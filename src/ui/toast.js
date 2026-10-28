@@ -1,15 +1,21 @@
 // Small messages at the bottom of the screen, above the navigation bar.
 // showToast({ message, actionLabel, onAction, duration, variant }) returns a function that closes it.
 //   variant 'reward' = a celebration message; 'default' = a normal one (like "Marked #5 solved" + Undo).
+//   host = an element to show the message in (Home uses one above its Next-up card).
+//          Without it, messages go in one shared box above the navigation bar.
 import { h } from './dom.js';
 
 const MAX_VISIBLE = 4;
 let container = null;
 
-export function showToast({ message, actionLabel = null, onAction = null, duration = 6000, variant = 'default' }) {
-  if (!container || !container.isConnected) {
-    container = h('div', { class: 'toasts', role: 'status', 'aria-live': 'polite' });
-    document.body.append(container);
+export function showToast({ message, actionLabel = null, onAction = null, duration = 6000, variant = 'default', host = null }) {
+  let box = host;
+  if (!box) {
+    if (!container || !container.isConnected) {
+      container = h('div', { class: 'toasts', role: 'status', 'aria-live': 'polite' });
+      document.body.append(container);
+    }
+    box = container;
   }
   let timer = null;
   let closed = false;
@@ -29,8 +35,8 @@ export function showToast({ message, actionLabel = null, onAction = null, durati
       : null);
 
   // Keep the pile small: drop the oldest message when there are too many.
-  while (container.children.length >= MAX_VISIBLE) container.children[0].remove();
-  container.append(el);
+  while (box.children.length >= MAX_VISIBLE) box.children[0].remove();
+  box.append(el);
   timer = setTimeout(dismiss, duration);
   return dismiss;
 }

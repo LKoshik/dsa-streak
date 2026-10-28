@@ -195,6 +195,10 @@ a { color: inherit; text-decoration: none; }
   bottom: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px) + 12px);
   display: grid; gap: 8px; justify-items: center; padding: 0 16px;
 }
+/* Home: a zero-height spot between the top part and the Next-up card. Messages grow UPWARD from it.
+   margin-top cancels one flex gap, so the card stays exactly where it was. */
+.home__toast-anchor { position: relative; flex: none; height: 0; margin-top: -12px; z-index: 5; }
+.toasts--inline { position: absolute; left: 0; right: 0; bottom: 0; padding: 0; }
 .toast {
   pointer-events: auto; max-width: 460px; width: max-content; min-height: 48px;
   display: flex; align-items: center; gap: 16px; padding: 8px 16px;
@@ -211,9 +215,9 @@ a { color: inherit; text-decoration: none; }
 }
 .toast.is-leaving { opacity: 0; transform: translateY(8px); transition: opacity 0.2s, transform 0.2s; }
 
-.fx-layer { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.fx-layer { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 6; }
 .xp-float {
-  position: absolute; left: 50%; bottom: 220px; transform: translateX(-50%);
+  position: absolute; left: 50%; bottom: 400px; transform: translateX(-50%);
   font-size: 28px; font-weight: 800; color: #ffc800; text-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
   animation: float-up 1.2s ease-out forwards;
 }

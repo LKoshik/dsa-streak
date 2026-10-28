@@ -4,15 +4,15 @@ import { h } from './ui/dom.js';
 import { createNav } from './ui/nav.js';
 import { applyTheme } from './ui/theme.js';
 import { msUntilNextMidnight } from './core/dates.js';
-import { store, init, refreshToday, markSolved, unmarkSolved, setGoal, setTheme,
-  setCurrentTopic, exportBackup, importBackup } from './state/actions.js';
+import * as actions from './state/actions.js';
 import * as selectors from './state/selectors.js';
 import { features } from './features/index.js';
 import { startRouter } from './router.js';
 import { registerWorker } from './ui/sw-client.js';
 import { createUpdateBanner } from './ui/update-banner.js';
 
-const actions = { init, markSolved, unmarkSolved, setGoal, setTheme, setCurrentTopic, refreshToday, exportBackup, importBackup };
+// Every screen gets the WHOLE actions file, so a new action can never be forgotten here.
+const { store, init, refreshToday } = actions;
 const appRoot = document.getElementById('app');
 
 // Re-read the clock at the next local midnight (and re-arm the timer afterwards).

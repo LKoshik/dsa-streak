@@ -21,6 +21,11 @@ function mount(root, ctx) {
   const fxLayer = h('div', { class: 'fx-layer', 'aria-hidden': 'true' });
   root.append(container, fxLayer);
 
+  // Messages ("Marked #7 solved" + Undo) show here: in the free space just ABOVE the Next-up card,
+  // so they never sit on top of the Solved button. Made once, so redraws do not throw them away.
+  const toastHost = h('div', { class: 'toasts toasts--inline', role: 'status', 'aria-live': 'polite' });
+  const toastAnchor = h('div', { class: 'home__toast-anchor' }, toastHost);
+
   let busy = false;          // true while a Solved tap is being saved
   let frame = null;          // pending render request
   let prevFraction = null;   // last daily ring value, so the ring can fill smoothly
@@ -128,6 +133,7 @@ function mount(root, ctx) {
         home.backupReminder ? backupBanner() : null,
         hero(copy),
         weekStrip(home)),
+      toastAnchor,
       nextCard(home, copy));
     // One-time effects have been used now.
     fx.bounce = false;
@@ -164,17 +170,18 @@ function mount(root, ctx) {
       playSound(soundForSolve({ before, after, problem, solvedIds }), store.get().settings.soundOn !== false);
       if (typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function') navigator.vibrate(20);
       floatXp();
-      for (const text of rewards.messages) showToast({ message: text, variant: 'reward', duration: 3500 });
+      for (const text of rewards.messages) showToast({ message: text, variant: 'reward', duration: 3500, host: toastHost });
       showToast({
         message: `Marked #${problem.id} solved`,
         actionLabel: 'Undo',
         duration: 6000,
+        host: toastHost,
         onAction: () => { fx.cheer = false; actions.unmarkSolved(problem.id); },
       });
       scheduleRender();
     } catch (error) {
       console.error(error);
-      showToast({ message: 'Could not save. Please try again.', duration: 4000 });
+      showToast({ message: 'Could not save. Please try again.', duration: 4000, host: toastHost });
     } finally {
       busy = false;
     }

@@ -118,6 +118,27 @@ test('home: Undo from the toast brings the old state back', async () => {
   assert.ok(hasText(root, '#1 of 405'));
 });
 
+test('home: the Undo message shows ABOVE the Next-up card, never on top of its Solved button', async () => {
+  await setup();
+  const { root } = mountHome();
+  solvedButton(root).click();
+  await tick();
+  dom.flushFrames();
+  const home = byClass(root, 'home')[0];
+  const kinds = home.children.map((c) => (c.classList.contains('home__scroll') ? 'scroll'
+    : c.classList.contains('home__toast-anchor') ? 'anchor' : c.classList.contains('next') ? 'card' : 'other'));
+  assert.deepEqual(kinds, ['scroll', 'anchor', 'card']);
+  const anchor = byClass(root, 'home__toast-anchor')[0];
+  assert.ok(anchor.find((e) => e.tagName === 'button' && e.textContent === 'Undo'), 'Undo lives in the Home toast box');
+  assert.ok(anchor.textContent.includes('Marked #1 solved'));
+  // The shared bottom box was not used for this message.
+  assert.equal(dom.body.find((e) => e.classList.contains('toasts') && !e.classList.contains('toasts--inline')), null);
+  // Another redraw must not throw the message away.
+  actions.store.set({ today: actions.store.get().today });
+  dom.flushFrames();
+  assert.ok(byClass(root, 'home__toast-anchor')[0].textContent.includes('Marked #1 solved'));
+});
+
 test('home: streak waiting for today shows the keep-your-streak message and a pulsing flame', async () => {
   await setup([solveOn(1, 2026, 6, 9)]);
   const { root } = mountHome();
@@ -238,6 +259,19 @@ test('ember: three moods, each with its own label and face', () => {
   assert.ok(lit.classList.contains('ember--lit'));
   assert.equal(byClass(createEmber({ mood: 'cheering' }), 'ember__spark').length, 3);
   assert.equal(byClass(createEmber({ mood: 'sleepy' }), 'ember__z').length, 2);
+  dom.restore();
+});
+
+test('toast: with a host the message goes into that host, not the shared box', () => {
+  mock.timers.enable({ apis: ['setTimeout'] });
+  dom = installFakeDom();
+  const host = document.createElement('div');
+  dom.body.append(host);
+  showToast({ message: 'in the host', host });
+  assert.equal(host.children.length, 1);
+  assert.ok(host.textContent.includes('in the host'));
+  assert.equal(dom.body.find((e) => e.classList.contains('toasts')), null);
+  mock.timers.reset();
   dom.restore();
 });
 
