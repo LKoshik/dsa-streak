@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DSA Streak: database check</title>
+  <style>
+    body { font: 15px/1.5 system-ui, sans-serif; background: #131f24; color: #fff; padding: 16px; }
+    pre { white-space: pre-wrap; }
+    .pass { color: #58cc02; } .fail { color: #ff4b4b; font-weight: bold; }
+    button { font-size: 16px; padding: 10px 16px; border-radius: 12px; border: 0; background: #1cb0f6; color: #fff; margin-top: 12px; }
+  </style>
+</head>
+<body>
+  <h2>Database check (throwaway page)</h2>
+  <p>This wipes the local "dsa-streak" database of THIS site address (localhost:8081), not your real app data on another address.</p>
+  <pre id="out"></pre>
+  <div id="buttons"></div>
+  <script type="module">
+    import * as db from '../src/data/db.js';
+    import * as actions from '../src/state/actions.js';
+
+    const out = document.getElementById('out');
+    let failures = 0;
+    function line(ok, text) {
+      if (!ok) failures++;
+      const span = document.createElement('span');
+      span.className = ok ? 'pass' : 'fail';
+      span.textContent = (ok ? 'PASS  ' : 'FAIL  ') + text + '\n';
+      out.appendChild(span);
+    }
+    function check(text, condition) { line(Boolean(condition), text); }
+    async function attempt(text, fn) {
+      try { await fn(); } catch (e) { line(false, text + ' (error: ' + e.message + ')'); }
+    }
+
+    async function mainSuite() {
+      await attempt('fresh start', async () => {
+        await db.deleteDatabase();
+        await actions.init();
+        const s = actions.store.get();
+        check('first run: ready, no solves', s.ready && s.solves.length === 0);
+        check('first run: default settings', s.settings.theme === 'system' && s.settings.currentTopic === null
+          && s.settings.lastBackupAt === null && s.settings.goalHistory.length === 1
+          && s.settings.goalHistory[0].from === '0000-01-01' && s.settings.goalHistory[0].goal === 1);
+      });
+
+      await attempt('save', async () => {
+        await actions.markSolved(1);
+        await actions.markSolved(2);
+        const saved = await db.loadAll();
+        check('save: both solves are in the database', saved.solves.length === 2);
+        check('save: store matches database', actions.store.get().solves.length === 2);
+        check('save: record has problemId, day and at', saved.solves.every((s) => s.problemId && /^\d{4}-\d{2}-\d{2}$/.test(s.day) && typeof s.at === 'number'));
+        await actions.markSolved(1);
+        await actions.markSolved(99999);
+        check('save: duplicates and unknown ids ignored', (await db.loadAll()).solves.length === 2);
+      });
+
+      await attempt('undo', async () => {
+        await actions.unmarkSolved(2);
+        const saved = await db.loadAll();
+        check('undo: solve removed from database', saved.solves.length === 1 && saved.solves[0].problemId === 1);
+        check('undo: store matches database', actions.store.get().solves.length === 1);
+      });
+
+      await attempt('goal change', async () => {
+        await actions.setGoal(2);
+        await actions.setGoal(3);
+        const history = (await db.loadAll()).settings.goalHistory;
+        check('goal: changing twice today keeps one entry for today', history.length === 2 && history[1].goal === 3);
+        await actions.setTheme('dark');
+        await actions.setCurrentTopic('Graphs');
+        const settings = (await db.loadAll()).settings;
+        check('settings: theme and current topic saved', settings.theme === 'dark' && settings.currentTopic === 'Graphs');
+      });
+
+      await attempt('replaceAll rolls back', async () => {
+        const before = await db.loadAll();
+        let rejected = false;
+        try {
+          // The second solve has no problemId, so the database refuses it.
+          await db.replaceAll({ solves: [{ problemId: 7, day: '2026-01-01', at: 1 }, { day: '2026-01-02', at: 2 }], settings: before.settings });
+        } catch { rejected = true; }
+        const after = await db.loadAll();
+        check('replaceAll: bad data is rejected', rejected);
+        check('replaceAll: nothing changed after the failure',
+          JSON.stringify(after.solves) === JSON.stringify(before.solves)
+          && JSON.stringify(after.settings) === JSON.stringify(before.settings));
+      });
+
+      await attempt('replaceAll works', async () => {
+        const settings = (await db.loadAll()).settings;
+        await db.replaceAll({ solves: [{ problemId: 5, day: '2026-01-01', at: 1 }, { problemId: 6, day: '2026-01-02', at: 2 }], settings: { ...settings, theme: 'light' } });
+        const after = await db.loadAll();
+        check('replaceAll: good data replaces everything', after.solves.length === 2 && after.settings.theme === 'light');
+      });
+
+      await attempt('persistence call', async () => {
+        const result = await db.requestPersistence();
+        check('requestPersistence does not crash (returned ' + result + ')', typeof result === 'boolean');
+      });
+
+      // Prepare the reload test: leave one known record, then ask for a reload.
+      await db.replaceAll({ solves: [{ problemId: 42, day: '2026-01-01', at: 1 }], settings: (await db.loadAll()).settings });
+      sessionStorage.setItem('dbcheck-stage', 'reloaded');
+      out.appendChild(document.createTextNode('\nLast check: press the button to reload the page and see if the data survived.\n'));
+      const button = document.createElement('button');
+      button.textContent = 'Reload the page';
+      button.onclick = () => location.reload();
+      document.getElementById('buttons').appendChild(button);
+    }
+
+    async function afterReload() {
+      sessionStorage.removeItem('dbcheck-stage');
+      await attempt('reload check', async () => {
+        const data = await db.loadAll();
+        check('data survived the reload', data.solves.length === 1 && data.solves[0].problemId === 42);
+        check('settings survived the reload', data.settings.theme === 'light');
+        await db.deleteDatabase();
+      });
+    }
+
+    (async () => {
+      if (sessionStorage.getItem('dbcheck-stage') === 'reloaded') await afterReload();
+      else await mainSuite();
+      const summary = document.createElement('div');
+      summary.innerHTML = failures === 0 ? '<b class="pass">ALL PASS so far</b>' : '<b class="fail">' + failures + ' FAILED</b>';
+      out.appendChild(summary);
+    })();
+  </script>
+</body>
+</html>

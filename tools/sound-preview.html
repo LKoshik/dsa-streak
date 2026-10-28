@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DSA Streak: sound preview</title>
+  <style>
+    body { font: 16px/1.5 system-ui, sans-serif; background: #131f24; color: #fff; padding: 16px; max-width: 480px; margin: 0 auto; }
+    h2 { margin: 0 0 4px; }
+    p { color: #afafaf; margin: 0 0 16px; }
+    button { display: block; width: 100%; text-align: left; font-size: 17px; padding: 14px 16px; border-radius: 14px; border: 0;
+             background: #58cc02; color: #fff; font-weight: 700; margin-bottom: 10px; }
+    button small { display: block; font-weight: 400; opacity: .9; font-size: 13px; }
+    button.big { background: #ff9600; }
+  </style>
+</head>
+<body>
+  <h2>Sound preview (throwaway page)</h2>
+  <p>Tap each button to hear it. Turn the phone or laptop volume up a little first.</p>
+  <div id="list"></div>
+  <script type="module">
+    import { unlockAudio, playSound } from '../src/ui/sound.js';
+    const WHEN = {
+      solve: 'Every solve',
+      goalMet: 'Daily goal reached',
+      section: 'Section finished',
+      streakStart: 'First streak day',
+      freeze: 'Freeze earned',
+      milestone: '7-day streak milestone (freezes full)',
+      levelUp: 'New level',
+      topicDone: 'Whole topic finished',
+    };
+    const list = document.getElementById('list');
+    for (const [name, text] of Object.entries(WHEN)) {
+      const b = document.createElement('button');
+      b.className = ['freeze', 'milestone', 'levelUp', 'topicDone'].includes(name) ? 'big' : '';
+      b.innerHTML = `${name}<small>${text}</small>`;
+      b.onclick = () => { unlockAudio(); playSound(name, true); };
+      list.append(b);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,15 @@
+BRIEF V2 AMENDMENTS (these override the Brief where they conflict):
+
+1. Path (changes D8 and G): topics are shown as 18 sticky green banners (like "SECTION 1, UNIT 4 / Talk about food" in Duolingo): "TOPIC 3 · Binary Search · 12 of 32". Under each banner, the 71 subsections are winding zig-zag nodes. Node states: done (green, check), in progress (progress ring), current (contains the Next up problem, pulsing, "START" bubble), upcoming (grey). Tapping a node opens the bottom sheet with that subsection's problems (checkboxes) and a "Continue here" button that sets currentTopic to its topic. Path auto-scrolls to the current node. selectPath stays as in Brief F.
+2. Home opens first every time (the app always starts at #/home). One tap on Solved must be possible without scrolling.
+3. Home states: (a) streak 0: "Start your streak today"; (b) streak above 0 and today pending: "Solve 1 problem to keep your N-day streak" with a gently pulsing flame; (c) today done: lit flame, "Done for today. See you tomorrow", Next up stays visible with a smaller secondary button for doing more; (d) after a missed day: kind wording like "Welcome back. Let's start a new streak", never shaming. Microcopy theme: "One problem is enough."
+4. Home shows a 7-day strip (last 7 days as dots: solved, frozen, missed, today, empty). CONTRACT CHANGE (approved): selectHome also returns `week: [{ day, status, isToday }]` (7 items ending today; status is null for days before firstDay).
+5. D10 is relaxed for small in-app rewards (CSS only, no libraries, no sound, respect prefers-reduced-motion, plus navigator.vibrate(20) on Solved if available): flame bounce, "+10 XP" float, ring fill, "+5 daily goal reached" message, "Freeze earned" message when the streak hits a multiple of 7, level-up message, subsection-finished and topic-finished messages. Still not in v1: links, backdating, notifications, server, confetti or sound.
+6. Mascot: an original flame character called Ember, drawn as inline SVG, with 3 moods (sleepy when the streak is at risk, happy when done today, cheering at milestones). Do NOT copy Duolingo's owl or any Duolingo asset.
+7. Look and feel (G2): Duolingo-inspired, dark mode must look great, because it is my main mode.
+   - Font stack: ui-rounded, "SF Pro Rounded", system-ui, "Segoe UI", Roboto, sans-serif. Bold headings (800), small uppercase labels with letter spacing. No external fonts.
+   - Chunky buttons: 16px radius, a darker 4px bottom edge (box-shadow 0 4px 0), which flattens on press (translateY 4px). Min height 48px.
+   - Dark tokens (approx.): --bg #131f24, --card #202f36, --border #37464f, --text #ffffff, --muted #8a9aa3. Light: --bg #ffffff, --card #f7f7f7, --border #e5e5e5, --text #4b4b4b, --muted #8a8a8a.
+   - Accents with their darker edge colors: green #58cc02/#58a700, blue #1cb0f6/#1899d6, orange #ff9600/#e58700, red #ff4b4b/#ea2b2b.
+   - Top row on Home: 🔥 streak, ❄️ freezes (x of 2), ⭐ XP, then the daily goal ring.
+8. Settings gets a short "Habit tip" text: install the app to your home screen and set a daily phone alarm at a fixed time. The README (Phase 10) repeats this.

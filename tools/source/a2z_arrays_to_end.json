@@ -1,0 +1,2610 @@
+{
+  "Arrays": {
+    "Fundamentals": [
+      {
+        "no": 1,
+        "no_in_subsection": 1,
+        "name": "Linear Search",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 2,
+        "no_in_subsection": 2,
+        "name": "Largest Element",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 3,
+        "no_in_subsection": 3,
+        "name": "Second Largest Element",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 4,
+        "no_in_subsection": 4,
+        "name": "Maximum Consecutive Ones",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 5,
+        "no_in_subsection": 5,
+        "name": "Left Rotate Array by One",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 6,
+        "no_in_subsection": 6,
+        "name": "Left Rotate Array by K Places",
+        "difficulty": "Core"
+      }
+    ],
+    "Logic Building": [
+      {
+        "no": 7,
+        "no_in_subsection": 1,
+        "name": "Move Zeros to End",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 8,
+        "no_in_subsection": 2,
+        "name": "Remove duplicates from sorted array",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 9,
+        "no_in_subsection": 3,
+        "name": "Find missing number",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 10,
+        "no_in_subsection": 4,
+        "name": "Union of two sorted arrays",
+        "difficulty": "Core"
+      },
+      {
+        "no": 11,
+        "no_in_subsection": 5,
+        "name": "Intersection of two sorted arrays",
+        "difficulty": "Core"
+      }
+    ],
+    "FAQs(Medium)": [
+      {
+        "no": 12,
+        "no_in_subsection": 1,
+        "name": "Majority Element-I",
+        "difficulty": "Core"
+      },
+      {
+        "no": 13,
+        "no_in_subsection": 2,
+        "name": "Leaders in an Array",
+        "difficulty": "Core"
+      },
+      {
+        "no": 14,
+        "no_in_subsection": 3,
+        "name": "Rearrange array elements by sign",
+        "difficulty": "Core"
+      },
+      {
+        "no": 15,
+        "no_in_subsection": 4,
+        "name": "Print the matrix in spiral manner",
+        "difficulty": "Core"
+      },
+      {
+        "no": 16,
+        "no_in_subsection": 5,
+        "name": "Pascal's Triangle I",
+        "difficulty": "Core"
+      },
+      {
+        "no": 17,
+        "no_in_subsection": 6,
+        "name": "Pascal's Triangle II",
+        "difficulty": "Core"
+      },
+      {
+        "no": 18,
+        "no_in_subsection": 7,
+        "name": "Pascal's Triangle III",
+        "difficulty": "Core"
+      },
+      {
+        "no": 19,
+        "no_in_subsection": 8,
+        "name": "Rotate matrix by 90 degrees",
+        "difficulty": "Core"
+      },
+      {
+        "no": 20,
+        "no_in_subsection": 9,
+        "name": "Set Matrix Zeroes",
+        "difficulty": "Core"
+      },
+      {
+        "no": 21,
+        "no_in_subsection": 10,
+        "name": "Two Sum",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 22,
+        "no_in_subsection": 11,
+        "name": "3 Sum",
+        "difficulty": "Core"
+      },
+      {
+        "no": 23,
+        "no_in_subsection": 12,
+        "name": "4 Sum",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 24,
+        "no_in_subsection": 13,
+        "name": "Sort an array of 0's 1's and 2's",
+        "difficulty": "Core"
+      },
+      {
+        "no": 25,
+        "no_in_subsection": 14,
+        "name": "Kadane's Algorithm",
+        "difficulty": "Core"
+      },
+      {
+        "no": 26,
+        "no_in_subsection": 15,
+        "name": "Next Permutation",
+        "difficulty": "Core"
+      }
+    ],
+    "FAQs(Hard)": [
+      {
+        "no": 27,
+        "no_in_subsection": 1,
+        "name": "Majority Element-II",
+        "difficulty": "Core"
+      },
+      {
+        "no": 28,
+        "no_in_subsection": 2,
+        "name": "Find the repeating and missing number",
+        "difficulty": "Core"
+      },
+      {
+        "no": 29,
+        "no_in_subsection": 3,
+        "name": "Count Inversions",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 30,
+        "no_in_subsection": 4,
+        "name": "Reverse Pairs",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 31,
+        "no_in_subsection": 5,
+        "name": "Maximum Product Subarray in an Array",
+        "difficulty": "Core"
+      },
+      {
+        "no": 32,
+        "no_in_subsection": 6,
+        "name": "Merge two sorted arrays without extra space",
+        "difficulty": "Core"
+      }
+    ]
+  },
+  "Hashing": {
+    "Theory": [
+      {
+        "no": 33,
+        "no_in_subsection": 1,
+        "name": "Basic Hashing",
+        "difficulty": "Basic"
+      }
+    ],
+    "FAQs": [
+      {
+        "no": 34,
+        "no_in_subsection": 1,
+        "name": "Longest Consecutive Sequence in an Array",
+        "difficulty": "Core"
+      },
+      {
+        "no": 35,
+        "no_in_subsection": 2,
+        "name": "Longest subarray with sum K",
+        "difficulty": "Core"
+      },
+      {
+        "no": 36,
+        "no_in_subsection": 3,
+        "name": "Largest Subarray with Sum 0",
+        "difficulty": "Core"
+      },
+      {
+        "no": 37,
+        "no_in_subsection": 4,
+        "name": "Count subarrays with given sum",
+        "difficulty": "Core"
+      },
+      {
+        "no": 38,
+        "no_in_subsection": 5,
+        "name": "Count subarrays with given xor K",
+        "difficulty": "Pro"
+      }
+    ]
+  },
+  "Binary Search": {
+    "Fundamentals": [
+      {
+        "no": 39,
+        "no_in_subsection": 1,
+        "name": "Search X in sorted array",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 40,
+        "no_in_subsection": 2,
+        "name": "Lower Bound",
+        "difficulty": "Core"
+      },
+      {
+        "no": 41,
+        "no_in_subsection": 3,
+        "name": "Upper Bound",
+        "difficulty": "Core"
+      }
+    ],
+    "Logic Building": [
+      {
+        "no": 42,
+        "no_in_subsection": 1,
+        "name": "Search insert position",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 43,
+        "no_in_subsection": 2,
+        "name": "Floor and Ceil in Sorted Array",
+        "difficulty": "Core"
+      },
+      {
+        "no": 44,
+        "no_in_subsection": 3,
+        "name": "First and last occurrence",
+        "difficulty": "Core"
+      },
+      {
+        "no": 45,
+        "no_in_subsection": 4,
+        "name": "Search in rotated sorted array-I",
+        "difficulty": "Core"
+      },
+      {
+        "no": 46,
+        "no_in_subsection": 5,
+        "name": "Search in rotated sorted array-II",
+        "difficulty": "Core"
+      },
+      {
+        "no": 47,
+        "no_in_subsection": 6,
+        "name": "Find minimum in Rotated Sorted Array",
+        "difficulty": "Core"
+      },
+      {
+        "no": 48,
+        "no_in_subsection": 7,
+        "name": "Find out how many times the array is rotated",
+        "difficulty": "Core"
+      },
+      {
+        "no": 49,
+        "no_in_subsection": 8,
+        "name": "Single element in sorted array",
+        "difficulty": "Core"
+      },
+      {
+        "no": 50,
+        "no_in_subsection": 9,
+        "name": "Count Occurrences in a Sorted Array",
+        "difficulty": "Core"
+      }
+    ],
+    "On answers": [
+      {
+        "no": 51,
+        "no_in_subsection": 1,
+        "name": "Find square root of a number",
+        "difficulty": "Core"
+      },
+      {
+        "no": 52,
+        "no_in_subsection": 2,
+        "name": "Find Nth root of a number",
+        "difficulty": "Core"
+      },
+      {
+        "no": 53,
+        "no_in_subsection": 3,
+        "name": "Find the smallest divisor",
+        "difficulty": "Core"
+      },
+      {
+        "no": 54,
+        "no_in_subsection": 4,
+        "name": "Koko eating bananas",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 55,
+        "no_in_subsection": 5,
+        "name": "Minimum days to make M bouquets",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 56,
+        "no_in_subsection": 6,
+        "name": "Capacity to Ship Packages Within D Days",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 57,
+        "no_in_subsection": 7,
+        "name": "Kth Missing Positive Number",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 58,
+        "no_in_subsection": 8,
+        "name": "Painter's Partition",
+        "difficulty": "Pro"
+      }
+    ],
+    "FAQs": [
+      {
+        "no": 59,
+        "no_in_subsection": 1,
+        "name": "Aggressive Cows",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 60,
+        "no_in_subsection": 2,
+        "name": "Book Allocation Problem",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 61,
+        "no_in_subsection": 3,
+        "name": "Find peak element",
+        "difficulty": "Core"
+      },
+      {
+        "no": 62,
+        "no_in_subsection": 4,
+        "name": "Median of 2 sorted arrays",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 63,
+        "no_in_subsection": 5,
+        "name": "Kth element of 2 sorted arrays",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 64,
+        "no_in_subsection": 6,
+        "name": "Minimize Max Distance to Gas Station",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 65,
+        "no_in_subsection": 7,
+        "name": "Split array - largest sum",
+        "difficulty": "Pro"
+      }
+    ],
+    "2D Arrays": [
+      {
+        "no": 66,
+        "no_in_subsection": 1,
+        "name": "Find row with maximum 1's",
+        "difficulty": "Core"
+      },
+      {
+        "no": 67,
+        "no_in_subsection": 2,
+        "name": "Search in a 2D Matrix",
+        "difficulty": "Core"
+      },
+      {
+        "no": 68,
+        "no_in_subsection": 3,
+        "name": "Search in 2D matrix - II",
+        "difficulty": "Core"
+      },
+      {
+        "no": 69,
+        "no_in_subsection": 4,
+        "name": "Find Peak Element - II",
+        "difficulty": "Core"
+      },
+      {
+        "no": 70,
+        "no_in_subsection": 5,
+        "name": "Matrix Median",
+        "difficulty": "Pro"
+      }
+    ]
+  },
+  "Strings (Basic and Medium)": {
+    "Parentheses": [
+      {
+        "no": 71,
+        "no_in_subsection": 1,
+        "name": "Remove Outermost Parentheses",
+        "difficulty": "Core"
+      },
+      {
+        "no": 72,
+        "no_in_subsection": 2,
+        "name": "Maximum Nesting Depth of the Parentheses",
+        "difficulty": "Core"
+      }
+    ],
+    "String Conversions": [
+      {
+        "no": 73,
+        "no_in_subsection": 1,
+        "name": "Roman to Integer",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 74,
+        "no_in_subsection": 2,
+        "name": "String to Integer (atoi)",
+        "difficulty": "Core"
+      }
+    ],
+    "Substring Problems": [
+      {
+        "no": 75,
+        "no_in_subsection": 1,
+        "name": "Count Number of Substrings",
+        "difficulty": ""
+      },
+      {
+        "no": 76,
+        "no_in_subsection": 2,
+        "name": "Longest Palindromic Substring",
+        "difficulty": "Core"
+      },
+      {
+        "no": 77,
+        "no_in_subsection": 3,
+        "name": "Sum of Beauty of All Substrings",
+        "difficulty": "Core"
+      }
+    ]
+  },
+  "Recursion": {
+    "Implementation Problems": [
+      {
+        "no": 78,
+        "no_in_subsection": 1,
+        "name": "Pow(x,n)",
+        "difficulty": "Core"
+      },
+      {
+        "no": 79,
+        "no_in_subsection": 2,
+        "name": "Generate Parentheses",
+        "difficulty": "Core"
+      },
+      {
+        "no": 80,
+        "no_in_subsection": 3,
+        "name": "Power Set",
+        "difficulty": "Core"
+      },
+      {
+        "no": 81,
+        "no_in_subsection": 4,
+        "name": "Count Good Numbers",
+        "difficulty": "Core"
+      },
+      {
+        "no": 82,
+        "no_in_subsection": 5,
+        "name": "Reverse a Stack",
+        "difficulty": "Core"
+      }
+    ],
+    "Subsequence Pattern Problems": [
+      {
+        "no": 83,
+        "no_in_subsection": 1,
+        "name": "Learn All Patterns of Subsequences (Theory)",
+        "difficulty": ""
+      },
+      {
+        "no": 84,
+        "no_in_subsection": 2,
+        "name": "Check if there exists a subsequence with sum K",
+        "difficulty": "Core"
+      },
+      {
+        "no": 85,
+        "no_in_subsection": 3,
+        "name": "Count all subsequences with sum K",
+        "difficulty": "Core"
+      },
+      {
+        "no": 86,
+        "no_in_subsection": 4,
+        "name": "Generate Binary Strings Without Consecutive 1s",
+        "difficulty": "Core"
+      }
+    ],
+    "FAQs (Medium)": [
+      {
+        "no": 87,
+        "no_in_subsection": 1,
+        "name": "Combination Sum",
+        "difficulty": "Core"
+      },
+      {
+        "no": 88,
+        "no_in_subsection": 2,
+        "name": "Combination Sum II",
+        "difficulty": "Core"
+      },
+      {
+        "no": 89,
+        "no_in_subsection": 3,
+        "name": "Subsets I",
+        "difficulty": "Core"
+      },
+      {
+        "no": 90,
+        "no_in_subsection": 4,
+        "name": "Subsets II",
+        "difficulty": "Core"
+      },
+      {
+        "no": 91,
+        "no_in_subsection": 5,
+        "name": "Combination Sum III",
+        "difficulty": "Pro"
+      }
+    ],
+    "Hard": [
+      {
+        "no": 92,
+        "no_in_subsection": 1,
+        "name": "Letter Combinations of a Phone Number",
+        "difficulty": "Pro"
+      }
+    ],
+    "FAQs (Hard)": [
+      {
+        "no": 93,
+        "no_in_subsection": 1,
+        "name": "Palindrome partitioning",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 94,
+        "no_in_subsection": 2,
+        "name": "Word Search",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 95,
+        "no_in_subsection": 3,
+        "name": "N Queen",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 96,
+        "no_in_subsection": 4,
+        "name": "Rat in a Maze",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 97,
+        "no_in_subsection": 5,
+        "name": "M Coloring Problem",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 98,
+        "no_in_subsection": 6,
+        "name": "Sudoku Solver",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 99,
+        "no_in_subsection": 7,
+        "name": "Expression Add Operators",
+        "difficulty": "Pro"
+      }
+    ]
+  },
+  "Linked-List": {
+    "Fundamentals (Single LL)": [
+      {
+        "no": 100,
+        "no_in_subsection": 1,
+        "name": "Introduction to Singly LinkedList",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 101,
+        "no_in_subsection": 2,
+        "name": "Traversal in Linked List",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 102,
+        "no_in_subsection": 3,
+        "name": "Deletion in Linked List",
+        "difficulty": "Core"
+      },
+      {
+        "no": 103,
+        "no_in_subsection": 4,
+        "name": "Insertion in Linked List",
+        "difficulty": "Core"
+      },
+      {
+        "no": 104,
+        "no_in_subsection": 5,
+        "name": "Deletion of the head of LL",
+        "difficulty": "Core"
+      },
+      {
+        "no": 105,
+        "no_in_subsection": 6,
+        "name": "Deletion of the tail of Linked List",
+        "difficulty": "Core"
+      },
+      {
+        "no": 106,
+        "no_in_subsection": 7,
+        "name": "Deletion of the Kth element of Linked List",
+        "difficulty": "Core"
+      },
+      {
+        "no": 107,
+        "no_in_subsection": 8,
+        "name": "Delete the element with value X",
+        "difficulty": "Core"
+      },
+      {
+        "no": 108,
+        "no_in_subsection": 9,
+        "name": "Insertion at the head of Linked List",
+        "difficulty": "Core"
+      },
+      {
+        "no": 109,
+        "no_in_subsection": 10,
+        "name": "Insertion at the tail of Linked List",
+        "difficulty": "Core"
+      },
+      {
+        "no": 110,
+        "no_in_subsection": 11,
+        "name": "Insertion at the Kth position of Linked List",
+        "difficulty": "Core"
+      },
+      {
+        "no": 111,
+        "no_in_subsection": 12,
+        "name": "Insertion before the value X in Linked List",
+        "difficulty": "Core"
+      },
+      {
+        "no": 112,
+        "no_in_subsection": 13,
+        "name": "Find the length of the Linked List",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 113,
+        "no_in_subsection": 14,
+        "name": "Search in Linked List",
+        "difficulty": "Core"
+      }
+    ],
+    "Fundamentals (Doubly LL)": [
+      {
+        "no": 114,
+        "no_in_subsection": 1,
+        "name": "Introduction to Doubly LL",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 115,
+        "no_in_subsection": 2,
+        "name": "Deletion in Doubly LL",
+        "difficulty": "Core"
+      },
+      {
+        "no": 116,
+        "no_in_subsection": 3,
+        "name": "Insertion in DLL",
+        "difficulty": "Core"
+      },
+      {
+        "no": 117,
+        "no_in_subsection": 4,
+        "name": "Convert Array to Doubly Linked List",
+        "difficulty": "Core"
+      },
+      {
+        "no": 118,
+        "no_in_subsection": 5,
+        "name": "Delete Tail of Doubly Linked List",
+        "difficulty": "Core"
+      },
+      {
+        "no": 119,
+        "no_in_subsection": 6,
+        "name": "Delete Kth Element of Doubly Linked List",
+        "difficulty": "Core"
+      },
+      {
+        "no": 120,
+        "no_in_subsection": 7,
+        "name": "Removing given node in Doubly Linked List",
+        "difficulty": "Core"
+      },
+      {
+        "no": 121,
+        "no_in_subsection": 8,
+        "name": "Insert node before head in Doubly Linked List",
+        "difficulty": "Core"
+      },
+      {
+        "no": 122,
+        "no_in_subsection": 9,
+        "name": "Insert node before tail in Doubly Linked List",
+        "difficulty": "Core"
+      },
+      {
+        "no": 123,
+        "no_in_subsection": 10,
+        "name": "Insert node before (kth node) in Doubly Linked List",
+        "difficulty": "Core"
+      },
+      {
+        "no": 124,
+        "no_in_subsection": 11,
+        "name": "Insert before given node in Doubly Linked List",
+        "difficulty": "Core"
+      },
+      {
+        "no": 125,
+        "no_in_subsection": 12,
+        "name": "Delete head of Doubly Linked List",
+        "difficulty": "Core"
+      },
+      {
+        "no": 126,
+        "no_in_subsection": 13,
+        "name": "Reverse a Doubly Linked List",
+        "difficulty": "Core"
+      }
+    ],
+    "Logic Building": [
+      {
+        "no": 127,
+        "no_in_subsection": 1,
+        "name": "Add two numbers in Linked List",
+        "difficulty": "Core"
+      },
+      {
+        "no": 128,
+        "no_in_subsection": 2,
+        "name": "Segregate odd and even nodes in Linked List",
+        "difficulty": "Core"
+      },
+      {
+        "no": 129,
+        "no_in_subsection": 3,
+        "name": "Sort a Linked List of 0's 1's and 2's",
+        "difficulty": "Core"
+      },
+      {
+        "no": 130,
+        "no_in_subsection": 4,
+        "name": "Remove Nth node from the back of the LL",
+        "difficulty": "Core"
+      },
+      {
+        "no": 131,
+        "no_in_subsection": 5,
+        "name": "Reverse a LL",
+        "difficulty": "Core"
+      }
+    ],
+    "FAQs (Medium)": [
+      {
+        "no": 132,
+        "no_in_subsection": 1,
+        "name": "Add one to a number represented by LL",
+        "difficulty": "Core"
+      },
+      {
+        "no": 133,
+        "no_in_subsection": 2,
+        "name": "Find Middle of Linked List",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 134,
+        "no_in_subsection": 3,
+        "name": "Delete the middle node in LL",
+        "difficulty": "Core"
+      },
+      {
+        "no": 135,
+        "no_in_subsection": 4,
+        "name": "Check if LL is palindrome or not",
+        "difficulty": "Core"
+      },
+      {
+        "no": 136,
+        "no_in_subsection": 5,
+        "name": "Find the intersection point of Y LL",
+        "difficulty": "Core"
+      },
+      {
+        "no": 137,
+        "no_in_subsection": 6,
+        "name": "Detect a loop in LL",
+        "difficulty": "Core"
+      },
+      {
+        "no": 138,
+        "no_in_subsection": 7,
+        "name": "Find the starting point in LL",
+        "difficulty": "Core"
+      },
+      {
+        "no": 139,
+        "no_in_subsection": 8,
+        "name": "Length of loop in LL",
+        "difficulty": "Core"
+      }
+    ],
+    "FAQs (Hard)": [
+      {
+        "no": 140,
+        "no_in_subsection": 1,
+        "name": "Reverse LL in group of given size K",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 141,
+        "no_in_subsection": 2,
+        "name": "Rotate a LL",
+        "difficulty": "Core"
+      },
+      {
+        "no": 142,
+        "no_in_subsection": 3,
+        "name": "Merge two Sorted Lists",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 143,
+        "no_in_subsection": 4,
+        "name": "Flattening of LL",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 144,
+        "no_in_subsection": 5,
+        "name": "Sort LL",
+        "difficulty": "Core"
+      },
+      {
+        "no": 145,
+        "no_in_subsection": 6,
+        "name": "Clone a LL with random and next pointer",
+        "difficulty": "Pro"
+      }
+    ],
+    "FAQS (DLL)": [
+      {
+        "no": 146,
+        "no_in_subsection": 1,
+        "name": "Delete all occurrences of a key in DLL",
+        "difficulty": "Core"
+      },
+      {
+        "no": 147,
+        "no_in_subsection": 2,
+        "name": "Remove duplicates from sorted DLL",
+        "difficulty": "Core"
+      },
+      {
+        "no": 148,
+        "no_in_subsection": 3,
+        "name": "Find Pairs with Given Sum in Doubly Linked List",
+        "difficulty": "Core"
+      }
+    ]
+  },
+  "Bit Manipulation": {
+    "Theory": [
+      {
+        "no": 149,
+        "no_in_subsection": 1,
+        "name": "Introduction to Bits and Tricks",
+        "difficulty": "Basic"
+      }
+    ],
+    "Bit Fundamentals": [
+      {
+        "no": 150,
+        "no_in_subsection": 1,
+        "name": "Check if the i-th bit is Set or Not",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 151,
+        "no_in_subsection": 2,
+        "name": "Check if a Number is Odd or Not",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 152,
+        "no_in_subsection": 3,
+        "name": "Check if a Number is Power of 2 or Not",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 153,
+        "no_in_subsection": 4,
+        "name": "Count the Number of Set Bits",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 154,
+        "no_in_subsection": 5,
+        "name": "Set the Rightmost Unset Bit",
+        "difficulty": ""
+      },
+      {
+        "no": 155,
+        "no_in_subsection": 6,
+        "name": "Swap Two Numbers",
+        "difficulty": "Basic"
+      }
+    ],
+    "Problems": [
+      {
+        "no": 156,
+        "no_in_subsection": 1,
+        "name": "Minimum Bit Flips to Convert Number",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 157,
+        "no_in_subsection": 2,
+        "name": "Single Number - I",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 158,
+        "no_in_subsection": 3,
+        "name": "Single Number - II",
+        "difficulty": "Core"
+      },
+      {
+        "no": 159,
+        "no_in_subsection": 4,
+        "name": "Single Number - III",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 160,
+        "no_in_subsection": 5,
+        "name": "Divide two numbers without multiplication and division",
+        "difficulty": "Core"
+      },
+      {
+        "no": 161,
+        "no_in_subsection": 6,
+        "name": "Power Set Bit Manipulation",
+        "difficulty": "Core"
+      },
+      {
+        "no": 162,
+        "no_in_subsection": 7,
+        "name": "XOR of numbers in a given range",
+        "difficulty": "Core"
+      }
+    ]
+  },
+  "Greedy Algorithms": {
+    "Easy": [
+      {
+        "no": 163,
+        "no_in_subsection": 1,
+        "name": "Assign Cookies",
+        "difficulty": "Core"
+      },
+      {
+        "no": 164,
+        "no_in_subsection": 2,
+        "name": "Lemonade Change",
+        "difficulty": "Core"
+      },
+      {
+        "no": 165,
+        "no_in_subsection": 3,
+        "name": "Fractional Knapsack",
+        "difficulty": "Core"
+      },
+      {
+        "no": 166,
+        "no_in_subsection": 4,
+        "name": "Jump Game - I",
+        "difficulty": "Core"
+      }
+    ],
+    "Scheduling and Interval Problems": [
+      {
+        "no": 167,
+        "no_in_subsection": 1,
+        "name": "Shortest Job First",
+        "difficulty": "Core"
+      },
+      {
+        "no": 168,
+        "no_in_subsection": 2,
+        "name": "Job sequencing Problem",
+        "difficulty": "Core"
+      },
+      {
+        "no": 169,
+        "no_in_subsection": 3,
+        "name": "N meetings in one room",
+        "difficulty": "Core"
+      },
+      {
+        "no": 170,
+        "no_in_subsection": 4,
+        "name": "Non-overlapping Intervals",
+        "difficulty": "Core"
+      },
+      {
+        "no": 171,
+        "no_in_subsection": 5,
+        "name": "Insert Interval",
+        "difficulty": "Core"
+      },
+      {
+        "no": 172,
+        "no_in_subsection": 6,
+        "name": "Merge Intervals",
+        "difficulty": "Core"
+      },
+      {
+        "no": 173,
+        "no_in_subsection": 7,
+        "name": "Minimum number of platforms required for a railway",
+        "difficulty": "Core"
+      }
+    ],
+    "Hard": [
+      {
+        "no": 174,
+        "no_in_subsection": 1,
+        "name": "Valid Parenthesis Checker",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 175,
+        "no_in_subsection": 2,
+        "name": "Candy",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 176,
+        "no_in_subsection": 3,
+        "name": "Jump Game II",
+        "difficulty": "Pro"
+      }
+    ]
+  },
+  "Sliding Window / 2 Pointer": {
+    "Pattern and Template": [
+      {
+        "no": 177,
+        "no_in_subsection": 1,
+        "name": "Theory",
+        "difficulty": "Core"
+      }
+    ],
+    "Constant Window": [
+      {
+        "no": 178,
+        "no_in_subsection": 1,
+        "name": "Maximum Points You Can Obtain from Cards",
+        "difficulty": "Core"
+      }
+    ],
+    "Longest and Smallest Window Problems": [
+      {
+        "no": 179,
+        "no_in_subsection": 1,
+        "name": "Longest Substring Without Repeating Characters",
+        "difficulty": "Core"
+      },
+      {
+        "no": 180,
+        "no_in_subsection": 2,
+        "name": "Max Consecutive Ones III",
+        "difficulty": "Core"
+      },
+      {
+        "no": 181,
+        "no_in_subsection": 3,
+        "name": "Fruit Into Baskets",
+        "difficulty": "Core"
+      },
+      {
+        "no": 182,
+        "no_in_subsection": 4,
+        "name": "Longest Substring With At Most K Distinct Characters",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 183,
+        "no_in_subsection": 5,
+        "name": "Longest Repeating Character Replacement",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 184,
+        "no_in_subsection": 6,
+        "name": "Minimum Window Substring",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 185,
+        "no_in_subsection": 7,
+        "name": "Minimum Window Subsequence",
+        "difficulty": "Pro"
+      }
+    ],
+    "Counting Subarrays / Substrings Problems": [
+      {
+        "no": 186,
+        "no_in_subsection": 1,
+        "name": "Number of Substrings Containing All Three Characters",
+        "difficulty": "Core"
+      },
+      {
+        "no": 187,
+        "no_in_subsection": 2,
+        "name": "Binary Subarrays With Sum",
+        "difficulty": "Core"
+      },
+      {
+        "no": 188,
+        "no_in_subsection": 3,
+        "name": "Count number of Nice subarrays",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 189,
+        "no_in_subsection": 4,
+        "name": "Subarrays with K Different Integers",
+        "difficulty": "Pro"
+      }
+    ]
+  },
+  "Stack / Queues": {
+    "Implementation": [
+      {
+        "no": 190,
+        "no_in_subsection": 1,
+        "name": "Implementation using different DS",
+        "difficulty": "Core"
+      },
+      {
+        "no": 191,
+        "no_in_subsection": 2,
+        "name": "Implement Stack using Arrays",
+        "difficulty": "Core"
+      },
+      {
+        "no": 192,
+        "no_in_subsection": 3,
+        "name": "Implement Queue using Arrays",
+        "difficulty": "Core"
+      },
+      {
+        "no": 193,
+        "no_in_subsection": 4,
+        "name": "Implement Stack using Queue",
+        "difficulty": "Core"
+      },
+      {
+        "no": 194,
+        "no_in_subsection": 5,
+        "name": "Implement Queue using Stack",
+        "difficulty": "Core"
+      },
+      {
+        "no": 195,
+        "no_in_subsection": 6,
+        "name": "Implement stack using Linkedlist",
+        "difficulty": "Core"
+      },
+      {
+        "no": 196,
+        "no_in_subsection": 7,
+        "name": "Implement queue using Linkedlist",
+        "difficulty": "Core"
+      },
+      {
+        "no": 197,
+        "no_in_subsection": 8,
+        "name": "Balanced Paranthesis",
+        "difficulty": "Core"
+      }
+    ],
+    "Prefix, Infix and Postfix Conversions": [
+      {
+        "no": 198,
+        "no_in_subsection": 1,
+        "name": "Infix to Postfix Conversion",
+        "difficulty": "Core"
+      },
+      {
+        "no": 199,
+        "no_in_subsection": 2,
+        "name": "Infix to Prefix Conversion",
+        "difficulty": "Core"
+      },
+      {
+        "no": 200,
+        "no_in_subsection": 3,
+        "name": "Prefix to Infix Conversion",
+        "difficulty": "Core"
+      },
+      {
+        "no": 201,
+        "no_in_subsection": 4,
+        "name": "Prefix to Postfix Conversion",
+        "difficulty": "Core"
+      },
+      {
+        "no": 202,
+        "no_in_subsection": 5,
+        "name": "Postfix to Infix Conversion",
+        "difficulty": "Core"
+      },
+      {
+        "no": 203,
+        "no_in_subsection": 6,
+        "name": "Postfix to Prefix Conversion",
+        "difficulty": "Core"
+      }
+    ],
+    "Monotonic Stack": [
+      {
+        "no": 204,
+        "no_in_subsection": 1,
+        "name": "Next Greater Element",
+        "difficulty": "Core"
+      },
+      {
+        "no": 205,
+        "no_in_subsection": 2,
+        "name": "Next Greater Element - 2",
+        "difficulty": "Core"
+      },
+      {
+        "no": 206,
+        "no_in_subsection": 3,
+        "name": "Asteroid Collision",
+        "difficulty": "Core"
+      },
+      {
+        "no": 207,
+        "no_in_subsection": 4,
+        "name": "Sum of Subarray Minimums",
+        "difficulty": "Core"
+      },
+      {
+        "no": 208,
+        "no_in_subsection": 5,
+        "name": "Sum of Subarray Ranges",
+        "difficulty": "Core"
+      },
+      {
+        "no": 209,
+        "no_in_subsection": 6,
+        "name": "Remove K Digits",
+        "difficulty": "Core"
+      },
+      {
+        "no": 210,
+        "no_in_subsection": 7,
+        "name": "Next Smaller Element",
+        "difficulty": "Core"
+      }
+    ],
+    "FAQs": [
+      {
+        "no": 211,
+        "no_in_subsection": 1,
+        "name": "Implement Min Stack",
+        "difficulty": "Core"
+      },
+      {
+        "no": 212,
+        "no_in_subsection": 2,
+        "name": "Sliding Window Maximum",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 213,
+        "no_in_subsection": 3,
+        "name": "Trapping Rainwater",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 214,
+        "no_in_subsection": 4,
+        "name": "Largest rectangle in a histogram",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 215,
+        "no_in_subsection": 5,
+        "name": "Maximum Rectangles",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 216,
+        "no_in_subsection": 6,
+        "name": "Stock span problem",
+        "difficulty": "Core"
+      },
+      {
+        "no": 217,
+        "no_in_subsection": 7,
+        "name": "Celebrity Problem",
+        "difficulty": "Core"
+      },
+      {
+        "no": 218,
+        "no_in_subsection": 8,
+        "name": "LRU Cache",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 219,
+        "no_in_subsection": 9,
+        "name": "LFU Cache",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 220,
+        "no_in_subsection": 10,
+        "name": "Number of Greater Elements to the Right",
+        "difficulty": "Core"
+      }
+    ]
+  },
+  "Binary Trees": {
+    "Theory/Traversals": [
+      {
+        "no": 221,
+        "no_in_subsection": 1,
+        "name": "Introduction",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 222,
+        "no_in_subsection": 2,
+        "name": "Inorder Traversal",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 223,
+        "no_in_subsection": 3,
+        "name": "Preorder Traversal",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 224,
+        "no_in_subsection": 4,
+        "name": "Postorder Traversal",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 225,
+        "no_in_subsection": 5,
+        "name": "Level Order Traversal",
+        "difficulty": "Core"
+      },
+      {
+        "no": 226,
+        "no_in_subsection": 6,
+        "name": "Pre, Post, Inorder in one traversal",
+        "difficulty": "Core"
+      }
+    ],
+    "Medium Problems": [
+      {
+        "no": 227,
+        "no_in_subsection": 1,
+        "name": "Maximum Depth in BT",
+        "difficulty": "Core"
+      },
+      {
+        "no": 228,
+        "no_in_subsection": 2,
+        "name": "Check if two trees are identical or not",
+        "difficulty": "Core"
+      },
+      {
+        "no": 229,
+        "no_in_subsection": 3,
+        "name": "Check for balanced binary tree",
+        "difficulty": "Core"
+      },
+      {
+        "no": 230,
+        "no_in_subsection": 4,
+        "name": "Diameter of Binary Tree",
+        "difficulty": "Core"
+      },
+      {
+        "no": 231,
+        "no_in_subsection": 5,
+        "name": "Maximum path sum",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 232,
+        "no_in_subsection": 6,
+        "name": "Check for symmetrical BTs",
+        "difficulty": "Core"
+      },
+      {
+        "no": 233,
+        "no_in_subsection": 7,
+        "name": "Children Sum Property in Binary Tree",
+        "difficulty": "Core"
+      }
+    ],
+    "FAQs": [
+      {
+        "no": 234,
+        "no_in_subsection": 1,
+        "name": "Zig Zag or Spiral Traversal",
+        "difficulty": "Core"
+      },
+      {
+        "no": 235,
+        "no_in_subsection": 2,
+        "name": "Boundary Traversal",
+        "difficulty": "Core"
+      },
+      {
+        "no": 236,
+        "no_in_subsection": 3,
+        "name": "Vertical Order Traversal",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 237,
+        "no_in_subsection": 4,
+        "name": "Top View of BT",
+        "difficulty": "Core"
+      },
+      {
+        "no": 238,
+        "no_in_subsection": 5,
+        "name": "Bottom view of BT",
+        "difficulty": "Core"
+      },
+      {
+        "no": 239,
+        "no_in_subsection": 6,
+        "name": "Right/Left View of BT",
+        "difficulty": "Core"
+      },
+      {
+        "no": 240,
+        "no_in_subsection": 7,
+        "name": "Print root to leaf path in BT",
+        "difficulty": "Core"
+      },
+      {
+        "no": 241,
+        "no_in_subsection": 8,
+        "name": "LCA in BT",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 242,
+        "no_in_subsection": 9,
+        "name": "Maximum Width of BT",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 243,
+        "no_in_subsection": 10,
+        "name": "Print all nodes at a distance of K in BT",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 244,
+        "no_in_subsection": 11,
+        "name": "Minimum time taken to burn the BT from a given Node",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 245,
+        "no_in_subsection": 12,
+        "name": "Count total nodes in a complete BT",
+        "difficulty": "Core"
+      },
+      {
+        "no": 246,
+        "no_in_subsection": 13,
+        "name": "Flatten Binary Tree to Linked List",
+        "difficulty": "Pro"
+      }
+    ],
+    "Construction Problems": [
+      {
+        "no": 247,
+        "no_in_subsection": 1,
+        "name": "Requirements needed to construct a unique BT",
+        "difficulty": "Core"
+      },
+      {
+        "no": 248,
+        "no_in_subsection": 2,
+        "name": "Construct a BT from Preorder and Inorder",
+        "difficulty": "Core"
+      },
+      {
+        "no": 249,
+        "no_in_subsection": 3,
+        "name": "Construct a BT from Postorder and Inorder",
+        "difficulty": "Core"
+      },
+      {
+        "no": 250,
+        "no_in_subsection": 4,
+        "name": "Serialize and De-serialize BT",
+        "difficulty": "Pro"
+      }
+    ],
+    "Traversal in Constant Space": [
+      {
+        "no": 251,
+        "no_in_subsection": 1,
+        "name": "Morris Inorder Traversal",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 252,
+        "no_in_subsection": 2,
+        "name": "Morris Preorder Traversal",
+        "difficulty": "Pro"
+      }
+    ]
+  },
+  "Binary Search Trees": {
+    "Theory and Basics": [
+      {
+        "no": 253,
+        "no_in_subsection": 1,
+        "name": "Introduction to BST",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 254,
+        "no_in_subsection": 2,
+        "name": "Search in BST",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 255,
+        "no_in_subsection": 3,
+        "name": "Floor and Ceil in a BST",
+        "difficulty": "Core"
+      },
+      {
+        "no": 256,
+        "no_in_subsection": 4,
+        "name": "Minimum and Maximum in BST",
+        "difficulty": ""
+      }
+    ],
+    "Medium": [
+      {
+        "no": 257,
+        "no_in_subsection": 1,
+        "name": "Insert a given node in BST",
+        "difficulty": "Core"
+      },
+      {
+        "no": 258,
+        "no_in_subsection": 2,
+        "name": "Delete a node in BST",
+        "difficulty": "Core"
+      },
+      {
+        "no": 259,
+        "no_in_subsection": 3,
+        "name": "Kth Smallest and Largest element in BST",
+        "difficulty": "Core"
+      },
+      {
+        "no": 260,
+        "no_in_subsection": 4,
+        "name": "Check if a tree is a BST or not",
+        "difficulty": "Core"
+      },
+      {
+        "no": 261,
+        "no_in_subsection": 5,
+        "name": "LCA in BST",
+        "difficulty": "Core"
+      },
+      {
+        "no": 262,
+        "no_in_subsection": 6,
+        "name": "Construct a BST from a preorder traversal",
+        "difficulty": "Core"
+      },
+      {
+        "no": 263,
+        "no_in_subsection": 7,
+        "name": "Inorder successor and predecessor in BST",
+        "difficulty": "Core"
+      }
+    ],
+    "FAQs": [
+      {
+        "no": 264,
+        "no_in_subsection": 1,
+        "name": "BST iterator",
+        "difficulty": "Core"
+      },
+      {
+        "no": 265,
+        "no_in_subsection": 2,
+        "name": "Two sum in BST",
+        "difficulty": "Core"
+      },
+      {
+        "no": 266,
+        "no_in_subsection": 3,
+        "name": "Correct BST with two nodes swapped",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 267,
+        "no_in_subsection": 4,
+        "name": "Largest BST in Binary Tree",
+        "difficulty": "Pro"
+      }
+    ]
+  },
+  "Heaps": {
+    "Theory and Implementation": [
+      {
+        "no": 268,
+        "no_in_subsection": 1,
+        "name": "Heaps (Theory Video)",
+        "difficulty": "Core"
+      },
+      {
+        "no": 269,
+        "no_in_subsection": 2,
+        "name": "Heapify Algorithm",
+        "difficulty": "Core"
+      },
+      {
+        "no": 270,
+        "no_in_subsection": 3,
+        "name": "Build heap from a given Array",
+        "difficulty": "Core"
+      },
+      {
+        "no": 271,
+        "no_in_subsection": 4,
+        "name": "Implement Min Heap",
+        "difficulty": "Core"
+      },
+      {
+        "no": 272,
+        "no_in_subsection": 5,
+        "name": "Implement Max Heap",
+        "difficulty": "Core"
+      },
+      {
+        "no": 273,
+        "no_in_subsection": 6,
+        "name": "Check if an array represents a min heap",
+        "difficulty": "Core"
+      },
+      {
+        "no": 274,
+        "no_in_subsection": 7,
+        "name": "Convert Min Heap to Max Heap",
+        "difficulty": "Core"
+      },
+      {
+        "no": 275,
+        "no_in_subsection": 8,
+        "name": "Heap Sort",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 276,
+        "no_in_subsection": 9,
+        "name": "K-th Largest element in an array",
+        "difficulty": "Pro"
+      }
+    ],
+    "FAQs": [
+      {
+        "no": 277,
+        "no_in_subsection": 1,
+        "name": "Kth largest element in a stream of running integers",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 278,
+        "no_in_subsection": 2,
+        "name": "Sort a K-Sorted Array",
+        "difficulty": ""
+      },
+      {
+        "no": 279,
+        "no_in_subsection": 3,
+        "name": "Merge K sorted Lists",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 280,
+        "no_in_subsection": 4,
+        "name": "Replace Elements by Their Rank",
+        "difficulty": "Core"
+      },
+      {
+        "no": 281,
+        "no_in_subsection": 5,
+        "name": "Task Scheduler",
+        "difficulty": "Core"
+      },
+      {
+        "no": 282,
+        "no_in_subsection": 6,
+        "name": "Hand of Straights",
+        "difficulty": "Core"
+      },
+      {
+        "no": 283,
+        "no_in_subsection": 7,
+        "name": "Design Twitter",
+        "difficulty": "Core"
+      },
+      {
+        "no": 284,
+        "no_in_subsection": 8,
+        "name": "Minimum Cost to Connect Sticks",
+        "difficulty": "Core"
+      },
+      {
+        "no": 285,
+        "no_in_subsection": 9,
+        "name": "Maximum Sum Combination",
+        "difficulty": "Core"
+      },
+      {
+        "no": 286,
+        "no_in_subsection": 10,
+        "name": "Find Median from Data Stream",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 287,
+        "no_in_subsection": 11,
+        "name": "Top K Frequent Elements",
+        "difficulty": "Core"
+      }
+    ]
+  },
+  "Graphs": {
+    "Theory and traversals": [
+      {
+        "no": 288,
+        "no_in_subsection": 1,
+        "name": "Introduction to Graph",
+        "difficulty": "Basic"
+      },
+      {
+        "no": 289,
+        "no_in_subsection": 2,
+        "name": "Traversal Techniques",
+        "difficulty": "Core"
+      },
+      {
+        "no": 290,
+        "no_in_subsection": 3,
+        "name": "Connected Components",
+        "difficulty": "Core"
+      }
+    ],
+    "Traversal Problems": [
+      {
+        "no": 291,
+        "no_in_subsection": 1,
+        "name": "Number of provinces",
+        "difficulty": "Core"
+      },
+      {
+        "no": 292,
+        "no_in_subsection": 2,
+        "name": "Number of islands",
+        "difficulty": "Core"
+      },
+      {
+        "no": 293,
+        "no_in_subsection": 3,
+        "name": "Flood fill algorithm",
+        "difficulty": "Core"
+      },
+      {
+        "no": 294,
+        "no_in_subsection": 4,
+        "name": "Number of enclaves",
+        "difficulty": "Core"
+      },
+      {
+        "no": 295,
+        "no_in_subsection": 5,
+        "name": "Rotten Oranges",
+        "difficulty": "Core"
+      },
+      {
+        "no": 296,
+        "no_in_subsection": 6,
+        "name": "Distance of nearest cell having one",
+        "difficulty": "Core"
+      },
+      {
+        "no": 297,
+        "no_in_subsection": 7,
+        "name": "Surrounded Regions",
+        "difficulty": "Core"
+      },
+      {
+        "no": 298,
+        "no_in_subsection": 8,
+        "name": "Number of distinct islands",
+        "difficulty": "Core"
+      }
+    ],
+    "Cycles": [
+      {
+        "no": 299,
+        "no_in_subsection": 1,
+        "name": "Detect a cycle in an undirected graph",
+        "difficulty": "Core"
+      },
+      {
+        "no": 300,
+        "no_in_subsection": 2,
+        "name": "Bipartite graph",
+        "difficulty": "Core"
+      },
+      {
+        "no": 301,
+        "no_in_subsection": 3,
+        "name": "Topological sort or Kahn's algorithm",
+        "difficulty": "Core"
+      },
+      {
+        "no": 302,
+        "no_in_subsection": 4,
+        "name": "Detect a cycle in a directed graph",
+        "difficulty": "Core"
+      }
+    ],
+    "Hard Problems": [
+      {
+        "no": 303,
+        "no_in_subsection": 1,
+        "name": "Find eventual safe states",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 304,
+        "no_in_subsection": 2,
+        "name": "Course Schedule I",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 305,
+        "no_in_subsection": 3,
+        "name": "Course Schedule II",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 306,
+        "no_in_subsection": 4,
+        "name": "Alien Dictionary",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 307,
+        "no_in_subsection": 5,
+        "name": "Shortest path in DAG",
+        "difficulty": "Core"
+      },
+      {
+        "no": 308,
+        "no_in_subsection": 6,
+        "name": "Shortest path in undirected graph with unit weights",
+        "difficulty": "Core"
+      },
+      {
+        "no": 309,
+        "no_in_subsection": 7,
+        "name": "Word ladder I",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 310,
+        "no_in_subsection": 8,
+        "name": "Word ladder II",
+        "difficulty": "Pro"
+      }
+    ],
+    "Shortest Path Algorithms": [
+      {
+        "no": 311,
+        "no_in_subsection": 1,
+        "name": "Dijkstra's algorithm",
+        "difficulty": "Core"
+      },
+      {
+        "no": 312,
+        "no_in_subsection": 2,
+        "name": "Print Shortest Path",
+        "difficulty": "Core"
+      },
+      {
+        "no": 313,
+        "no_in_subsection": 3,
+        "name": "Shortest Distance in a Binary Maze",
+        "difficulty": "Core"
+      },
+      {
+        "no": 314,
+        "no_in_subsection": 4,
+        "name": "Path with minimum effort",
+        "difficulty": "Core"
+      },
+      {
+        "no": 315,
+        "no_in_subsection": 5,
+        "name": "Cheapest flight within K stops",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 316,
+        "no_in_subsection": 6,
+        "name": "Minimum multiplications to reach end",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 317,
+        "no_in_subsection": 7,
+        "name": "Number of ways to arrive at destination",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 318,
+        "no_in_subsection": 8,
+        "name": "Bellman ford algorithm",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 319,
+        "no_in_subsection": 9,
+        "name": "Floyd warshall algorithm",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 320,
+        "no_in_subsection": 10,
+        "name": "Find the city with the smallest number of neighbors",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 321,
+        "no_in_subsection": 11,
+        "name": "Network Delay Time",
+        "difficulty": "Core"
+      },
+      {
+        "no": 322,
+        "no_in_subsection": 12,
+        "name": "Swim in Rising Water",
+        "difficulty": "Pro"
+      }
+    ],
+    "Minimum Spanning Tree": [
+      {
+        "no": 323,
+        "no_in_subsection": 1,
+        "name": "MST theory",
+        "difficulty": "Core"
+      },
+      {
+        "no": 324,
+        "no_in_subsection": 2,
+        "name": "Disjoint Set",
+        "difficulty": "Core"
+      },
+      {
+        "no": 325,
+        "no_in_subsection": 3,
+        "name": "Find the MST weight",
+        "difficulty": "Core"
+      }
+    ],
+    "Hard Problems II": [
+      {
+        "no": 326,
+        "no_in_subsection": 1,
+        "name": "Number of operations to make network connected",
+        "difficulty": "Core"
+      },
+      {
+        "no": 327,
+        "no_in_subsection": 2,
+        "name": "Accounts merge",
+        "difficulty": "Core"
+      },
+      {
+        "no": 328,
+        "no_in_subsection": 3,
+        "name": "Number of islands II",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 329,
+        "no_in_subsection": 4,
+        "name": "Making a large island",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 330,
+        "no_in_subsection": 5,
+        "name": "Most stones removed with same row or column",
+        "difficulty": "Pro"
+      }
+    ],
+    "Additional Algorithms": [
+      {
+        "no": 331,
+        "no_in_subsection": 1,
+        "name": "Kosaraju's algorithm",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 332,
+        "no_in_subsection": 2,
+        "name": "Bridges in graph",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 333,
+        "no_in_subsection": 3,
+        "name": "Articulation point in graph",
+        "difficulty": "Pro"
+      }
+    ]
+  },
+  "Dynamic Programming": {
+    "Introduction": [
+      {
+        "no": 334,
+        "no_in_subsection": 1,
+        "name": "Introduction to DP",
+        "difficulty": "Basic"
+      }
+    ],
+    "1D DP": [
+      {
+        "no": 335,
+        "no_in_subsection": 1,
+        "name": "Climbing stairs",
+        "difficulty": "Core"
+      },
+      {
+        "no": 336,
+        "no_in_subsection": 2,
+        "name": "Frog Jump",
+        "difficulty": "Core"
+      },
+      {
+        "no": 337,
+        "no_in_subsection": 3,
+        "name": "Frog jump with K distances",
+        "difficulty": "Core"
+      },
+      {
+        "no": 338,
+        "no_in_subsection": 4,
+        "name": "Maximum sum of non adjacent elements",
+        "difficulty": "Core"
+      },
+      {
+        "no": 339,
+        "no_in_subsection": 5,
+        "name": "House robber",
+        "difficulty": "Core"
+      }
+    ],
+    "2D DP": [
+      {
+        "no": 340,
+        "no_in_subsection": 1,
+        "name": "Ninja's training",
+        "difficulty": "Core"
+      }
+    ],
+    "DP on grids": [
+      {
+        "no": 341,
+        "no_in_subsection": 1,
+        "name": "Grid unique paths",
+        "difficulty": "Core"
+      },
+      {
+        "no": 342,
+        "no_in_subsection": 2,
+        "name": "Unique paths II",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 343,
+        "no_in_subsection": 3,
+        "name": "Minimum Falling Path Sum",
+        "difficulty": "Core"
+      },
+      {
+        "no": 344,
+        "no_in_subsection": 4,
+        "name": "Triangle",
+        "difficulty": "Core"
+      },
+      {
+        "no": 345,
+        "no_in_subsection": 5,
+        "name": "Cherry pickup II",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 346,
+        "no_in_subsection": 6,
+        "name": "Count Square Submatrices with All Ones",
+        "difficulty": ""
+      }
+    ],
+    "DP on stocks": [
+      {
+        "no": 347,
+        "no_in_subsection": 1,
+        "name": "Best time to buy and sell stock",
+        "difficulty": "Core"
+      },
+      {
+        "no": 348,
+        "no_in_subsection": 2,
+        "name": "Best time to buy and sell stock II",
+        "difficulty": "Core"
+      },
+      {
+        "no": 349,
+        "no_in_subsection": 3,
+        "name": "Best time to buy and sell stock III",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 350,
+        "no_in_subsection": 4,
+        "name": "Best time to buy and sell stock IV",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 351,
+        "no_in_subsection": 5,
+        "name": "Best time to buy and sell stock with transaction fees",
+        "difficulty": "Core"
+      },
+      {
+        "no": 352,
+        "no_in_subsection": 6,
+        "name": "Best Time to Buy and Sell Stock with Cooldown",
+        "difficulty": "Core"
+      }
+    ],
+    "DP on subsequences": [
+      {
+        "no": 353,
+        "no_in_subsection": 1,
+        "name": "Subset sum equals to target",
+        "difficulty": "Core"
+      },
+      {
+        "no": 354,
+        "no_in_subsection": 2,
+        "name": "Partition equal subset sum",
+        "difficulty": "Core"
+      },
+      {
+        "no": 355,
+        "no_in_subsection": 3,
+        "name": "Partition a set into two subsets with minimum absolute sum difference",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 356,
+        "no_in_subsection": 4,
+        "name": "Count subsets with sum K",
+        "difficulty": "Core"
+      },
+      {
+        "no": 357,
+        "no_in_subsection": 5,
+        "name": "Count partitions with given difference",
+        "difficulty": "Core"
+      },
+      {
+        "no": 358,
+        "no_in_subsection": 6,
+        "name": "0 and 1 Knapsack",
+        "difficulty": "Core"
+      },
+      {
+        "no": 359,
+        "no_in_subsection": 7,
+        "name": "Minimum coins",
+        "difficulty": "Core"
+      },
+      {
+        "no": 360,
+        "no_in_subsection": 8,
+        "name": "Target sum",
+        "difficulty": "Core"
+      },
+      {
+        "no": 361,
+        "no_in_subsection": 9,
+        "name": "Coin change II",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 362,
+        "no_in_subsection": 10,
+        "name": "Unbounded knapsack",
+        "difficulty": "Core"
+      },
+      {
+        "no": 363,
+        "no_in_subsection": 11,
+        "name": "Rod cutting problem",
+        "difficulty": "Pro"
+      }
+    ],
+    "LIS": [
+      {
+        "no": 364,
+        "no_in_subsection": 1,
+        "name": "Longest Increasing Subsequence",
+        "difficulty": "Core"
+      },
+      {
+        "no": 365,
+        "no_in_subsection": 2,
+        "name": "Print Longest Increasing Subsequence",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 366,
+        "no_in_subsection": 3,
+        "name": "Largest Divisible Subset",
+        "difficulty": "Core"
+      },
+      {
+        "no": 367,
+        "no_in_subsection": 4,
+        "name": "Longest String Chain",
+        "difficulty": "Core"
+      },
+      {
+        "no": 368,
+        "no_in_subsection": 5,
+        "name": "Longest Bitonic Subsequence",
+        "difficulty": "Core"
+      },
+      {
+        "no": 369,
+        "no_in_subsection": 6,
+        "name": "Number of Longest Increasing Subsequences",
+        "difficulty": "Core"
+      }
+    ],
+    "DP on strings": [
+      {
+        "no": 370,
+        "no_in_subsection": 1,
+        "name": "Longest common subsequence",
+        "difficulty": "Core"
+      },
+      {
+        "no": 371,
+        "no_in_subsection": 2,
+        "name": "Longest common substring",
+        "difficulty": "Core"
+      },
+      {
+        "no": 372,
+        "no_in_subsection": 3,
+        "name": "Longest palindromic subsequence",
+        "difficulty": "Core"
+      },
+      {
+        "no": 373,
+        "no_in_subsection": 4,
+        "name": "Minimum insertions to make string palindrome",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 374,
+        "no_in_subsection": 5,
+        "name": "Minimum insertions or deletions to convert string A to B",
+        "difficulty": "Core"
+      },
+      {
+        "no": 375,
+        "no_in_subsection": 6,
+        "name": "Shortest common supersequence",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 376,
+        "no_in_subsection": 7,
+        "name": "Distinct subsequences",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 377,
+        "no_in_subsection": 8,
+        "name": "Edit distance",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 378,
+        "no_in_subsection": 9,
+        "name": "Wildcard matching",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 379,
+        "no_in_subsection": 10,
+        "name": "Word Break",
+        "difficulty": "Core"
+      },
+      {
+        "no": 380,
+        "no_in_subsection": 11,
+        "name": "Count Palindromic Subsequences",
+        "difficulty": "Pro"
+      }
+    ],
+    "MCM DP": [
+      {
+        "no": 381,
+        "no_in_subsection": 1,
+        "name": "Matrix chain multiplication",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 382,
+        "no_in_subsection": 2,
+        "name": "Burst balloons",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 383,
+        "no_in_subsection": 3,
+        "name": "Palindrome partitioning II",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 384,
+        "no_in_subsection": 4,
+        "name": "Partition Array for Maximum Sum",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 385,
+        "no_in_subsection": 5,
+        "name": "Minimum cost to cut the stick",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 386,
+        "no_in_subsection": 6,
+        "name": "Different Ways to Evaluate a Boolean Expression",
+        "difficulty": "Pro"
+      }
+    ]
+  },
+  "Tries": {
+    "Theory": [
+      {
+        "no": 387,
+        "no_in_subsection": 1,
+        "name": "Bit PreRequisites for TRIE Problems",
+        "difficulty": ""
+      },
+      {
+        "no": 388,
+        "no_in_subsection": 2,
+        "name": "Trie Implementation and Operations",
+        "difficulty": "Core"
+      },
+      {
+        "no": 389,
+        "no_in_subsection": 3,
+        "name": "Trie Implementation and Advanced Operations",
+        "difficulty": "Core"
+      }
+    ],
+    "Problems": [
+      {
+        "no": 390,
+        "no_in_subsection": 1,
+        "name": "Longest Word with All Prefixes",
+        "difficulty": "Core"
+      },
+      {
+        "no": 391,
+        "no_in_subsection": 2,
+        "name": "Number of distinct substrings in a string",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 392,
+        "no_in_subsection": 3,
+        "name": "Maximum XOR of two numbers in an array",
+        "difficulty": "Core"
+      },
+      {
+        "no": 393,
+        "no_in_subsection": 4,
+        "name": "Maximum Xor with an element from an array",
+        "difficulty": "Pro"
+      }
+    ]
+  },
+  "Strings (Advanced Algo)": {
+    "Medium Problems": [
+      {
+        "no": 394,
+        "no_in_subsection": 1,
+        "name": "Reverse every word in a string",
+        "difficulty": "Core"
+      },
+      {
+        "no": 395,
+        "no_in_subsection": 2,
+        "name": "Minimum number of bracket reversals to make an expression balanced",
+        "difficulty": "Core"
+      },
+      {
+        "no": 396,
+        "no_in_subsection": 3,
+        "name": "Count and say",
+        "difficulty": "Core"
+      }
+    ],
+    "Advanced Problems (Less asked)": [
+      {
+        "no": 397,
+        "no_in_subsection": 1,
+        "name": "Hashing In Strings | Theory",
+        "difficulty": ""
+      },
+      {
+        "no": 398,
+        "no_in_subsection": 2,
+        "name": "Rabin Karp Algorithm",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 399,
+        "no_in_subsection": 3,
+        "name": "Z function",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 400,
+        "no_in_subsection": 4,
+        "name": "KMP Algorithm or LPS array",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 401,
+        "no_in_subsection": 5,
+        "name": "Shortest Palindrome",
+        "difficulty": "Pro"
+      },
+      {
+        "no": 402,
+        "no_in_subsection": 6,
+        "name": "Longest happy prefix",
+        "difficulty": "Pro"
+      }
+    ]
+  },
+  "Maths": {
+    "Sieve of Eratosthenes": [
+      {
+        "no": 403,
+        "no_in_subsection": 1,
+        "name": "Print all primes till N",
+        "difficulty": "Core"
+      },
+      {
+        "no": 404,
+        "no_in_subsection": 2,
+        "name": "Prime factorisation of a Number",
+        "difficulty": "Core"
+      },
+      {
+        "no": 405,
+        "no_in_subsection": 3,
+        "name": "Count primes in range L to R",
+        "difficulty": "Pro"
+      }
+    ]
+  }
+}

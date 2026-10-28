@@ -1,0 +1,17 @@
+{
+  "name": "DSA Streak",
+  "short_name": "DSA Streak",
+  "description": "Solve one problem a day from the Striver A2Z DSA sheet.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#131f24",
+  "background_color": "#131f24",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

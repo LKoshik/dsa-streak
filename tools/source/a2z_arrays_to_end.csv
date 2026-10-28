@@ -1,0 +1,406 @@
+no,topic,subsection,no_in_subsection,name,difficulty
+1,Arrays,Fundamentals,1,Linear Search,Basic
+2,Arrays,Fundamentals,2,Largest Element,Basic
+3,Arrays,Fundamentals,3,Second Largest Element,Basic
+4,Arrays,Fundamentals,4,Maximum Consecutive Ones,Basic
+5,Arrays,Fundamentals,5,Left Rotate Array by One,Basic
+6,Arrays,Fundamentals,6,Left Rotate Array by K Places,Core
+7,Arrays,Logic Building,1,Move Zeros to End,Basic
+8,Arrays,Logic Building,2,Remove duplicates from sorted array,Basic
+9,Arrays,Logic Building,3,Find missing number,Basic
+10,Arrays,Logic Building,4,Union of two sorted arrays,Core
+11,Arrays,Logic Building,5,Intersection of two sorted arrays,Core
+12,Arrays,FAQs(Medium),1,Majority Element-I,Core
+13,Arrays,FAQs(Medium),2,Leaders in an Array,Core
+14,Arrays,FAQs(Medium),3,Rearrange array elements by sign,Core
+15,Arrays,FAQs(Medium),4,Print the matrix in spiral manner,Core
+16,Arrays,FAQs(Medium),5,Pascal's Triangle I,Core
+17,Arrays,FAQs(Medium),6,Pascal's Triangle II,Core
+18,Arrays,FAQs(Medium),7,Pascal's Triangle III,Core
+19,Arrays,FAQs(Medium),8,Rotate matrix by 90 degrees,Core
+20,Arrays,FAQs(Medium),9,Set Matrix Zeroes,Core
+21,Arrays,FAQs(Medium),10,Two Sum,Basic
+22,Arrays,FAQs(Medium),11,3 Sum,Core
+23,Arrays,FAQs(Medium),12,4 Sum,Pro
+24,Arrays,FAQs(Medium),13,Sort an array of 0's 1's and 2's,Core
+25,Arrays,FAQs(Medium),14,Kadane's Algorithm,Core
+26,Arrays,FAQs(Medium),15,Next Permutation,Core
+27,Arrays,FAQs(Hard),1,Majority Element-II,Core
+28,Arrays,FAQs(Hard),2,Find the repeating and missing number,Core
+29,Arrays,FAQs(Hard),3,Count Inversions,Pro
+30,Arrays,FAQs(Hard),4,Reverse Pairs,Pro
+31,Arrays,FAQs(Hard),5,Maximum Product Subarray in an Array,Core
+32,Arrays,FAQs(Hard),6,Merge two sorted arrays without extra space,Core
+33,Hashing,Theory,1,Basic Hashing,Basic
+34,Hashing,FAQs,1,Longest Consecutive Sequence in an Array,Core
+35,Hashing,FAQs,2,Longest subarray with sum K,Core
+36,Hashing,FAQs,3,Largest Subarray with Sum 0,Core
+37,Hashing,FAQs,4,Count subarrays with given sum,Core
+38,Hashing,FAQs,5,Count subarrays with given xor K,Pro
+39,Binary Search,Fundamentals,1,Search X in sorted array,Basic
+40,Binary Search,Fundamentals,2,Lower Bound,Core
+41,Binary Search,Fundamentals,3,Upper Bound,Core
+42,Binary Search,Logic Building,1,Search insert position,Basic
+43,Binary Search,Logic Building,2,Floor and Ceil in Sorted Array,Core
+44,Binary Search,Logic Building,3,First and last occurrence,Core
+45,Binary Search,Logic Building,4,Search in rotated sorted array-I,Core
+46,Binary Search,Logic Building,5,Search in rotated sorted array-II,Core
+47,Binary Search,Logic Building,6,Find minimum in Rotated Sorted Array,Core
+48,Binary Search,Logic Building,7,Find out how many times the array is rotated,Core
+49,Binary Search,Logic Building,8,Single element in sorted array,Core
+50,Binary Search,Logic Building,9,Count Occurrences in a Sorted Array,Core
+51,Binary Search,On answers,1,Find square root of a number,Core
+52,Binary Search,On answers,2,Find Nth root of a number,Core
+53,Binary Search,On answers,3,Find the smallest divisor,Core
+54,Binary Search,On answers,4,Koko eating bananas,Pro
+55,Binary Search,On answers,5,Minimum days to make M bouquets,Pro
+56,Binary Search,On answers,6,Capacity to Ship Packages Within D Days,Pro
+57,Binary Search,On answers,7,Kth Missing Positive Number,Pro
+58,Binary Search,On answers,8,Painter's Partition,Pro
+59,Binary Search,FAQs,1,Aggressive Cows,Pro
+60,Binary Search,FAQs,2,Book Allocation Problem,Pro
+61,Binary Search,FAQs,3,Find peak element,Core
+62,Binary Search,FAQs,4,Median of 2 sorted arrays,Pro
+63,Binary Search,FAQs,5,Kth element of 2 sorted arrays,Pro
+64,Binary Search,FAQs,6,Minimize Max Distance to Gas Station,Pro
+65,Binary Search,FAQs,7,Split array - largest sum,Pro
+66,Binary Search,2D Arrays,1,Find row with maximum 1's,Core
+67,Binary Search,2D Arrays,2,Search in a 2D Matrix,Core
+68,Binary Search,2D Arrays,3,Search in 2D matrix - II,Core
+69,Binary Search,2D Arrays,4,Find Peak Element - II,Core
+70,Binary Search,2D Arrays,5,Matrix Median,Pro
+71,Strings (Basic and Medium),Parentheses,1,Remove Outermost Parentheses,Core
+72,Strings (Basic and Medium),Parentheses,2,Maximum Nesting Depth of the Parentheses,Core
+73,Strings (Basic and Medium),String Conversions,1,Roman to Integer,Basic
+74,Strings (Basic and Medium),String Conversions,2,String to Integer (atoi),Core
+75,Strings (Basic and Medium),Substring Problems,1,Count Number of Substrings,
+76,Strings (Basic and Medium),Substring Problems,2,Longest Palindromic Substring,Core
+77,Strings (Basic and Medium),Substring Problems,3,Sum of Beauty of All Substrings,Core
+78,Recursion,Implementation Problems,1,"Pow(x,n)",Core
+79,Recursion,Implementation Problems,2,Generate Parentheses,Core
+80,Recursion,Implementation Problems,3,Power Set,Core
+81,Recursion,Implementation Problems,4,Count Good Numbers,Core
+82,Recursion,Implementation Problems,5,Reverse a Stack,Core
+83,Recursion,Subsequence Pattern Problems,1,Learn All Patterns of Subsequences (Theory),
+84,Recursion,Subsequence Pattern Problems,2,Check if there exists a subsequence with sum K,Core
+85,Recursion,Subsequence Pattern Problems,3,Count all subsequences with sum K,Core
+86,Recursion,Subsequence Pattern Problems,4,Generate Binary Strings Without Consecutive 1s,Core
+87,Recursion,FAQs (Medium),1,Combination Sum,Core
+88,Recursion,FAQs (Medium),2,Combination Sum II,Core
+89,Recursion,FAQs (Medium),3,Subsets I,Core
+90,Recursion,FAQs (Medium),4,Subsets II,Core
+91,Recursion,FAQs (Medium),5,Combination Sum III,Pro
+92,Recursion,Hard,1,Letter Combinations of a Phone Number,Pro
+93,Recursion,FAQs (Hard),1,Palindrome partitioning,Pro
+94,Recursion,FAQs (Hard),2,Word Search,Pro
+95,Recursion,FAQs (Hard),3,N Queen,Pro
+96,Recursion,FAQs (Hard),4,Rat in a Maze,Pro
+97,Recursion,FAQs (Hard),5,M Coloring Problem,Pro
+98,Recursion,FAQs (Hard),6,Sudoku Solver,Pro
+99,Recursion,FAQs (Hard),7,Expression Add Operators,Pro
+100,Linked-List,Fundamentals (Single LL),1,Introduction to Singly LinkedList,Basic
+101,Linked-List,Fundamentals (Single LL),2,Traversal in Linked List,Basic
+102,Linked-List,Fundamentals (Single LL),3,Deletion in Linked List,Core
+103,Linked-List,Fundamentals (Single LL),4,Insertion in Linked List,Core
+104,Linked-List,Fundamentals (Single LL),5,Deletion of the head of LL,Core
+105,Linked-List,Fundamentals (Single LL),6,Deletion of the tail of Linked List,Core
+106,Linked-List,Fundamentals (Single LL),7,Deletion of the Kth element of Linked List,Core
+107,Linked-List,Fundamentals (Single LL),8,Delete the element with value X,Core
+108,Linked-List,Fundamentals (Single LL),9,Insertion at the head of Linked List,Core
+109,Linked-List,Fundamentals (Single LL),10,Insertion at the tail of Linked List,Core
+110,Linked-List,Fundamentals (Single LL),11,Insertion at the Kth position of Linked List,Core
+111,Linked-List,Fundamentals (Single LL),12,Insertion before the value X in Linked List,Core
+112,Linked-List,Fundamentals (Single LL),13,Find the length of the Linked List,Basic
+113,Linked-List,Fundamentals (Single LL),14,Search in Linked List,Core
+114,Linked-List,Fundamentals (Doubly LL),1,Introduction to Doubly LL,Basic
+115,Linked-List,Fundamentals (Doubly LL),2,Deletion in Doubly LL,Core
+116,Linked-List,Fundamentals (Doubly LL),3,Insertion in DLL,Core
+117,Linked-List,Fundamentals (Doubly LL),4,Convert Array to Doubly Linked List,Core
+118,Linked-List,Fundamentals (Doubly LL),5,Delete Tail of Doubly Linked List,Core
+119,Linked-List,Fundamentals (Doubly LL),6,Delete Kth Element of Doubly Linked List,Core
+120,Linked-List,Fundamentals (Doubly LL),7,Removing given node in Doubly Linked List,Core
+121,Linked-List,Fundamentals (Doubly LL),8,Insert node before head in Doubly Linked List,Core
+122,Linked-List,Fundamentals (Doubly LL),9,Insert node before tail in Doubly Linked List,Core
+123,Linked-List,Fundamentals (Doubly LL),10,Insert node before (kth node) in Doubly Linked List,Core
+124,Linked-List,Fundamentals (Doubly LL),11,Insert before given node in Doubly Linked List,Core
+125,Linked-List,Fundamentals (Doubly LL),12,Delete head of Doubly Linked List,Core
+126,Linked-List,Fundamentals (Doubly LL),13,Reverse a Doubly Linked List,Core
+127,Linked-List,Logic Building,1,Add two numbers in Linked List,Core
+128,Linked-List,Logic Building,2,Segregate odd and even nodes in Linked List,Core
+129,Linked-List,Logic Building,3,Sort a Linked List of 0's 1's and 2's,Core
+130,Linked-List,Logic Building,4,Remove Nth node from the back of the LL,Core
+131,Linked-List,Logic Building,5,Reverse a LL,Core
+132,Linked-List,FAQs (Medium),1,Add one to a number represented by LL,Core
+133,Linked-List,FAQs (Medium),2,Find Middle of Linked List,Basic
+134,Linked-List,FAQs (Medium),3,Delete the middle node in LL,Core
+135,Linked-List,FAQs (Medium),4,Check if LL is palindrome or not,Core
+136,Linked-List,FAQs (Medium),5,Find the intersection point of Y LL,Core
+137,Linked-List,FAQs (Medium),6,Detect a loop in LL,Core
+138,Linked-List,FAQs (Medium),7,Find the starting point in LL,Core
+139,Linked-List,FAQs (Medium),8,Length of loop in LL,Core
+140,Linked-List,FAQs (Hard),1,Reverse LL in group of given size K,Pro
+141,Linked-List,FAQs (Hard),2,Rotate a LL,Core
+142,Linked-List,FAQs (Hard),3,Merge two Sorted Lists,Basic
+143,Linked-List,FAQs (Hard),4,Flattening of LL,Pro
+144,Linked-List,FAQs (Hard),5,Sort LL,Core
+145,Linked-List,FAQs (Hard),6,Clone a LL with random and next pointer,Pro
+146,Linked-List,FAQS (DLL),1,Delete all occurrences of a key in DLL,Core
+147,Linked-List,FAQS (DLL),2,Remove duplicates from sorted DLL,Core
+148,Linked-List,FAQS (DLL),3,Find Pairs with Given Sum in Doubly Linked List,Core
+149,Bit Manipulation,Theory,1,Introduction to Bits and Tricks,Basic
+150,Bit Manipulation,Bit Fundamentals,1,Check if the i-th bit is Set or Not,Basic
+151,Bit Manipulation,Bit Fundamentals,2,Check if a Number is Odd or Not,Basic
+152,Bit Manipulation,Bit Fundamentals,3,Check if a Number is Power of 2 or Not,Basic
+153,Bit Manipulation,Bit Fundamentals,4,Count the Number of Set Bits,Basic
+154,Bit Manipulation,Bit Fundamentals,5,Set the Rightmost Unset Bit,
+155,Bit Manipulation,Bit Fundamentals,6,Swap Two Numbers,Basic
+156,Bit Manipulation,Problems,1,Minimum Bit Flips to Convert Number,Basic
+157,Bit Manipulation,Problems,2,Single Number - I,Basic
+158,Bit Manipulation,Problems,3,Single Number - II,Core
+159,Bit Manipulation,Problems,4,Single Number - III,Pro
+160,Bit Manipulation,Problems,5,Divide two numbers without multiplication and division,Core
+161,Bit Manipulation,Problems,6,Power Set Bit Manipulation,Core
+162,Bit Manipulation,Problems,7,XOR of numbers in a given range,Core
+163,Greedy Algorithms,Easy,1,Assign Cookies,Core
+164,Greedy Algorithms,Easy,2,Lemonade Change,Core
+165,Greedy Algorithms,Easy,3,Fractional Knapsack,Core
+166,Greedy Algorithms,Easy,4,Jump Game - I,Core
+167,Greedy Algorithms,Scheduling and Interval Problems,1,Shortest Job First,Core
+168,Greedy Algorithms,Scheduling and Interval Problems,2,Job sequencing Problem,Core
+169,Greedy Algorithms,Scheduling and Interval Problems,3,N meetings in one room,Core
+170,Greedy Algorithms,Scheduling and Interval Problems,4,Non-overlapping Intervals,Core
+171,Greedy Algorithms,Scheduling and Interval Problems,5,Insert Interval,Core
+172,Greedy Algorithms,Scheduling and Interval Problems,6,Merge Intervals,Core
+173,Greedy Algorithms,Scheduling and Interval Problems,7,Minimum number of platforms required for a railway,Core
+174,Greedy Algorithms,Hard,1,Valid Parenthesis Checker,Pro
+175,Greedy Algorithms,Hard,2,Candy,Pro
+176,Greedy Algorithms,Hard,3,Jump Game II,Pro
+177,Sliding Window / 2 Pointer,Pattern and Template,1,Theory,Core
+178,Sliding Window / 2 Pointer,Constant Window,1,Maximum Points You Can Obtain from Cards,Core
+179,Sliding Window / 2 Pointer,Longest and Smallest Window Problems,1,Longest Substring Without Repeating Characters,Core
+180,Sliding Window / 2 Pointer,Longest and Smallest Window Problems,2,Max Consecutive Ones III,Core
+181,Sliding Window / 2 Pointer,Longest and Smallest Window Problems,3,Fruit Into Baskets,Core
+182,Sliding Window / 2 Pointer,Longest and Smallest Window Problems,4,Longest Substring With At Most K Distinct Characters,Pro
+183,Sliding Window / 2 Pointer,Longest and Smallest Window Problems,5,Longest Repeating Character Replacement,Pro
+184,Sliding Window / 2 Pointer,Longest and Smallest Window Problems,6,Minimum Window Substring,Pro
+185,Sliding Window / 2 Pointer,Longest and Smallest Window Problems,7,Minimum Window Subsequence,Pro
+186,Sliding Window / 2 Pointer,Counting Subarrays / Substrings Problems,1,Number of Substrings Containing All Three Characters,Core
+187,Sliding Window / 2 Pointer,Counting Subarrays / Substrings Problems,2,Binary Subarrays With Sum,Core
+188,Sliding Window / 2 Pointer,Counting Subarrays / Substrings Problems,3,Count number of Nice subarrays,Pro
+189,Sliding Window / 2 Pointer,Counting Subarrays / Substrings Problems,4,Subarrays with K Different Integers,Pro
+190,Stack / Queues,Implementation,1,Implementation using different DS,Core
+191,Stack / Queues,Implementation,2,Implement Stack using Arrays,Core
+192,Stack / Queues,Implementation,3,Implement Queue using Arrays,Core
+193,Stack / Queues,Implementation,4,Implement Stack using Queue,Core
+194,Stack / Queues,Implementation,5,Implement Queue using Stack,Core
+195,Stack / Queues,Implementation,6,Implement stack using Linkedlist,Core
+196,Stack / Queues,Implementation,7,Implement queue using Linkedlist,Core
+197,Stack / Queues,Implementation,8,Balanced Paranthesis,Core
+198,Stack / Queues,"Prefix, Infix and Postfix Conversions",1,Infix to Postfix Conversion,Core
+199,Stack / Queues,"Prefix, Infix and Postfix Conversions",2,Infix to Prefix Conversion,Core
+200,Stack / Queues,"Prefix, Infix and Postfix Conversions",3,Prefix to Infix Conversion,Core
+201,Stack / Queues,"Prefix, Infix and Postfix Conversions",4,Prefix to Postfix Conversion,Core
+202,Stack / Queues,"Prefix, Infix and Postfix Conversions",5,Postfix to Infix Conversion,Core
+203,Stack / Queues,"Prefix, Infix and Postfix Conversions",6,Postfix to Prefix Conversion,Core
+204,Stack / Queues,Monotonic Stack,1,Next Greater Element,Core
+205,Stack / Queues,Monotonic Stack,2,Next Greater Element - 2,Core
+206,Stack / Queues,Monotonic Stack,3,Asteroid Collision,Core
+207,Stack / Queues,Monotonic Stack,4,Sum of Subarray Minimums,Core
+208,Stack / Queues,Monotonic Stack,5,Sum of Subarray Ranges,Core
+209,Stack / Queues,Monotonic Stack,6,Remove K Digits,Core
+210,Stack / Queues,Monotonic Stack,7,Next Smaller Element,Core
+211,Stack / Queues,FAQs,1,Implement Min Stack,Core
+212,Stack / Queues,FAQs,2,Sliding Window Maximum,Pro
+213,Stack / Queues,FAQs,3,Trapping Rainwater,Pro
+214,Stack / Queues,FAQs,4,Largest rectangle in a histogram,Pro
+215,Stack / Queues,FAQs,5,Maximum Rectangles,Pro
+216,Stack / Queues,FAQs,6,Stock span problem,Core
+217,Stack / Queues,FAQs,7,Celebrity Problem,Core
+218,Stack / Queues,FAQs,8,LRU Cache,Pro
+219,Stack / Queues,FAQs,9,LFU Cache,Pro
+220,Stack / Queues,FAQs,10,Number of Greater Elements to the Right,Core
+221,Binary Trees,Theory/Traversals,1,Introduction,Basic
+222,Binary Trees,Theory/Traversals,2,Inorder Traversal,Basic
+223,Binary Trees,Theory/Traversals,3,Preorder Traversal,Basic
+224,Binary Trees,Theory/Traversals,4,Postorder Traversal,Basic
+225,Binary Trees,Theory/Traversals,5,Level Order Traversal,Core
+226,Binary Trees,Theory/Traversals,6,"Pre, Post, Inorder in one traversal",Core
+227,Binary Trees,Medium Problems,1,Maximum Depth in BT,Core
+228,Binary Trees,Medium Problems,2,Check if two trees are identical or not,Core
+229,Binary Trees,Medium Problems,3,Check for balanced binary tree,Core
+230,Binary Trees,Medium Problems,4,Diameter of Binary Tree,Core
+231,Binary Trees,Medium Problems,5,Maximum path sum,Pro
+232,Binary Trees,Medium Problems,6,Check for symmetrical BTs,Core
+233,Binary Trees,Medium Problems,7,Children Sum Property in Binary Tree,Core
+234,Binary Trees,FAQs,1,Zig Zag or Spiral Traversal,Core
+235,Binary Trees,FAQs,2,Boundary Traversal,Core
+236,Binary Trees,FAQs,3,Vertical Order Traversal,Pro
+237,Binary Trees,FAQs,4,Top View of BT,Core
+238,Binary Trees,FAQs,5,Bottom view of BT,Core
+239,Binary Trees,FAQs,6,Right/Left View of BT,Core
+240,Binary Trees,FAQs,7,Print root to leaf path in BT,Core
+241,Binary Trees,FAQs,8,LCA in BT,Pro
+242,Binary Trees,FAQs,9,Maximum Width of BT,Pro
+243,Binary Trees,FAQs,10,Print all nodes at a distance of K in BT,Pro
+244,Binary Trees,FAQs,11,Minimum time taken to burn the BT from a given Node,Pro
+245,Binary Trees,FAQs,12,Count total nodes in a complete BT,Core
+246,Binary Trees,FAQs,13,Flatten Binary Tree to Linked List,Pro
+247,Binary Trees,Construction Problems,1,Requirements needed to construct a unique BT,Core
+248,Binary Trees,Construction Problems,2,Construct a BT from Preorder and Inorder,Core
+249,Binary Trees,Construction Problems,3,Construct a BT from Postorder and Inorder,Core
+250,Binary Trees,Construction Problems,4,Serialize and De-serialize BT,Pro
+251,Binary Trees,Traversal in Constant Space,1,Morris Inorder Traversal,Pro
+252,Binary Trees,Traversal in Constant Space,2,Morris Preorder Traversal,Pro
+253,Binary Search Trees,Theory and Basics,1,Introduction to BST,Basic
+254,Binary Search Trees,Theory and Basics,2,Search in BST,Basic
+255,Binary Search Trees,Theory and Basics,3,Floor and Ceil in a BST,Core
+256,Binary Search Trees,Theory and Basics,4,Minimum and Maximum in BST,
+257,Binary Search Trees,Medium,1,Insert a given node in BST,Core
+258,Binary Search Trees,Medium,2,Delete a node in BST,Core
+259,Binary Search Trees,Medium,3,Kth Smallest and Largest element in BST,Core
+260,Binary Search Trees,Medium,4,Check if a tree is a BST or not,Core
+261,Binary Search Trees,Medium,5,LCA in BST,Core
+262,Binary Search Trees,Medium,6,Construct a BST from a preorder traversal,Core
+263,Binary Search Trees,Medium,7,Inorder successor and predecessor in BST,Core
+264,Binary Search Trees,FAQs,1,BST iterator,Core
+265,Binary Search Trees,FAQs,2,Two sum in BST,Core
+266,Binary Search Trees,FAQs,3,Correct BST with two nodes swapped,Pro
+267,Binary Search Trees,FAQs,4,Largest BST in Binary Tree,Pro
+268,Heaps,Theory and Implementation,1,Heaps (Theory Video),Core
+269,Heaps,Theory and Implementation,2,Heapify Algorithm,Core
+270,Heaps,Theory and Implementation,3,Build heap from a given Array,Core
+271,Heaps,Theory and Implementation,4,Implement Min Heap,Core
+272,Heaps,Theory and Implementation,5,Implement Max Heap,Core
+273,Heaps,Theory and Implementation,6,Check if an array represents a min heap,Core
+274,Heaps,Theory and Implementation,7,Convert Min Heap to Max Heap,Core
+275,Heaps,Theory and Implementation,8,Heap Sort,Pro
+276,Heaps,Theory and Implementation,9,K-th Largest element in an array,Pro
+277,Heaps,FAQs,1,Kth largest element in a stream of running integers,Pro
+278,Heaps,FAQs,2,Sort a K-Sorted Array,
+279,Heaps,FAQs,3,Merge K sorted Lists,Pro
+280,Heaps,FAQs,4,Replace Elements by Their Rank,Core
+281,Heaps,FAQs,5,Task Scheduler,Core
+282,Heaps,FAQs,6,Hand of Straights,Core
+283,Heaps,FAQs,7,Design Twitter,Core
+284,Heaps,FAQs,8,Minimum Cost to Connect Sticks,Core
+285,Heaps,FAQs,9,Maximum Sum Combination,Core
+286,Heaps,FAQs,10,Find Median from Data Stream,Pro
+287,Heaps,FAQs,11,Top K Frequent Elements,Core
+288,Graphs,Theory and traversals,1,Introduction to Graph,Basic
+289,Graphs,Theory and traversals,2,Traversal Techniques,Core
+290,Graphs,Theory and traversals,3,Connected Components,Core
+291,Graphs,Traversal Problems,1,Number of provinces,Core
+292,Graphs,Traversal Problems,2,Number of islands,Core
+293,Graphs,Traversal Problems,3,Flood fill algorithm,Core
+294,Graphs,Traversal Problems,4,Number of enclaves,Core
+295,Graphs,Traversal Problems,5,Rotten Oranges,Core
+296,Graphs,Traversal Problems,6,Distance of nearest cell having one,Core
+297,Graphs,Traversal Problems,7,Surrounded Regions,Core
+298,Graphs,Traversal Problems,8,Number of distinct islands,Core
+299,Graphs,Cycles,1,Detect a cycle in an undirected graph,Core
+300,Graphs,Cycles,2,Bipartite graph,Core
+301,Graphs,Cycles,3,Topological sort or Kahn's algorithm,Core
+302,Graphs,Cycles,4,Detect a cycle in a directed graph,Core
+303,Graphs,Hard Problems,1,Find eventual safe states,Pro
+304,Graphs,Hard Problems,2,Course Schedule I,Pro
+305,Graphs,Hard Problems,3,Course Schedule II,Pro
+306,Graphs,Hard Problems,4,Alien Dictionary,Pro
+307,Graphs,Hard Problems,5,Shortest path in DAG,Core
+308,Graphs,Hard Problems,6,Shortest path in undirected graph with unit weights,Core
+309,Graphs,Hard Problems,7,Word ladder I,Pro
+310,Graphs,Hard Problems,8,Word ladder II,Pro
+311,Graphs,Shortest Path Algorithms,1,Dijkstra's algorithm,Core
+312,Graphs,Shortest Path Algorithms,2,Print Shortest Path,Core
+313,Graphs,Shortest Path Algorithms,3,Shortest Distance in a Binary Maze,Core
+314,Graphs,Shortest Path Algorithms,4,Path with minimum effort,Core
+315,Graphs,Shortest Path Algorithms,5,Cheapest flight within K stops,Pro
+316,Graphs,Shortest Path Algorithms,6,Minimum multiplications to reach end,Pro
+317,Graphs,Shortest Path Algorithms,7,Number of ways to arrive at destination,Pro
+318,Graphs,Shortest Path Algorithms,8,Bellman ford algorithm,Pro
+319,Graphs,Shortest Path Algorithms,9,Floyd warshall algorithm,Pro
+320,Graphs,Shortest Path Algorithms,10,Find the city with the smallest number of neighbors,Pro
+321,Graphs,Shortest Path Algorithms,11,Network Delay Time,Core
+322,Graphs,Shortest Path Algorithms,12,Swim in Rising Water,Pro
+323,Graphs,Minimum Spanning Tree,1,MST theory,Core
+324,Graphs,Minimum Spanning Tree,2,Disjoint Set,Core
+325,Graphs,Minimum Spanning Tree,3,Find the MST weight,Core
+326,Graphs,Hard Problems II,1,Number of operations to make network connected,Core
+327,Graphs,Hard Problems II,2,Accounts merge,Core
+328,Graphs,Hard Problems II,3,Number of islands II,Pro
+329,Graphs,Hard Problems II,4,Making a large island,Pro
+330,Graphs,Hard Problems II,5,Most stones removed with same row or column,Pro
+331,Graphs,Additional Algorithms,1,Kosaraju's algorithm,Pro
+332,Graphs,Additional Algorithms,2,Bridges in graph,Pro
+333,Graphs,Additional Algorithms,3,Articulation point in graph,Pro
+334,Dynamic Programming,Introduction,1,Introduction to DP,Basic
+335,Dynamic Programming,1D DP,1,Climbing stairs,Core
+336,Dynamic Programming,1D DP,2,Frog Jump,Core
+337,Dynamic Programming,1D DP,3,Frog jump with K distances,Core
+338,Dynamic Programming,1D DP,4,Maximum sum of non adjacent elements,Core
+339,Dynamic Programming,1D DP,5,House robber,Core
+340,Dynamic Programming,2D DP,1,Ninja's training,Core
+341,Dynamic Programming,DP on grids,1,Grid unique paths,Core
+342,Dynamic Programming,DP on grids,2,Unique paths II,Pro
+343,Dynamic Programming,DP on grids,3,Minimum Falling Path Sum,Core
+344,Dynamic Programming,DP on grids,4,Triangle,Core
+345,Dynamic Programming,DP on grids,5,Cherry pickup II,Pro
+346,Dynamic Programming,DP on grids,6,Count Square Submatrices with All Ones,
+347,Dynamic Programming,DP on stocks,1,Best time to buy and sell stock,Core
+348,Dynamic Programming,DP on stocks,2,Best time to buy and sell stock II,Core
+349,Dynamic Programming,DP on stocks,3,Best time to buy and sell stock III,Pro
+350,Dynamic Programming,DP on stocks,4,Best time to buy and sell stock IV,Pro
+351,Dynamic Programming,DP on stocks,5,Best time to buy and sell stock with transaction fees,Core
+352,Dynamic Programming,DP on stocks,6,Best Time to Buy and Sell Stock with Cooldown,Core
+353,Dynamic Programming,DP on subsequences,1,Subset sum equals to target,Core
+354,Dynamic Programming,DP on subsequences,2,Partition equal subset sum,Core
+355,Dynamic Programming,DP on subsequences,3,Partition a set into two subsets with minimum absolute sum difference,Pro
+356,Dynamic Programming,DP on subsequences,4,Count subsets with sum K,Core
+357,Dynamic Programming,DP on subsequences,5,Count partitions with given difference,Core
+358,Dynamic Programming,DP on subsequences,6,0 and 1 Knapsack,Core
+359,Dynamic Programming,DP on subsequences,7,Minimum coins,Core
+360,Dynamic Programming,DP on subsequences,8,Target sum,Core
+361,Dynamic Programming,DP on subsequences,9,Coin change II,Pro
+362,Dynamic Programming,DP on subsequences,10,Unbounded knapsack,Core
+363,Dynamic Programming,DP on subsequences,11,Rod cutting problem,Pro
+364,Dynamic Programming,LIS,1,Longest Increasing Subsequence,Core
+365,Dynamic Programming,LIS,2,Print Longest Increasing Subsequence,Pro
+366,Dynamic Programming,LIS,3,Largest Divisible Subset,Core
+367,Dynamic Programming,LIS,4,Longest String Chain,Core
+368,Dynamic Programming,LIS,5,Longest Bitonic Subsequence,Core
+369,Dynamic Programming,LIS,6,Number of Longest Increasing Subsequences,Core
+370,Dynamic Programming,DP on strings,1,Longest common subsequence,Core
+371,Dynamic Programming,DP on strings,2,Longest common substring,Core
+372,Dynamic Programming,DP on strings,3,Longest palindromic subsequence,Core
+373,Dynamic Programming,DP on strings,4,Minimum insertions to make string palindrome,Pro
+374,Dynamic Programming,DP on strings,5,Minimum insertions or deletions to convert string A to B,Core
+375,Dynamic Programming,DP on strings,6,Shortest common supersequence,Pro
+376,Dynamic Programming,DP on strings,7,Distinct subsequences,Pro
+377,Dynamic Programming,DP on strings,8,Edit distance,Pro
+378,Dynamic Programming,DP on strings,9,Wildcard matching,Pro
+379,Dynamic Programming,DP on strings,10,Word Break,Core
+380,Dynamic Programming,DP on strings,11,Count Palindromic Subsequences,Pro
+381,Dynamic Programming,MCM DP,1,Matrix chain multiplication,Pro
+382,Dynamic Programming,MCM DP,2,Burst balloons,Pro
+383,Dynamic Programming,MCM DP,3,Palindrome partitioning II,Pro
+384,Dynamic Programming,MCM DP,4,Partition Array for Maximum Sum,Pro
+385,Dynamic Programming,MCM DP,5,Minimum cost to cut the stick,Pro
+386,Dynamic Programming,MCM DP,6,Different Ways to Evaluate a Boolean Expression,Pro
+387,Tries,Theory,1,Bit PreRequisites for TRIE Problems,
+388,Tries,Theory,2,Trie Implementation and Operations,Core
+389,Tries,Theory,3,Trie Implementation and Advanced Operations,Core
+390,Tries,Problems,1,Longest Word with All Prefixes,Core
+391,Tries,Problems,2,Number of distinct substrings in a string,Pro
+392,Tries,Problems,3,Maximum XOR of two numbers in an array,Core
+393,Tries,Problems,4,Maximum Xor with an element from an array,Pro
+394,Strings (Advanced Algo),Medium Problems,1,Reverse every word in a string,Core
+395,Strings (Advanced Algo),Medium Problems,2,Minimum number of bracket reversals to make an expression balanced,Core
+396,Strings (Advanced Algo),Medium Problems,3,Count and say,Core
+397,Strings (Advanced Algo),Advanced Problems (Less asked),1,Hashing In Strings | Theory,
+398,Strings (Advanced Algo),Advanced Problems (Less asked),2,Rabin Karp Algorithm,Pro
+399,Strings (Advanced Algo),Advanced Problems (Less asked),3,Z function,Pro
+400,Strings (Advanced Algo),Advanced Problems (Less asked),4,KMP Algorithm or LPS array,Pro
+401,Strings (Advanced Algo),Advanced Problems (Less asked),5,Shortest Palindrome,Pro
+402,Strings (Advanced Algo),Advanced Problems (Less asked),6,Longest happy prefix,Pro
+403,Maths,Sieve of Eratosthenes,1,Print all primes till N,Core
+404,Maths,Sieve of Eratosthenes,2,Prime factorisation of a Number,Core
+405,Maths,Sieve of Eratosthenes,3,Count primes in range L to R,Pro
