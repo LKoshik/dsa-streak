@@ -124,7 +124,7 @@ test('home: tapping Solved turns the card into the gold Solved card with rewards
   assert.ok(card.classList.contains('next2--done'));
   assert.ok(hasText(card, 'Solved'));
   assert.ok(hasText(card, 'Linear Search'));
-  assert.deepEqual(byClass(card, 'reward-chip').map((c) => c.textContent.trim()), ['+10 XP', '+5 daily goal reached', 'Streak started']);
+  assert.deepEqual(byClass(card, 'reward-chip').map((c) => c.textContent.trim()), ['+10 XP', '+5 goal', 'Streak started']);
   assert.ok(buttonWithText(card, 'Undo'));
   assert.equal(buttonWithText(card, 'Next problem').disabled, true); // wakes up a moment later
   // Rewards live on the card now: no toast, no floating XP.

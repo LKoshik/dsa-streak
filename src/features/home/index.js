@@ -247,9 +247,11 @@ function mount(root, ctx) {
       next.disabled = true;
       setTimeout(() => { c.armed = true; next.disabled = false; }, ARM_MS);
     }
+    // Chips are short so the usual rewards fit on ONE line (a second row would make the card taller than the Next up card).
+    const short = (text) => text.replace(/^\+5 daily goal reached$/, '+5 goal');
     const chips = [[icon('xp', 14), '+10 XP'], ...c.messages.map((m) => {
       const view = rewardView(m);
-      return [view.icon ? icon(view.icon, 14) : null, view.text].filter(Boolean);
+      return [view.icon ? icon(view.icon, 14) : null, short(view.text)].filter(Boolean);
     })];
     return h('section', { class: `card next2 next2--done topic${fx.pop ? ' is-pop' : ''}` },
       h('div', { class: 'next2__band' }, h('span', { class: 'next2__label' }, icon('check', 16), 'Solved')),

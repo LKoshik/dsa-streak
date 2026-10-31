@@ -178,8 +178,9 @@ Notes
 
 ## Home redesign (from the home demo, v5)
 - `src/features/home/index.js` is the demo's design wired to the real store. Header = 3 big pill cards (freezes, XP, daily goal), each opens a
-  short sheet (`infoSheet`); the goal sheet changes the goal with `actions.setGoal`. The middle part spreads out (`justify-content: space-evenly`)
-  and grows on tall screens (`@container home (min-height: 680px)`, `.home` is a size container); on tiny screens it still scrolls.
+  short sheet (`infoSheet`); the goal sheet changes the goal with `actions.setGoal`. The middle part spreads out (`justify-content: space-evenly`).
+  Home sizes scale smoothly with the height Home gets (`.home` is a size container; the block "Home sizes" in `main.css` uses `cqh` units, small at 600 px
+  of Home height, roomy at 714 px). It fits with no scrolling from about 720 px of screen height; below that the middle part scrolls.
 - "Next up" card (`.next2`): tinted band in the topic colour (`topicHue(n.topicIndex)`), ONE XP chip (`+10 XP`, or `+15 XP` with a goal icon when this
   solve completes today's goal), title, tag + topic, a progress bar for the current section with its `done/total`, then Skip + Solved.
   After Solved the SAME card turns gold (`.next2--done`): reward chips (via `rewardView`, drawn icons), Undo, Next problem. Next problem is disabled
@@ -191,7 +192,9 @@ Notes
 - Dropped from the card on purpose (the demo was approved without them): the "#7 of 405" counter and the "Solve it on takeUforward, then tap Solved." hint.
 - CSS: the old `.chip*`, `.next__*` (except the finished-card ones), `.fx-layer` and `.xp-float` rules were removed; the new rules sit in `main.css`
   where the old card rules were. The level bar in the XP sheet is `.level-bar` (the old `.bar` belongs to other screens).
-- Known: on milestone solves (first ever, freeze earned, level up) 3+ reward chips wrap to a second row and the card grows about 34 px; on a
-  phone about 800 px tall the middle part then scrolls a few pixels. Nothing is cut off.
+- Reward chips on the gold card are kept short (`+5 goal` instead of `+5 daily goal reached`) so the usual rewards fit on one line; 4+ chips (for
+  example day 7 with a freeze) can still wrap to a second row.
+- App frame fix (bug seen on an Android phone: bottom navigation pushed off screen, whole page scrolled): `#app` is now `position: fixed; inset: 0`
+  and `html, body` do not scroll. The old `height: 100vh / 100dvh` was taller than the visible area on Android Chrome. This affects every screen.
 - Tests: `home-dom`, `path-dom`, `skip-continue` updated for the new card; new tests for first-solve-only animation, upcoming days, info sheets and
   section progress.

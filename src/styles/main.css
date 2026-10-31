@@ -175,8 +175,11 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ---------- app frame: screen on top, bottom navigation below ---------- */
+/* The frame is pinned to the edges of what you can actually see. vh / dvh units can be taller than the visible area on Android
+   Chrome (address bar, system bars), which pushed the bottom navigation off the screen and made the whole page scroll. */
+html, body { overflow: hidden; overscroll-behavior: none; }
 #app {
-  height: 100vh; height: 100dvh;
+  position: fixed; inset: 0;
   max-width: 520px; margin: 0 auto;
   display: flex; flex-direction: column;
 }
@@ -281,7 +284,7 @@ a { color: inherit; text-decoration: none; }
 .tag--pro { background: var(--orange-edge); }
 
 /* ---------- home ---------- */
-.home { height: 100%; display: flex; flex-direction: column; gap: var(--space-md); container: home / size; }
+.home { height: 100%; display: flex; flex-direction: column; gap: 10px; container: home / size; }
 /* the middle part spreads out to fill free space; it scrolls only when the screen is too small */
 .home__scroll { flex: 1; min-height: 0; overflow-y: auto; display: flex; flex-direction: column; justify-content: space-evenly; gap: var(--space-md); margin-inline: calc(-1 * var(--space-md)); padding-inline: var(--space-md); } /* the side room stops Ember's flame tail being cut off */
 .home__scroll > * { flex: none; }
@@ -389,7 +392,7 @@ a { color: inherit; text-decoration: none; }
 .pill {
   appearance: none; font: inherit; color: var(--text); cursor: pointer;
   display: grid; align-content: center; justify-items: center; gap: 6px;
-  min-height: 88px; padding: 8px var(--space-sm);
+  min-height: 84px; padding: 8px var(--space-sm);
   background: var(--card); border: var(--border-w) solid var(--border); border-radius: var(--radius-lg);
   box-shadow: var(--elev-card);
   transition: transform var(--dur-press), box-shadow var(--dur-press), background var(--dur-ui);
@@ -416,20 +419,8 @@ a { color: inherit; text-decoration: none; }
 .dot--future { background: transparent; border: var(--border-w) dashed var(--border); box-sizing: border-box; }
 .day.is-future .day__letter { opacity: 0.55; }
 
-/* ---------- Home layout: header, then the middle spreads out and grows when the screen is tall ---------- */
-@container home (min-height: 680px) {
-  .streak-hero__flame { width: 96px; height: 100px; }
-  .streak-hero__number { font-size: 72px; }
-  .streak-hero__label { font-size: 20px; }
-  .hero .ember-rig { width: 112px; }
-}
+/* ---------- Home layout: header, then the middle spreads out to fill the free space ---------- */
 
-@container home (max-height: 679px) {
-  .next2__band { min-height: 34px; }
-  .next2__body { gap: 8px; padding: 10px var(--space-lg) var(--space-md); }
-  .next2__title { font-size: 20px; }
-  .next2 .btn, .btn-text { min-height: 48px; }
-}
 
 /* ---------- Next up card: calm tinted band, one XP chip, title, progress, actions ---------- */
 .next2 { flex: none; overflow: hidden; }
@@ -478,6 +469,20 @@ a { color: inherit; text-decoration: none; }
 @keyframes strip-grow { from { width: calc(var(--from) * 100%); } }
 @keyframes card-pop { 0% { transform: scale(0.96); } 100% { transform: none; } }
 @keyframes chip-pop { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: none; } }
+
+/* ---------- Home sizes: scale smoothly with the height the screen gives Home, so it fits without scrolling ----------
+   Each value runs from its small size (Home 600px tall or less) to its roomy size (714px or more). Container units (cqh)
+   measure the .home box, which is the space between the top of the screen and the bottom navigation. */
+.home__scroll { gap: clamp(8px, calc(0.0351 * 100cqh - 13.05px), 12px); }
+.streak-hero__flame { width: clamp(70px, calc(0.2281 * 100cqh - 66.84px), 96px); height: clamp(72px, calc(0.2456 * 100cqh - 75.37px), 100px); }
+.streak-hero__number { font-size: clamp(48px, calc(0.2105 * 100cqh - 78.32px), 72px); }
+.streak-hero__label { font-size: clamp(17px, calc(0.0263 * 100cqh + 1.21px), 20px); }
+.hero .ember-rig { width: clamp(92px, calc(0.1754 * 100cqh - 13.26px), 112px); }
+.next2__band { min-height: clamp(34px, calc(0.0526 * 100cqh + 2.42px), 40px); }
+.next2__body { gap: clamp(8px, calc(0.0175 * 100cqh - 2.53px), 10px); padding-top: clamp(10px, calc(0.0175 * 100cqh - 0.53px), 12px); }
+.next2__title { font-size: clamp(20px, calc(0.0175 * 100cqh + 9.47px), 22px); }
+.next2__meta { min-height: clamp(24px, calc(0.0351 * 100cqh + 2.95px), 28px); }
+.next2 .btn, .btn-text { min-height: clamp(46px, calc(0.0702 * 100cqh + 3.89px), 54px); }
 
 /* ---------- messages ---------- */
 .toasts {
