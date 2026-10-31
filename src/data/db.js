@@ -1,7 +1,7 @@
 // The only file that talks to IndexedDB (the database inside the browser).
 // Database "dsa-streak" has two stores:
 //   solves   -> one record per solved problem: { problemId, day, at }
-//   settings -> one record: { key: 'main', goalHistory, theme, currentTopic, lastBackupAt }
+//   settings -> one record: { key: 'main', goalHistory, theme, currentTopic, currentProblemId, skippedIds, lastBackupAt }
 // Titles of problems are never stored here; they live in the code.
 
 const DB_NAME = 'dsa-streak';
@@ -26,6 +26,8 @@ export function defaultSettings() {
     goalHistory: [{ from: '0000-01-01', goal: 1 }],
     theme: 'system',
     currentTopic: null,
+    currentProblemId: null, // where "Next up" starts looking (set by Continue here and Skip)
+    skippedIds: [],         // problems the user skipped; they stay skipped until the user goes back to them
     lastBackupAt: null,
     soundOn: true,
   };

@@ -44,6 +44,9 @@ const options = {
   ],
   bundle: true,
   outdir: DIST,
+  // The Nunito font file is copied to dist/fonts/ and the CSS url() is rewritten relative to app.css.
+  loader: { '.woff2': 'file' },
+  assetNames: 'fonts/[name]',
   format: 'esm',
   target: 'es2020',
   minify: !serve,

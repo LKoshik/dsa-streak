@@ -213,4 +213,4 @@ function mount(root, ctx) {
   };
 }
 
-export default { id: 'settings', label: 'Settings', icon: '⚙️', mount };
+export default { id: 'settings', label: 'Settings', icon: 'settings', mount };

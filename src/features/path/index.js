@@ -1,19 +1,22 @@
-// Path screen: 18 sticky green topic banners, and under each one the subsections
+// Path screen: 18 sticky topic banners (5 colours, repeating), and under each one the subsections
 // as winding zig-zag nodes (done / in progress / current / upcoming).
-// Tap a node: a bottom sheet lists that subsection's problems as checkboxes, plus "Continue here".
+// Tap a node: a bottom sheet lists that subsection's problems as checkboxes. "Continue here" is on the node and on every
+// problem (it moves Next up there, and brings a skipped problem back). Skipped problems carry a "Skipped" tag.
 // No links anywhere. The router resets the screen's class to "view", so this screen
 // adds its own classes and scrolls its own inner box (.path).
 import { h } from '../../ui/dom.js';
-import { createRing } from '../../ui/ring.js';
+import { createSegmentedRing } from '../../ui/ring.js';
+import { icon } from '../../ui/icons.js';
+import { createNodeSprite, createNodeArt } from '../../ui/node-art.js';
 import { openSheet } from '../../ui/sheet.js';
 import { showToast } from '../../ui/toast.js';
+import { showRewardToast } from '../../ui/reward-toast.js';
 import { getProblem } from '../../core/catalog.js';
 import { computeRewards } from '../home/rewards.js';
 import { soundForSolve } from '../../core/sound-events.js';
 import { unlockAudio, playSound } from '../../ui/sound.js';
-import { buildPathModel, bannerText, centeredScrollTop } from './model.js';
+import { buildPathModel, bannerText, centeredScrollTop, continueTargetFor } from './model.js';
 
-const NODE_ICON = { done: '✓', current: '★', upcoming: '☆' };
 const STATE_WORD = { done: 'done', current: 'current', progress: 'in progress', upcoming: 'not started' };
 
 function mount(root, ctx) {
@@ -37,18 +40,17 @@ function mount(root, ctx) {
   // ---------- the path ----------
 
   function nodeView(node) {
-    const fraction = node.total > 0 ? node.solved / node.total : 0;
     const partial = node.state === 'progress' || (node.state === 'current' && node.solved > 0);
     const button = h('button', {
       type: 'button',
       class: 'node__btn',
       'aria-label': `${node.name}, ${node.solved} of ${node.total} solved, ${STATE_WORD[node.state]}`,
       onclick: () => openNode(node.key),
-    }, partial ? `${node.solved}/${node.total}` : NODE_ICON[node.state]);
+    }, createNodeArt(node.state === 'upcoming'));
     nodeButtons.set(node.key, button);
 
     const stage = h('div', { class: 'node__stage' },
-      partial ? createRing({ size: 84, stroke: 7, value: fraction, color: 'var(--orange)' }) : null,
+      partial ? createSegmentedRing({ size: 88, stroke: 6, solved: node.solved, total: node.total }) : null,
       button);
     return h('div', {
       class: `node node--${node.state}`,
@@ -63,14 +65,14 @@ function mount(root, ctx) {
 
   function topicView(topic) {
     const percent = topic.total > 0 ? Math.round((topic.solved / topic.total) * 100) : 0;
-    return h('section', { class: `topic${topic.done ? ' topic--done' : ''}` },
+    return h('section', { class: `topic${topic.done ? ' topic--done' : ''} topic--${topic.hue}` },
       h('header', { class: 'topic-banner', 'aria-label': bannerText(topic) },
         h('div', { class: 'topic-banner__text' },
           h('div', { class: 'topic-banner__label' }, `TOPIC ${topic.number} · ${topic.solved} of ${topic.total}`),
           h('h2', { class: 'topic-banner__name' }, topic.name),
           h('div', { class: 'topic-banner__bar', 'aria-hidden': 'true' },
             h('div', { class: 'topic-banner__fill', style: { '--p': `${percent}%` } }))),
-        h('div', { class: 'topic-banner__badge', 'aria-hidden': 'true' }, topic.done ? '🏆' : '')),
+        h('div', { class: 'topic-banner__badge', 'aria-hidden': 'true' }, topic.done ? icon('trophy', 24) : null)),
       h('div', { class: 'topic__nodes' }, topic.nodes.map(nodeView)));
   }
 
@@ -80,11 +82,12 @@ function mount(root, ctx) {
     const keepScroll = scroller.scrollTop;
     model = buildPathModel(selectors.selectPath(store.get()));
     nodeButtons.clear();
-    const allDone = model.currentKey === null;
+    const allDone = model.allDone;
     scroller.replaceChildren(
+      createNodeSprite(), // the two node shapes, drawn by every node with <use>
       ...model.topics.map(topicView),
       h('div', { class: `path__end${allDone ? ' is-done' : ''}` },
-        h('div', { class: 'path__trophy', 'aria-hidden': 'true' }, '🏆'),
+        h('div', { class: 'path__trophy', 'aria-hidden': 'true' }, icon('trophy', 44)),
         h('div', { class: 'node__name' }, allDone ? 'You finished the whole path' : 'The end of the path')));
     scroller.scrollTop = keepScroll;
 
@@ -130,21 +133,30 @@ function mount(root, ctx) {
     if (problem.solved) classes.push('is-solved');
     if (confirmId === problem.id) classes.push('is-confirming');
     if (popped) classes.push('is-pop');
-    return h('button', {
+    const rowButton = h('button', {
       type: 'button',
       role: 'checkbox',
       'aria-checked': problem.solved ? 'true' : 'false',
       class: classes.join(' '),
       onclick: () => onToggle(problem),
     },
-      h('span', { class: 'prow__box', 'aria-hidden': 'true' }, problem.solved ? '✓' : ''),
+      h('span', { class: 'prow__box', 'aria-hidden': 'true' }, problem.solved ? icon('check', 20) : null),
       h('span', { class: 'prow__main' },
         h('span', { class: 'prow__title' }, problem.title),
         h('span', { class: 'prow__meta' },
           h('span', null, `#${problem.id}`),
           problem.difficulty ? h('span', { class: `tag tag--${problem.difficulty.toLowerCase()}` }, problem.difficulty) : null,
-          isNext ? h('span', { class: 'prow__next' }, 'Next up') : null)),
+          isNext ? h('span', { class: 'prow__next' }, 'Next up') : null,
+          problem.skipped ? h('span', { class: 'prow__skipped' }, 'Skipped') : null)),
       popped ? h('span', { class: 'xp-pop', 'aria-hidden': 'true' }, '+10 XP') : null);
+    // The row itself ticks the problem, so "Continue here" is its own button beside it (never a button inside a button).
+    const goButton = isNext ? null : h('button', {
+      type: 'button',
+      class: 'prow__go',
+      'aria-label': `Continue here from #${problem.id}`,
+      onclick: () => onContinueProblem(problem),
+    }, 'Continue here');
+    return h('div', { class: 'prow-item' }, rowButton, goButton);
   }
 
   function footerFor(node) {
@@ -157,10 +169,11 @@ function mount(root, ctx) {
           h('button', { type: 'button', class: 'btn btn--ghost', onclick: cancelUncheck }, 'Keep it'),
           h('button', { type: 'button', class: 'btn btn--red', onclick: confirmUncheck }, 'Uncheck')));
     }
-    if (model.topics[node.topicNumber - 1].isCurrent) {
-      const { next } = selectors.selectHome(store.get());
+    if (node.nextProblemId !== null) {
+      const next = getProblem(node.nextProblemId);
       return h('p', { class: 'sheet__note' },
-        next ? `✓ This topic is your Next up: #${next.problem.id} ${next.problem.title}` : '✓ This topic is your Next up');
+        icon('check', 16),
+        h('span', null, next ? `Your Next up is here: #${next.id} ${next.title}` : 'Your Next up is here'));
     }
     return h('button', { type: 'button', class: 'btn btn--green btn--block', onclick: () => onContinue(node) }, 'Continue here');
   }
@@ -173,7 +186,9 @@ function mount(root, ctx) {
     sheet.update({
       label: `TOPIC ${node.topicNumber} · ${node.topic}`,
       title: node.name,
-      subtitle: done ? `All ${node.total} solved ✓` : `${node.solved} of ${node.total} solved`,
+      subtitle: done
+        ? h('span', { class: 'sheet__done' }, icon('check', 16), `All ${node.total} solved`)
+        : `${node.solved} of ${node.total} solved`,
       progress: node.total > 0 ? node.solved / node.total : 0,
       body: h('div', { class: 'plist', role: 'group', 'aria-label': 'Problems' },
         node.problems.map((p) => problemRow(p, p.id === node.nextProblemId))),
@@ -186,7 +201,7 @@ function mount(root, ctx) {
     if (!model || !model.nodes.has(key)) return;
     openKey = key;
     confirmId = null;
-    sheet = openSheet({ onClose: onSheetClosed });
+    sheet = openSheet({ hue: model.nodes.get(key).hue, onClose: onSheetClosed });
     refreshSheet();
   }
 
@@ -221,7 +236,7 @@ function mount(root, ctx) {
       justChecked = problem.id;
       playSound(soundForSolve({ before, after, problem: getProblem(problem.id), solvedIds }), store.get().settings.soundOn !== false);
       if (typeof navigator !== 'undefined' && typeof navigator.vibrate === 'function') navigator.vibrate(20);
-      for (const text of rewards.messages) showToast({ message: text, variant: 'reward', duration: 3500 });
+      for (const text of rewards.messages) showRewardToast(text, { duration: 3500 });
       scheduleRender();
     } catch (error) {
       console.error(error);
@@ -255,15 +270,20 @@ function mount(root, ctx) {
 
   // ---------- Continue here ----------
 
-  async function onContinue(node) {
-    if (busy) return;
+  // Moves Next up to `problemId` (Home shows the same problem), closes the sheet and scrolls to the new current node.
+  async function continueAt(problemId) {
+    if (busy || problemId === null) return;
     busy = true;
     try {
-      await actions.setCurrentTopic(node.topic);
+      const saved = await actions.continueFrom(problemId);
+      if (!saved) return;
       const { next } = selectors.selectHome(store.get());
       wantScroll = 'smooth';
       if (sheet) sheet.close();
-      if (next) showToast({ message: `Next up: ${next.topic} · #${next.problem.id}`, duration: 3500 });
+      showToast({
+        message: next ? `Next up: ${next.topic} · #${next.problem.id}` : 'Nothing left to do after that one',
+        duration: 3500,
+      });
       scheduleRender();
     } catch (error) {
       console.error(error);
@@ -271,6 +291,14 @@ function mount(root, ctx) {
     } finally {
       busy = false;
     }
+  }
+
+  function onContinue(node) {
+    return continueAt(continueTargetFor(node));
+  }
+
+  function onContinueProblem(problem) {
+    return continueAt(problem.id);
   }
 
   const unsubscribe = store.subscribe(scheduleRender);
@@ -289,4 +317,4 @@ function mount(root, ctx) {
   };
 }
 
-export default { id: 'path', label: 'Path', icon: '🗺️', mount };
+export default { id: 'path', label: 'Path', icon: 'path', mount };

@@ -69,3 +69,15 @@ test('weekdayLetter', () => {
   assert.equal(weekdayLetter('2026-10-31'), 'S');
   assert.equal(weekdayLetter('2026-11-01'), 'S');
 });
+
+import { emberMoodFor } from '../src/features/home/copy.js';
+
+test('emberMoodFor: the calm face for each situation', () => {
+  const mood = (patch) => emberMoodFor({ next: {}, daily: { met: false }, todayStatus: 'pending', solvedCount: 5, ...patch });
+  assert.equal(mood({}), 'wait');                                        // solved before, nothing today
+  assert.equal(mood({ solvedCount: 0 }), 'new');                         // never solved anything
+  assert.equal(mood({ todayStatus: 'solved' }), null);                   // solved today, goal not met: normal idle
+  assert.equal(mood({ todayStatus: 'solved', daily: { met: true } }), 'happy');
+  assert.equal(mood({ next: null }), 'happy');                           // whole list done
+  assert.equal(mood({ solvedCount: 0, todayStatus: 'solved' }), null);   // the first solve ends "new"
+});

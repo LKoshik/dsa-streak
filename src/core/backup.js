@@ -3,7 +3,7 @@
 //
 // The file is JSON text:
 //   { app: 'dsa-streak', version: 1, exportedAt: '2026-06-10T09:30:00.000Z',
-//     settings: { goalHistory, theme, currentTopic, lastBackupAt },
+//     settings: { goalHistory, theme, currentTopic, currentProblemId, skippedIds, lastBackupAt },
 //     solves: [{ problemId, day, at }] }
 import { PROBLEMS } from './problems.data.js';
 import { TOPICS } from './catalog.js';
@@ -42,6 +42,8 @@ export function buildBackup({ solves, settings }, now) {
       goalHistory: settings.goalHistory.map((e) => ({ from: e.from, goal: e.goal })),
       theme: settings.theme,
       currentTopic: settings.currentTopic ?? null,
+      currentProblemId: settings.currentProblemId ?? null,
+      skippedIds: [...(settings.skippedIds ?? [])],
       lastBackupAt: now,
     },
     solves: solves.map((s) => ({ problemId: s.problemId, day: s.day, at: s.at })),
@@ -81,7 +83,7 @@ function checkGoalHistory(history, errors) {
 }
 
 // Checks the settings object.
-function checkSettings(settings, errors) {
+function checkSettings(settings, validIds, errors) {
   if (!isObject(settings)) {
     errors.push('Settings are missing or are not an object.');
     return;
@@ -96,6 +98,24 @@ function checkSettings(settings, errors) {
   const last = settings.lastBackupAt;
   if (last !== undefined && last !== null && !isNumber(last)) {
     errors.push(`Settings: lastBackupAt is ${show(last)}, but it must be a number or null.`);
+  }
+  // Older backups have no currentProblemId / skippedIds: that is fine (they count as null / none).
+  const pointer = settings.currentProblemId;
+  if (pointer !== undefined && pointer !== null && !(isInteger(pointer) && validIds.has(pointer))) {
+    errors.push(`Settings: currentProblemId ${show(pointer)} is not a problem number from this list (use a number or null).`);
+  }
+  const skipped = settings.skippedIds;
+  if (skipped !== undefined) {
+    if (!Array.isArray(skipped)) {
+      errors.push('Settings: skippedIds must be a list.');
+    } else {
+      const seenSkipped = new Set();
+      for (const id of skipped) {
+        if (!isInteger(id) || !validIds.has(id)) errors.push(`Settings: skippedIds has ${show(id)}, which is not a problem number from this list.`);
+        else if (seenSkipped.has(id)) errors.push(`Settings: skippedIds has #${id} more than once.`);
+        else seenSkipped.add(id);
+      }
+    }
   }
   checkGoalHistory(settings.goalHistory, errors);
 }
@@ -146,7 +166,7 @@ export function validateBackup(data, validIds = DEFAULT_VALID_IDS) {
   if (typeof data.exportedAt !== 'string' || !ISO_START.test(data.exportedAt) || Number.isNaN(Date.parse(data.exportedAt))) {
     errors.push(`exportedAt ${show(data.exportedAt)} is not a valid date and time.`);
   }
-  checkSettings(data.settings, errors);
+  checkSettings(data.settings, ids, errors);
   checkSolves(data.solves, ids, errors);
   return { ok: errors.length === 0, errors };
 }
@@ -172,6 +192,8 @@ export function backupToState(backup) {
       goalHistory: s.goalHistory.map((e) => ({ from: e.from, goal: e.goal })),
       theme: s.theme,
       currentTopic: s.currentTopic,
+      currentProblemId: s.currentProblemId ?? null,
+      skippedIds: Array.isArray(s.skippedIds) ? [...s.skippedIds] : [],
       lastBackupAt: typeof s.lastBackupAt === 'number' ? s.lastBackupAt : null,
     },
   };

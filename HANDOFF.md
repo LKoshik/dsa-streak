@@ -118,3 +118,80 @@ HANDOFF Phase 10 (Deploy)
 6. CONTRACT CHANGES: none.
 7. Known: the workflow was NOT run here (no GitHub access); its YAML was parsed and checked for structure only, so the first real run is the real test. Action versions: configure-pages@v5, upload-pages-artifact@v4 and deploy-pages@v4 match GitHub's current Pages docs; setup-node@v4 was not checked against docs. Newer majors exist (the docs example uses checkout@v5, and upload-pages-artifact has a v5), so you may see an upgrade notice; the versions used keep working. This file already used "Phase 10" for the sound phase, so this note is the deploy phase from the original plan. The README uses <your-username> and <repo> as placeholders for the app address; nothing in the build depends on the real names. Still to confirm on a real GitHub repo: Pages source set to GitHub Actions, first deploy green, the app opens at the sub-path address, install and offline work from that https address, and the failing-test proof (4).
 8. Next phase: none defined in the files I have. After the deploy proof and the phone checks from Phases 9 and 10 (sound), v1 is ready to use.
+
+## UI merge: looks folder merged into the app (this zip is now the current app)
+
+The older UI phases (tokens, Nunito, icons) were lost, so they were rebuilt from the looks folder, together with the
+newer looks work. Logic files were not changed (state, core, actions, selectors). Tests: 382 pass. `npm run build` works.
+
+What changed
+- `src/styles/main.css` = the looks stylesheet (tokens, Nunito, 5 topic hues, flame, node art, Ember rig CSS).
+  The old bobbing `.hero__ember` rule was removed (the rig floats by itself).
+- Font: `src/fonts/` (Nunito + OFL.txt). `tools/build.js` copies it to `dist/fonts/` (esbuild `file` loader); the CSS url stays relative.
+- New `src/ui/`: `icons.js` (13 icons, `icon(name, size)`), `flame.js` (dim / stage-1 / stage-2 / stage-3, `flameStageFor`),
+  `node-art.js` (hidden sprite + `<use>`), `ember-rig.js` (the layered mascot), `reward-toast.js` (emoji in reward text -> icon).
+  `ember.js` is now `createEmber()` + `setEmberMood / cheerEmber / waveEmber`. `dom.js` got `svgFromString()` (SVG text -> element).
+- Home: flame chip (dim until today is solved; stage by streak 1-6 / 7-13 / 14+), drawn icons everywhere, ONE Ember per screen
+  that survives redraws. Faces: `wait` (not solved today), `new` (never solved anything), `happy` (goal met), normal idle otherwise
+  (`emberMoodFor` in `features/home/copy.js`). Cheers once when the daily goal is completed (or a milestone), waves once per app open.
+- Path: 5 topic colours (green, purple, teal, pink, blue, repeating, `topicHue` in `features/path/model.js`), star node art for
+  explored nodes and the upcoming art for unexplored ones, 96 px progress ring on the current node, bottom sheet wears the topic colour.
+- Stats, nav, toasts, week dots, banner: emoji and symbols replaced by drawn icons.
+- Tests: new `svg-icons`, `ember-rig`, `reward-toast`, `tokens` tests; existing Home / Path / model / copy tests extended.
+
+Notes
+- Not changed: `homeCopy().mood` and `.lit` still exist (old Ember moods) but Home no longer reads them. Safe to delete later.
+- Known old quirk (not new): tapping a node while a sheet is already open leaves the second sheet empty. The backdrop makes it
+  impossible by hand, so it was left alone.
+
+## Path ring fix (segmented ring)
+- The progress ring around a Path node is now split: 3 or 4 equal-length arcs, with the problems shared out evenly
+  between them (`splitProblems`, `ringSegments`, `createSegmentedRing` in `src/ui/ring.js`), arcs fill one after the other.
+  E.g. 15 = 5+5+5, 49 = 13+12+12+12. 2 or 3 problems = one arc per problem; 0 or 1 problem = one plain ring.
+- The ring is centred on the node (same 96 px stage for every node that has a ring; before, "in progress" nodes used an 80 px
+  stage, which pushed the ring down onto the name). The current node's ring breathes with the node (`node-pulse` on `.ring--segments`).
+
+## Skip + Continue here anywhere
+- "Next up" is now found from a saved POINTER (`settings.currentProblemId`), not just a topic: `findNext` in `src/core/next.js` starts at the
+  pointer, walks forward through the sheet (wrapping at the end) and returns the first problem that is not solved and not skipped.
+  Home and Path both use it through `findNextFor` in `src/state/selectors.js`, so they always show the same problem.
+- Skip (button on the Home Next-up card): `actions.skipProblem`. The problem stays unsolved (no XP, no streak) and is added to
+  `settings.skippedIds`; Next up passes over it for good. It only comes back when the user goes back to it by hand
+  (`actions.continueFrom` on it, or solving it). Undo on the toast = `actions.unskipProblem`.
+- Continue here: on every node (footer button, starts at the node's first open problem; if none, after the node) and on every problem row
+  (small button beside the row; not shown on the Next-up row). `actions.continueFrom(problemId)`.
+- The current node on the Path is the node that holds Next up. When only skipped problems are left, Home says so instead of "All done".
+- Backup file: `currentProblemId` and `skippedIds` are included (older backups without them still load). Old saved data with only a
+  `currentTopic` keeps working (the search starts at that topic's first problem).
+- Tests: `tests/skip-continue.test.js` is new; backup / selectors / path-dom tests were updated.
+
+## Home streak look (big streak + merged week pill)
+- The small streak chip is gone from the top row (now 3 chips: freezes, XP, goal). `streakHero()` in `src/features/home/index.js` draws a big flame
+  and number with "day streak" (the 3 flame stages from `flameStageFor`). Flickers when today is done, 3 sparks from a 7-day streak on,
+  dim while today is open. Colours come from `.streak-hero--stage-N` in `main.css`.
+- Week strip: neighbouring SOLVED days join into one gradient pill (`.week__run`, placed with `--from` / `--len` on a 7-column grid; each `.day` is
+  `display: contents` so letters and dots sit on the same grid). A gap starts a new pill; frozen/missed days stay separate dots. The pill that
+  includes today grows in (`is-fresh`) only right after a solve. Today's empty dot glows softly.
+- New tokens (in `:root` next to the flame tokens): `--run-top`, `--run-bottom`, `--run-edge`, `--run-check`.
+- Ember in the Home hero is 108 px wide (was about 130) to make room; `.home__scroll` has side room so his flame tail is no longer cut off.
+- Next: the daily streak celebration screen (full screen after the first solve of the day).
+
+## Home redesign (from the home demo, v5)
+- `src/features/home/index.js` is the demo's design wired to the real store. Header = 3 big pill cards (freezes, XP, daily goal), each opens a
+  short sheet (`infoSheet`); the goal sheet changes the goal with `actions.setGoal`. The middle part spreads out (`justify-content: space-evenly`)
+  and grows on tall screens (`@container home (min-height: 680px)`, `.home` is a size container); on tiny screens it still scrolls.
+- "Next up" card (`.next2`): tinted band in the topic colour (`topicHue(n.topicIndex)`), ONE XP chip (`+10 XP`, or `+15 XP` with a goal icon when this
+  solve completes today's goal), title, tag + topic, a progress bar for the current section with its `done/total`, then Skip + Solved.
+  After Solved the SAME card turns gold (`.next2--done`): reward chips (via `rewardView`, drawn icons), Undo, Next problem. Next problem is disabled
+  for 600 ms so a fast double tap cannot skip past. The old toast-with-Undo, the floating "+10 XP" and `showRewardToast` are no longer used on Home.
+- `selectHome().next` now also has `topicIndex`, `subDone`, `subTotal` (section progress for the card).
+- First solve of the day only: flame, number and week pill animate (`fx.streak = before.todayStatus !== 'solved'`); Ember reacts every time (`fx.bounce`).
+- Week bar: shows the last 4 days, today, and `UPCOMING = 2` empty dashed days (`.dot--future`), so it is never full. Built from `home.week` in the
+  UI (no selector change). Change `UPCOMING` to 3 for an emptier bar (then it shows 3 past days).
+- Dropped from the card on purpose (the demo was approved without them): the "#7 of 405" counter and the "Solve it on takeUforward, then tap Solved." hint.
+- CSS: the old `.chip*`, `.next__*` (except the finished-card ones), `.fx-layer` and `.xp-float` rules were removed; the new rules sit in `main.css`
+  where the old card rules were. The level bar in the XP sheet is `.level-bar` (the old `.bar` belongs to other screens).
+- Known: on milestone solves (first ever, freeze earned, level up) 3+ reward chips wrap to a second row and the card grows about 34 px; on a
+  phone about 800 px tall the middle part then scrolls a few pixels. Nothing is cut off.
+- Tests: `home-dom`, `path-dom`, `skip-continue` updated for the new card; new tests for first-solve-only animation, upcoming days, info sheets and
+  section progress.

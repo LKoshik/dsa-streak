@@ -1,6 +1,7 @@
 // Small messages at the bottom of the screen, above the navigation bar.
 // showToast({ message, actionLabel, onAction, duration, variant }) returns a function that closes it.
 //   variant 'reward' = a celebration message; 'default' = a normal one (like "Marked #5 solved" + Undo).
+//   icon = an optional icon element shown before the text (see ui/icons.js).
 //   host = an element to show the message in (Home uses one above its Next-up card).
 //          Without it, messages go in one shared box above the navigation bar.
 import { h } from './dom.js';
@@ -8,7 +9,7 @@ import { h } from './dom.js';
 const MAX_VISIBLE = 4;
 let container = null;
 
-export function showToast({ message, actionLabel = null, onAction = null, duration = 6000, variant = 'default', host = null }) {
+export function showToast({ message, actionLabel = null, onAction = null, duration = 6000, variant = 'default', host = null, icon = null }) {
   let box = host;
   if (!box) {
     if (!container || !container.isConnected) {
@@ -29,6 +30,7 @@ export function showToast({ message, actionLabel = null, onAction = null, durati
   }
 
   const el = h('div', { class: `toast toast--${variant}` },
+    icon ? h('span', { class: 'toast__icon' }, icon) : null,
     h('span', { class: 'toast__text' }, message),
     actionLabel
       ? h('button', { class: 'toast__action', type: 'button', onclick: () => { dismiss(); if (onAction) onAction(); } }, actionLabel)

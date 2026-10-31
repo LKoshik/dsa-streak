@@ -138,7 +138,7 @@ test('selectPath: 18 topics with the right shape and totals', () => {
   assert.equal(arrays.subsections[0].name, 'Fundamentals');
   assert.equal(arrays.subsections[0].solved, 2);
   assert.equal(arrays.subsections[0].total, 6);
-  assert.deepEqual(arrays.subsections[0].problems[0], { id: 1, title: 'Linear Search', difficulty: 'Basic', solved: true });
+  assert.deepEqual(arrays.subsections[0].problems[0], { id: 1, title: 'Linear Search', difficulty: 'Basic', solved: true, skipped: false, isNext: false });
   assert.equal(arrays.subsections[0].problems[2].solved, false);
   assert.equal(path.filter((t) => t.isCurrent).length, 1);
 });

@@ -5,7 +5,7 @@ import { installFakeDom, hasText, byClass } from './helpers/fake-dom.js';
 import { fakeStorage } from './helpers/fake-storage.js';
 import * as actions from '../src/state/actions.js';
 import * as selectors from '../src/state/selectors.js';
-import { TOPICS } from '../src/core/catalog.js';
+import { TOPICS, getProblem } from '../src/core/catalog.js';
 import path from '../src/features/path/index.js';
 import home from '../src/features/home/index.js';
 import { features } from '../src/features/index.js';
@@ -50,6 +50,7 @@ const nodeByKey = (root, key) => nodes(root).find((n) => n.dataset.key === key);
 const nodeButton = (root, key) => nodeByKey(root, key).find((e) => e.tagName === 'button');
 const sheetLayer = () => dom.body.find((e) => e.classList.contains('sheet-layer') && !e.classList.contains('is-leaving'));
 const rows = () => (sheetLayer() ? byClass(sheetLayer(), 'prow') : []);
+const footerContinue = (scope) => byClass(scope, 'sheet__footer').map((f) => f.find((e) => e.tagName === 'button' && e.textContent.trim() === 'Continue here')).find(Boolean) || null;
 const buttonWithText = (scope, text) => scope.find((e) => e.tagName === 'button' && e.textContent.trim() === text);
 async function settle() { await tick(); dom.flushFrames(); }
 const next = () => selectors.selectHome(actions.store.get()).next;
@@ -95,12 +96,15 @@ test('path: done nodes have a check, in-progress nodes a ring with the count', a
   const { root } = mountPath();
   const done = nodeByKey(root, 't0s0');
   assert.ok(done.classList.contains('node--done'));
-  assert.equal(nodeButton(root, 't0s0').textContent, '✓');
+  assert.equal(byClass(nodeButton(root, 't0s0'), 'node__art').length, 1);
+  assert.equal(byClass(nodeButton(root, 't0s0'), 'node__art')[0].children[0].getAttribute('href'), '#node-star');
   assert.equal(byClass(done, 'ring').length, 0);
   const progress = nodeByKey(root, 't0s2');
   assert.ok(progress.classList.contains('node--progress'));
-  assert.equal(nodeButton(root, 't0s2').textContent, '2/15');
+  assert.ok(/2 of 15 solved, in progress/.test(nodeButton(root, 't0s2').getAttribute('aria-label')));
   assert.equal(byClass(progress, 'ring').length, 1);
+  // The ring takes its colour from the topic (CSS), so the progress circle has no inline stroke.
+  assert.equal(byClass(progress, 'ring__value')[0].style.stroke, undefined);
   assert.ok(nodeByKey(root, 't0s1').classList.contains('node--current'));
 });
 
@@ -108,7 +112,7 @@ test('path: there are no links anywhere, not even inside the sheet', async () =>
   await setup();
   const { root } = mountPath();
   nodeButton(root, 't0s0').click();
-  const anchors = (el) => el.findAll((e) => e.tagName === 'a' || 'href' in e.attrs);
+  const anchors = (el) => el.findAll((e) => e.tagName === 'a' || ('href' in e.attrs && e.tagName !== 'use')); // <use href="#node-star"> only points inside the page
   assert.equal(anchors(root).length, 0);
   assert.equal(anchors(sheetLayer()).length, 0);
 });
@@ -128,22 +132,24 @@ test('path: tapping a node opens the sheet with its problems as checkboxes', asy
   assert.ok(hasText(rows()[0], '#1'));
   assert.ok(hasText(rows()[0], 'Next up'));
   assert.ok(!hasText(rows()[1], 'Next up'));
-  // This topic already is the current one: no Continue here button, a note instead.
-  assert.equal(buttonWithText(layer, 'Continue here'), null);
-  assert.ok(hasText(layer, 'This topic is your Next up'));
+  // This node holds Next up: a note instead of the node's Continue here button, and no Continue here on that row.
+  assert.ok(hasText(layer, 'Your Next up is here'));
+  assert.equal(footerContinue(layer), null);
+  assert.equal(byClass(layer, 'prow__go').length, 5); // every other problem has its own Continue here
 });
 
-test('path: Continue here sets the current topic, closes the sheet and changes Home\'s Next up', async () => {
+test('path: Continue here on a node moves Next up to its first problem, closes the sheet and changes Home\'s Next up', async () => {
   await setup();
   const { root } = mountPath();
   assert.equal(next().topic, 'Arrays');
   nodeButton(root, 't2s0').click();
-  const button = buttonWithText(sheetLayer(), 'Continue here');
+  const button = footerContinue(sheetLayer());
   assert.ok(button);
   button.click();
   await settle();
   assert.equal(actions.store.get().settings.currentTopic, 'Binary Search');
   assert.equal(fake.settings.currentTopic, 'Binary Search');
+  assert.equal(fake.settings.currentProblemId, TOPICS[2].ids[0]);
   assert.equal(next().topic, 'Binary Search');
   assert.equal(next().problem.id, TOPICS[2].ids[0]);
   assert.equal(sheetLayer(), null);
@@ -156,7 +162,7 @@ test('path: Continue here sets the current topic, closes the sheet and changes H
   dom.body.append(homeRoot);
   const unmountHome = home.mount(homeRoot, ctx());
   assert.ok(hasText(homeRoot, 'Binary Search · Fundamentals'));
-  assert.ok(hasText(homeRoot, `#${TOPICS[2].ids[0]} of 405`));
+  assert.ok(hasText(homeRoot, getProblem(TOPICS[2].ids[0]).title));
   unmountHome();
 });
 
@@ -206,7 +212,7 @@ test('path: finishing a topic shows a message, a trophy, and Next up moves to an
   assert.ok(!hasText(dom.body, 'Section finished'));
   assert.equal(next().topic, 'Arrays');
   assert.ok(byClass(root, 'topic')[17].classList.contains('topic--done'));
-  assert.ok(hasText(byClass(root, 'topic-banner__badge')[17], '🏆'));
+  assert.equal(byClass(byClass(root, 'topic-banner__badge')[17], 'icon--trophy').length, 1);
 });
 
 test('path: unchecking asks first; Keep it changes nothing', async () => {
@@ -377,4 +383,44 @@ test('path: unmount closes the sheet, removes its classes and stops listening', 
 test('path: the Path tab is still the second tab', () => {
   assert.deepEqual(features.map((f) => f.id), ['home', 'path', 'stats', 'settings']);
   assert.equal(path.label, 'Path');
+});
+
+test('path: topics wear five colours in order, with one shared node sprite', async () => {
+  await setup();
+  const { root } = mountPath();
+  const topics = byClass(root, 'topic');
+  const hues = ['green', 'purple', 'teal', 'pink', 'blue'];
+  topics.forEach((t, i) => assert.ok(t.classList.contains(`topic--${hues[i % 5]}`), `topic ${i + 1}`));
+  assert.equal(byClass(root, 'node-sprite').length, 1);
+  // Not explored yet: the upcoming shape. The current node uses the star.
+  assert.equal(byClass(nodeButton(root, 't0s0'), 'node__art')[0].children[0].getAttribute('href'), '#node-star');
+  assert.equal(byClass(nodeButton(root, 't0s1'), 'node__art')[0].children[0].getAttribute('href'), '#node-upcoming');
+});
+
+test('path: the bottom sheet wears the colour of its topic and uses drawn icons', async () => {
+  await setup({ solves: [solve(1)] });
+  const { root } = mountPath();
+  nodeButton(root, 't1s0').click(); // Hashing = topic 2 = purple
+  const purple = sheetLayer().find((e) => e.classList.contains('sheet'));
+  assert.ok(purple.classList.contains('sheet--purple'));
+  sheetLayer().find((e) => e.classList.contains('sheet__close')).click();
+  nodeButton(root, 't0s0').click(); // Arrays = topic 1 = green
+  const green = sheetLayer().find((e) => e.classList.contains('sheet'));
+  assert.ok(green.classList.contains('sheet--green'));
+  const box = byClass(sheetLayer(), 'prow__box')[0]; // problem 1 is solved
+  assert.equal(byClass(box, 'icon--check').length, 1);
+  assert.equal(byClass(byClass(sheetLayer(), 'sheet__note')[0], 'icon--check').length, 1); // Arrays is the current topic
+});
+
+test('path: the ring is split into one arc per 5 problems of that subsection', async () => {
+  const sub2 = TOPICS[0].subsections[2].ids; // 15 problems -> 3 arcs
+  await setup({ solves: sub2.slice(0, 7).map((id) => solve(id)) });
+  const { root } = mountPath();
+  const ring = byClass(nodeByKey(root, 't0s2'), 'ring')[0];
+  assert.ok(ring.classList.contains('ring--segments'));
+  assert.equal(byClass(ring, 'ring__track').length, 3);
+  assert.equal(byClass(ring, 'ring__value').length, 2); // 5 solved = arc 1 full, 2 solved = part of arc 2
+  // The node and its ring live in the same 96 px stage, so they share one centre.
+  assert.equal(ring.parent.classList.contains('node__stage'), true);
+  assert.equal(ring.parent.children.includes(nodeButton(root, 't0s2')), true);
 });

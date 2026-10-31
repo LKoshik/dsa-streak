@@ -46,17 +46,47 @@ function lastSevenDays(effectiveToday, statusByDay) {
   return week;
 }
 
+// The one place that decides "Next up", so Home and Path always agree.
+function findNextFor(state, solvedIds) {
+  const { currentTopic, currentProblemId, skippedIds } = state.settings;
+  return findNext(TOPICS, solvedIds, currentTopic, {
+    currentProblemId: currentProblemId ?? null,
+    skippedIds: skippedIds ?? [],
+  });
+}
+
+// Skipped problems that are still unsolved (a solved problem is never "skipped").
+function skippedUnsolved(state, solvedIds) {
+  return (state.settings.skippedIds ?? []).filter((id) => getProblem(id) && !solvedIds.has(id));
+}
+
+// Next up for Home: the problem, its topic (name + position, for the topic colour) and how far the
+// problem's section is (solved / total), for the progress bar on the card.
+function nextInfo(found, solvedIds) {
+  const problem = getProblem(found.problemId);
+  const topicIndex = TOPICS.findIndex((t) => t.name === found.topic);
+  const sub = topicIndex >= 0 ? TOPICS[topicIndex].subsections.find((s) => s.name === problem.subsection) : null;
+  return {
+    problem,
+    topic: found.topic,
+    topicIndex,
+    subDone: sub ? sub.ids.filter((id) => solvedIds.has(id)).length : 0,
+    subTotal: sub ? sub.ids.length : 0,
+  };
+}
+
 // Everything the Home screen shows.
 export function selectHome(state) {
   const { solvedIds, effectiveToday, streakInfo } = derive(state);
-  const found = findNext(TOPICS, solvedIds, state.settings.currentTopic);
+  const found = findNextFor(state, solvedIds);
   return {
     streak: streakInfo.streak,
     longest: streakInfo.longest,
     freezes: streakInfo.freezes,
     todayStatus: streakInfo.todayStatus,
     daily: dailyProgress(state.solves, state.settings.goalHistory, effectiveToday),
-    next: found ? { problem: getProblem(found.problemId), topic: found.topic } : null,
+    next: found ? nextInfo(found, solvedIds) : null,
+    skippedCount: skippedUnsolved(state, solvedIds).length, // when next is null and this is above 0, only skipped problems are left
     xp: xpSummary(state),
     solvedCount: countSolved(solvedIds),
     total: TOTAL,
@@ -68,7 +98,8 @@ export function selectHome(state) {
 // Everything the Path screen shows: topics, their subsections and every problem.
 export function selectPath(state) {
   const { solvedIds } = derive(state);
-  const found = findNext(TOPICS, solvedIds, state.settings.currentTopic);
+  const found = findNextFor(state, solvedIds);
+  const skipped = new Set(skippedUnsolved(state, solvedIds));
   const progress = topicProgress(TOPICS, solvedIds);
   return TOPICS.map((topic, index) => ({
     topic: topic.name,
@@ -82,7 +113,10 @@ export function selectPath(state) {
       total: sub.ids.length,
       problems: sub.ids.map((id) => {
         const p = getProblem(id);
-        return { id, title: p.title, difficulty: p.difficulty, solved: solvedIds.has(id) };
+        return {
+          id, title: p.title, difficulty: p.difficulty, solved: solvedIds.has(id),
+          skipped: skipped.has(id), isNext: found !== null && found.problemId === id,
+        };
       }),
     })),
   }));

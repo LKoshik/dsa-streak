@@ -31,6 +31,17 @@ export function homeCopy(home) {
   return { state: 'start', headline: 'Start your streak today', sub: 'One problem is enough.', mood: 'happy', pulse: false, lit: false };
 }
 
+// The calm face of Ember (the layered mascot) for the Home numbers:
+//   'happy' = the daily goal is met (or the whole list is done), null = solved something today but the goal is not met
+//   yet (normal idle), 'wait' = nothing solved today, 'new' = nothing was EVER solved (looking around).
+// "No history" only counts until the first problem is solved; after that "not solved today" wins.
+export function emberMoodFor(home) {
+  if (home.next === null && !(home.skippedCount > 0)) return 'happy'; // all done (skipped problems left is not "all done")
+  if (home.daily.met) return 'happy';
+  if (home.todayStatus === 'solved') return null;
+  return home.solvedCount === 0 ? 'new' : 'wait';
+}
+
 const LETTERS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
 
 // First letter of the weekday for a day like '2026-03-08'.

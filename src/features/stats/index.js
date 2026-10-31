@@ -1,6 +1,7 @@
 // Stats screen: streak tiles, solved progress, XP and level, days practiced, and a month calendar.
 // Everything comes from selectStats; the calendar grid comes from core/calendar.js.
 import { h } from '../../ui/dom.js';
+import { icon } from '../../ui/icons.js';
 import { buildMonthGrid, shiftMonth, compareMonths, monthTitle, monthOfDay } from '../../core/calendar.js';
 import { statsToday, percent, monthLimits, clampMonth } from './model.js';
 
@@ -19,10 +20,10 @@ function mount(root, ctx) {
 
   // ---------- small pieces ----------
 
-  function tile(className, icon, value, label, title) {
+  function tile(className, iconEl, value, label, title) {
     return h('div', { class: `card tile ${className}`, title },
       h('div', { class: 'tile__main' },
-        h('span', { class: 'tile__icon', 'aria-hidden': 'true' }, icon),
+        h('span', { class: 'tile__icon', 'aria-hidden': 'true' }, iconEl),
         h('span', { class: 'tile__value' }, value)),
       h('div', { class: 'tile__label' }, label));
   }
@@ -37,9 +38,9 @@ function mount(root, ctx) {
 
   function tiles(stats) {
     return h('div', { class: 'tiles' },
-      tile('tile--streak', '🔥', stats.streak, 'Current streak', `${stats.streak}-day current streak`),
-      tile('tile--longest', '🏆', stats.longest, 'Longest streak', `${stats.longest}-day longest streak`),
-      tile('tile--freeze', '❄️', `${stats.freezes}/${MAX_FREEZES}`, 'Freezes', `${stats.freezes} of ${MAX_FREEZES} streak freezes`));
+      tile('tile--streak', icon('flame', 20), stats.streak, 'Current streak', `${stats.streak}-day current streak`),
+      tile('tile--longest', icon('trophy', 20), stats.longest, 'Longest streak', `${stats.longest}-day longest streak`),
+      tile('tile--freeze', icon('snowflake', 20), `${stats.freezes}/${MAX_FREEZES}`, 'Freezes', `${stats.freezes} of ${MAX_FREEZES} streak freezes`));
   }
 
   function solvedCard(stats) {
@@ -58,7 +59,9 @@ function mount(root, ctx) {
       h('div', { class: 'stat-card__head' },
         h('div', { class: 'label' }, 'XP'),
         h('span', { class: 'stat-card__pct stat-card__level' }, `Level ${level}`)),
-      h('div', { class: 'stat-card__big' }, `⭐ ${total} XP`),
+      h('div', { class: 'stat-card__big stat-card__big--xp' },
+        h('span', { class: 'stat-card__icon', 'aria-hidden': 'true' }, icon('xp', 24)),
+        `${total} XP`),
       bar(fraction, '#ffc800', `Progress to level ${level + 1}`),
       h('p', { class: 'stat-card__hint' }, `${xpForNext - xpIntoLevel} XP to Level ${level + 1}`));
   }
@@ -66,7 +69,9 @@ function mount(root, ctx) {
   function practicedCard(stats) {
     return h('section', { class: 'card stat-card stat-card--days' },
       h('div', { class: 'label' }, 'Days practiced'),
-      h('div', { class: 'stat-card__big' }, `📅 ${stats.daysPracticed} ${stats.daysPracticed === 1 ? 'day' : 'days'}`));
+      h('div', { class: 'stat-card__big stat-card__big--days' },
+        h('span', { class: 'stat-card__icon', 'aria-hidden': 'true' }, icon('calendar', 24)),
+        `${stats.daysPracticed} ${stats.daysPracticed === 1 ? 'day' : 'days'}`));
   }
 
   // ---------- the calendar ----------
@@ -155,4 +160,4 @@ function mount(root, ctx) {
   };
 }
 
-export default { id: 'stats', label: 'Stats', icon: '📊', mount };
+export default { id: 'stats', label: 'Stats', icon: 'stats', mount };

@@ -1,13 +1,15 @@
 // Bottom navigation bar. Plain links (#/home ...), so the router does the work.
+// feature.icon is an icon NAME ('home', 'path', 'stats', 'settings'), drawn by ui/icons.js.
 // createNav(features) returns { el, setActive(id) }.
 import { h } from './dom.js';
+import { icon } from './icons.js';
 
 export function createNav(features) {
   const links = new Map();
   const el = h('nav', { class: 'nav', 'aria-label': 'Main' },
     features.map((feature) => {
       const link = h('a', { class: 'nav__item', href: `#/${feature.id}` },
-        h('span', { class: 'nav__icon', 'aria-hidden': 'true' }, feature.icon),
+        h('span', { class: 'nav__icon' }, icon(feature.icon)),
         h('span', { class: 'nav__label' }, feature.label));
       links.set(feature.id, link);
       return link;

@@ -1,5 +1,6 @@
 // A bottom sheet: slides up over the screen with a title, a scrolling body and a fixed footer.
-//   const sheet = openSheet({ label, title, subtitle, progress, body, footer, onClose });
+//   const sheet = openSheet({ label, title, subtitle, progress, body, footer, hue, onClose });
+//   hue = a topic colour name ('green', 'purple', 'teal', 'pink', 'blue'): the sheet and its progress bar wear it.
 //   sheet.update({ title, body, ... })  // redraw parts; the body keeps its scroll position
 //   sheet.close();  sheet.isOpen();
 // Closes with the X button, a tap on the dark background, the Escape key, or a swipe down.
@@ -17,7 +18,7 @@ function asList(value) {
   return Array.isArray(value) ? value : [value];
 }
 
-export function openSheet({ label = '', title = '', subtitle = '', progress = null, body = null, footer = null, onClose = null } = {}) {
+export function openSheet({ label = '', title = '', subtitle = '', progress = null, body = null, footer = null, hue = null, onClose = null } = {}) {
   if (active) active.close();
   counter += 1;
   const titleId = `sheet-title-${counter}`;
@@ -40,7 +41,7 @@ export function openSheet({ label = '', title = '', subtitle = '', progress = nu
       closeBtn),
     barEl);
 
-  const panel = h('div', { class: 'sheet', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': titleId },
+  const panel = h('div', { class: hue ? `sheet sheet--${hue}` : 'sheet', role: 'dialog', 'aria-modal': 'true', 'aria-labelledby': titleId },
     grab, bodyEl, footerEl);
   const backdrop = h('div', { class: 'sheet-backdrop', onclick: () => close() });
   const layer = h('div', { class: 'sheet-layer' }, backdrop, panel);

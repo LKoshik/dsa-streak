@@ -32,6 +32,12 @@ class FakeElement {
   getAttribute(name) { return name in this.attrs ? this.attrs[name] : null; }
   removeAttribute(name) { delete this.attrs[name]; }
   addEventListener(type, fn) { (this.listeners[type] ||= []).push(fn); }
+  removeEventListener(type, fn) { this.listeners[type] = (this.listeners[type] || []).filter((f) => f !== fn); }
+  // Only a single class selector, like '.ember-rig__act'.
+  querySelector(selector) {
+    const name = selector.replace(/^\./, '');
+    return this.find((e) => e.classList.contains(name));
+  }
   _adopt(node) {
     const child = typeof node === 'string' ? new FakeText(node) : node;
     if (child.parent) child.parent.children = child.parent.children.filter((c) => c !== child);

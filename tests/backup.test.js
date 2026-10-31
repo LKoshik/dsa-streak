@@ -226,7 +226,7 @@ test('round trip: build, to text, parse, validate, restore gives the same state'
   assert.equal(parsed.ok, true);
   const restored = backupToState(parsed.data);
   assert.deepEqual(restored.solves, state.solves);
-  assert.deepEqual(restored.settings, { ...state.settings, lastBackupAt: NOW });
+  assert.deepEqual(restored.settings, { ...state.settings, currentProblemId: null, skippedIds: [], lastBackupAt: NOW });
 });
 
 test('round trip: an empty state and a file with a missing lastBackupAt', () => {
@@ -247,7 +247,32 @@ test('backupToState: drops unknown fields', () => {
   const state = backupToState(data);
   assert.deepEqual(Object.keys(state), ['solves', 'settings']);
   assert.deepEqual(Object.keys(state.solves[0]), ['problemId', 'day', 'at']);
-  assert.deepEqual(Object.keys(state.settings).sort(), ['currentTopic', 'goalHistory', 'lastBackupAt', 'theme']);
+  assert.deepEqual(Object.keys(state.settings).sort(), ['currentProblemId', 'currentTopic', 'goalHistory', 'lastBackupAt', 'skippedIds', 'theme']);
+});
+
+test('backup keeps the Next up pointer and the skipped list, and old backups without them still load', () => {
+  const state = { solves: solves(), settings: { ...settings(), currentProblemId: 7, skippedIds: [3, 5] } };
+  const parsed = parseBackup(JSON.stringify(buildBackup(state, NOW)));
+  assert.equal(parsed.ok, true);
+  const restored = backupToState(parsed.data);
+  assert.equal(restored.settings.currentProblemId, 7);
+  assert.deepEqual(restored.settings.skippedIds, [3, 5]);
+  // An old file has neither field.
+  const old = good();
+  delete old.settings.currentProblemId;
+  delete old.settings.skippedIds;
+  assert.equal(validateBackup(old).ok, true);
+  assert.equal(backupToState(old).settings.currentProblemId, null);
+  assert.deepEqual(backupToState(old).settings.skippedIds, []);
+});
+
+test('validateBackup: bad currentProblemId or skippedIds', () => {
+  failsWith(withChange((d) => { d.settings.currentProblemId = 99999; }), /currentProblemId/);
+  failsWith(withChange((d) => { d.settings.currentProblemId = 'x'; }), /currentProblemId/);
+  failsWith(withChange((d) => { d.settings.skippedIds = 'x'; }), /skippedIds must be a list/);
+  failsWith(withChange((d) => { d.settings.skippedIds = [1, 99999]; }), /skippedIds has 99999/);
+  failsWith(withChange((d) => { d.settings.skippedIds = [2, 2]; }), /more than once/);
+  assert.equal(validateBackup(withChange((d) => { d.settings.skippedIds = []; d.settings.currentProblemId = null; })).ok, true);
 });
 
 // ---------- needsBackupReminder ----------

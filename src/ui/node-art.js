@@ -1,0 +1,19 @@
+// Path node art: ONE hidden sprite with two shapes, drawn by every node with <use>.
+//   createNodeSprite() -> the hidden <svg class="node-sprite"> (put it once at the top of the Path view)
+//   createNodeArt(upcoming) -> <svg class="node__art"> that uses #node-star (done / current / in progress)
+//                              or #node-upcoming (not explored yet)
+// The gradients inside use only black and white, so one sprite is right for every topic colour
+// (the node colour comes from CSS: currentColor on the symbol).
+import { svgFromString } from './dom.js';
+
+const SPRITE = "<svg class=\"node-sprite\" width=\"0\" height=\"0\" aria-hidden=\"true\" focusable=\"false\"><defs><linearGradient id=\"ns-top\" x1=\".18\" y1=\"0\" x2=\".82\" y2=\"1\"><stop offset=\"0\" stop-color=\"#000\" stop-opacity=\"0\"/><stop offset=\"1\" stop-color=\"#000\" stop-opacity=\".1\"/></linearGradient><radialGradient id=\"ns-shadow\"><stop offset=\"0\" stop-color=\"#000\" stop-opacity=\".22\"/><stop offset=\"1\" stop-color=\"#000\" stop-opacity=\"0\"/></radialGradient><symbol id=\"node-star\" viewBox=\"0 0 240 220\"><ellipse cx=\"120\" cy=\"190\" rx=\"92\" ry=\"11\" fill=\"url(#ns-shadow)\"/><path d=\"M24 91C24 48 67 18 120 18C173 18 216 48 216 91L216 119C216 164 173 197 120 197C67 197 24 164 24 119Z\" fill=\"currentColor\"/><path d=\"M24 91C24 48 67 18 120 18C173 18 216 48 216 91L216 119C216 164 173 197 120 197C67 197 24 164 24 119Z\" fill=\"#000\" opacity=\".24\"/><path d=\"M24 91C24 48 67 18 120 18C173 18 216 48 216 91C216 136 173 169 120 169C67 169 24 136 24 91Z\" fill=\"currentColor\"/><path d=\"M24 91C24 48 67 18 120 18C173 18 216 48 216 91C216 136 173 169 120 169C67 169 24 136 24 91Z\" fill=\"url(#ns-top)\"/><path d=\"M48 91C52 58 82 36 124 33C132 32 137 39 131 45L61 115C55 121 48 114 48 105Z\" fill=\"#fff\" opacity=\".28\"/><path d=\"M153 49C157 44 164 44 169 49L185 65C190 70 190 77 185 82L145 122C139 128 131 127 127 121C123 116 124 109 129 104Z\" fill=\"#fff\" opacity=\".19\"/><path d=\"M113.2 57.2C115.9 51.8 124.1 51.8 126.8 57.2L135.1 73.9L153.5 76.6C159.5 77.5 161.9 84.9 157.5 89.1L144.2 102.1L147.3 120.4C148.3 126.4 142 131 136.6 128.2L120 119.5L103.4 128.2C98 131 91.7 126.4 92.7 120.4L95.8 102.1L82.5 89.1C78.1 84.9 80.5 77.5 86.5 76.6L104.9 73.9Z\" fill=\"#fff\"/></symbol><symbol id=\"node-upcoming\" viewBox=\"0 0 240 220\"><path d=\"M24 91C24 48 67 18 120 18C173 18 216 48 216 91L216 119C216 164 173 197 120 197C67 197 24 164 24 119Z\" fill=\"currentColor\"/><path d=\"M24 91C24 48 67 18 120 18C173 18 216 48 216 91L216 119C216 164 173 197 120 197C67 197 24 164 24 119Z\" fill=\"#000\" opacity=\".3\"/><path d=\"M24 91C24 48 67 18 120 18C173 18 216 48 216 91C216 136 173 169 120 169C67 169 24 136 24 91Z\" fill=\"currentColor\"/><path d=\"M24 91C24 48 67 18 120 18C173 18 216 48 216 91C216 136 173 169 120 169C67 169 24 136 24 91Z\" fill=\"url(#ns-top)\"/><path d=\"M48 91C52 58 82 36 124 33C132 32 137 39 131 45L61 115C55 121 48 114 48 105Z\" fill=\"#fff\" opacity=\".075\"/><path d=\"M153 49C157 44 164 44 169 49L185 65C190 70 190 77 185 82L145 122C139 128 131 127 127 121C123 116 124 109 129 104Z\" fill=\"#fff\" opacity=\".045\"/><path d=\"M113.2 57.2C115.9 51.8 124.1 51.8 126.8 57.2L135.1 73.9L153.5 76.6C159.5 77.5 161.9 84.9 157.5 89.1L144.2 102.1L147.3 120.4C148.3 126.4 142 131 136.6 128.2L120 119.5L103.4 128.2C98 131 91.7 126.4 92.7 120.4L95.8 102.1L82.5 89.1C78.1 84.9 80.5 77.5 86.5 76.6L104.9 73.9Z\" style=\"fill: var(--node-upcoming-star)\" opacity=\".72\"/></symbol></defs></svg>";
+
+export function createNodeSprite() {
+  return svgFromString(SPRITE);
+}
+
+export function createNodeArt(upcoming = false) {
+  const href = upcoming ? '#node-upcoming' : '#node-star';
+  return svgFromString(
+    `<svg class="node__art" viewBox="0 0 240 220" aria-hidden="true" focusable="false"><use href="${href}"></use></svg>`);
+}

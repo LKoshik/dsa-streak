@@ -49,6 +49,9 @@ export async function markSolved(problemId) {
   // Read the state again: it may have changed while we were saving.
   const others = store.get().solves.filter((s) => s.problemId !== problemId);
   store.set({ solves: [...others, solve], today: day });
+  // Solving a skipped problem takes it off the skipped list.
+  const skipped = store.get().settings.skippedIds ?? [];
+  if (skipped.includes(problemId)) await updateSettings({ skippedIds: skipped.filter((id) => id !== problemId) });
   return solve;
 }
 
@@ -85,6 +88,42 @@ export async function setSound(on) {
 export async function setCurrentTopic(name) {
   if (name !== null && !TOPICS.some((t) => t.name === name)) return;
   await updateSettings({ currentTopic: name });
+}
+
+// "Continue here" on a problem: Next up starts from this problem. If it was skipped, it is not skipped any more
+// (going back to it by hand is the one way to bring a skipped problem back). Unknown ids are ignored.
+// A problem that is already solved just means "carry on after it". Returns true if something was saved.
+export async function continueFrom(problemId) {
+  const problem = getProblem(problemId);
+  if (!problem) return false;
+  const skipped = store.get().settings.skippedIds ?? [];
+  await updateSettings({
+    currentProblemId: problemId,
+    currentTopic: problem.topic,
+    skippedIds: skipped.filter((id) => id !== problemId),
+  });
+  return true;
+}
+
+// "Skip": the problem stays unsolved (no XP, no streak) but Next up moves on past it, and it stays skipped
+// until the user goes back to it. Unknown or already solved problems are ignored. Returns true if saved.
+export async function skipProblem(problemId) {
+  if (!getProblem(problemId)) return false;
+  if (store.get().solves.some((s) => s.problemId === problemId)) return false;
+  const skipped = store.get().settings.skippedIds ?? [];
+  await updateSettings({
+    currentProblemId: problemId,
+    skippedIds: skipped.includes(problemId) ? skipped : [...skipped, problemId],
+  });
+  return true;
+}
+
+// Takes a problem off the skipped list (the Undo of Skip). Returns true if it was skipped.
+export async function unskipProblem(problemId) {
+  const skipped = store.get().settings.skippedIds ?? [];
+  if (!skipped.includes(problemId)) return false;
+  await updateSettings({ skippedIds: skipped.filter((id) => id !== problemId) });
+  return true;
 }
 
 // Reads the phone's clock again (app came back, window focused, midnight passed).

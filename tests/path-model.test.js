@@ -128,3 +128,15 @@ test('centeredScrollTop: puts the node a little above the middle and never goes 
   assert.equal(centeredScrollTop({ nodeTop: 700, nodeHeight: 60, viewHeight: 600, scrollTop: 100 }), 560);
   assert.equal(centeredScrollTop({ nodeTop: 50, nodeHeight: 60, viewHeight: 600, scrollTop: 0 }), 0);
 });
+
+import { topicHue, TOPIC_HUES } from '../src/features/path/model.js';
+
+test('topic colours: five hues in order, repeating, and every topic and node carries one', () => {
+  assert.deepEqual(TOPIC_HUES, ['green', 'purple', 'teal', 'pink', 'blue']);
+  assert.deepEqual([0, 1, 2, 3, 4, 5, 6, 17].map(topicHue), ['green', 'purple', 'teal', 'pink', 'blue', 'green', 'purple', 'teal']);
+  const model = modelFor([]);
+  model.topics.forEach((topic, i) => {
+    assert.equal(topic.hue, TOPIC_HUES[i % 5]);
+    assert.ok(topic.nodes.every((node) => node.hue === topic.hue));
+  });
+});

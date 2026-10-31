@@ -9,6 +9,7 @@ const SVG_NS = 'http://www.w3.org/2000/svg';
 const SVG_TAGS = new Set([
   'svg', 'g', 'path', 'circle', 'ellipse', 'rect', 'line', 'polygon', 'polyline',
   'defs', 'linearGradient', 'radialGradient', 'stop', 'text', 'title',
+  'clipPath', 'use', 'symbol',
 ]);
 
 function addChildren(parent, children) {
@@ -44,4 +45,35 @@ export function h(tag, props, ...children) {
   }
   addChildren(el, children);
   return el;
+}
+
+// svgFromString(markup): turns a piece of SVG TEXT (one root <svg>) into a real element.
+// Used for the big drawings (flames, Ember, path node art) that are stored as text.
+// A tiny reader on purpose: tags, double-quoted attributes, text, self-closing tags. No entities, no comments.
+const TOKEN = /<(\/?)([A-Za-z][\w:-]*)((?:\s+[\w:-]+="[^"]*")*)\s*(\/?)>|([^<]+)/g;
+const ATTRIBUTE = /([\w:-]+)="([^"]*)"/g;
+
+export function svgFromString(markup) {
+  const stack = [];
+  let root = null;
+  TOKEN.lastIndex = 0;
+  for (let match = TOKEN.exec(markup); match !== null; match = TOKEN.exec(markup)) {
+    const [, closing, tag, attributes, selfClosing, text] = match;
+    if (text !== undefined) {
+      if (stack.length > 0 && text.trim() !== '') stack[stack.length - 1].append(document.createTextNode(text));
+      continue;
+    }
+    if (closing) {
+      stack.pop();
+      continue;
+    }
+    const el = document.createElementNS(SVG_NS, tag);
+    ATTRIBUTE.lastIndex = 0;
+    for (let a = ATTRIBUTE.exec(attributes); a !== null; a = ATTRIBUTE.exec(attributes)) el.setAttribute(a[1], a[2]);
+    if (stack.length > 0) stack[stack.length - 1].append(el);
+    else root = el;
+    if (!selfClosing) stack.push(el);
+  }
+  if (root === null || stack.length !== 0) throw new Error('svgFromString: the markup is not one complete element');
+  return root;
 }
