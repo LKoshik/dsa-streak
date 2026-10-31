@@ -24,6 +24,11 @@ class FakeElement {
       add(...names) { el.attrs.class = [...new Set([...this.list(), ...names])].join(' '); },
       remove(...names) { el.attrs.class = this.list().filter((c) => !names.includes(c)).join(' '); },
       contains(name) { return this.list().includes(name); },
+      toggle(name, force) {
+        const on = force === undefined ? !this.contains(name) : Boolean(force);
+        if (on) this.add(name); else this.remove(name);
+        return on;
+      },
     };
   }
   set className(value) { this.attrs.class = value; }
@@ -37,6 +42,16 @@ class FakeElement {
   querySelector(selector) {
     const name = selector.replace(/^\./, '');
     return this.find((e) => e.classList.contains(name));
+  }
+  // Only a single class selector ('.name') or a single data attribute selector ('[data-count]').
+  querySelectorAll(selector) {
+    const data = /^\[data-([a-z-]+)\]$/.exec(selector);
+    if (data) {
+      const key = data[1].replace(/-([a-z])/g, (_, c) => c.toUpperCase());
+      return this.findAll((e) => key in e.dataset);
+    }
+    const name = selector.replace(/^\./, '');
+    return this.findAll((e) => e.classList.contains(name));
   }
   _adopt(node) {
     const child = typeof node === 'string' ? new FakeText(node) : node;

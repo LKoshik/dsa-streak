@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { statsToday, percent, monthLimits, clampMonth } from '../src/features/stats/model.js';
+import { statsToday, percent, monthLimits, clampMonth, nextMilestone } from '../src/features/stats/model.js';
 
 test('statsToday: no solves means state.today', () => {
   assert.equal(statsToday('2026-06-10', {}), '2026-06-10');
@@ -35,4 +35,32 @@ test('clampMonth keeps a month inside the limits', () => {
   assert.deepEqual(clampMonth({ year: 2026, month: 1 }, limits), { year: 2026, month: 3 });
   assert.deepEqual(clampMonth({ year: 2026, month: 4 }, limits), { year: 2026, month: 4 });
   assert.deepEqual(clampMonth({ year: 2027, month: 1 }, limits), { year: 2026, month: 6 });
+});
+
+test('nextMilestone: aims at the next round ten on a small sheet', () => {
+  assert.deepEqual(nextMilestone(0, 69), { target: 10, remaining: 10, isFinish: false });
+  assert.deepEqual(nextMilestone(9, 69), { target: 10, remaining: 1, isFinish: false });
+  assert.deepEqual(nextMilestone(10, 69), { target: 20, remaining: 10, isFinish: false });
+  assert.deepEqual(nextMilestone(27, 69), { target: 30, remaining: 3, isFinish: false });
+});
+
+test('nextMilestone: aims at every 25 on a big sheet (200 problems or more)', () => {
+  assert.deepEqual(nextMilestone(0, 405), { target: 25, remaining: 25, isFinish: false });
+  assert.deepEqual(nextMilestone(25, 405), { target: 50, remaining: 25, isFinish: false });
+  assert.deepEqual(nextMilestone(7, 405), { target: 25, remaining: 18, isFinish: false });
+  assert.deepEqual(nextMilestone(0, 200), { target: 25, remaining: 25, isFinish: false });
+  assert.deepEqual(nextMilestone(0, 199), { target: 10, remaining: 10, isFinish: false });
+});
+
+test('nextMilestone: the last step is capped at the total and marked as the finish', () => {
+  assert.deepEqual(nextMilestone(65, 69), { target: 69, remaining: 4, isFinish: true });
+  assert.deepEqual(nextMilestone(400, 405), { target: 405, remaining: 5, isFinish: true });
+  assert.deepEqual(nextMilestone(68, 69), { target: 69, remaining: 1, isFinish: true });
+});
+
+test('nextMilestone: nothing to aim at when everything is solved or the sheet is empty', () => {
+  assert.equal(nextMilestone(69, 69), null);
+  assert.equal(nextMilestone(70, 69), null);
+  assert.equal(nextMilestone(0, 0), null);
+  assert.equal(nextMilestone(0, undefined), null);
 });

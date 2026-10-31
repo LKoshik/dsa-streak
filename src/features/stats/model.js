@@ -29,3 +29,12 @@ export function clampMonth(month, limits) {
   if (compareMonths(month, limits.last) > 0) return limits.last;
   return month;
 }
+
+// The next round number to aim at for the Solved bar (every 10 on a small sheet, every 25 on a big one),
+// capped at the total. Returns null when everything is solved or there is nothing to solve.
+export function nextMilestone(solved, total) {
+  if (!(total > 0) || solved >= total) return null;
+  const step = total >= 200 ? 25 : 10;
+  const target = Math.min((Math.floor(Math.max(0, solved) / step) + 1) * step, total);
+  return { target, remaining: target - solved, isFinish: target === total };
+}

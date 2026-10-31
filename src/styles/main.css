@@ -719,69 +719,6 @@ html, body { overflow: hidden; overscroll-behavior: none; }
 @keyframes box-pop { 0% { transform: scale(0.6); } 60% { transform: scale(1.25); } 100% { transform: scale(1); } }
 @keyframes xp-pop-up { 0% { opacity: 0; transform: translateY(6px); } 20% { opacity: 1; } 100% { opacity: 0; transform: translateY(-22px); } }
 
-/* ---------- stats ---------- */
-.stats { display: grid; align-content: start; gap: var(--space-md); padding-bottom: var(--space-sm); }
-.stats__title { font-size: var(--fs-title); line-height: var(--lh-title); }
-
-.tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-sm); }
-.tile { padding: var(--space-md) var(--space-xs); display: grid; justify-items: center; align-content: center; gap: var(--space-xs); min-height: 78px; text-align: center; }
-.tile__main { display: flex; align-items: center; gap: var(--space-xs); font-weight: var(--fw-heavy); font-size: var(--fs-title); line-height: 1; }
-.tile__icon { display: inline-grid; place-items: center; }
-.tile--streak .tile__icon { color: var(--streak); }
-.tile--longest .tile__icon { color: var(--reward); }
-.tile--freeze .tile__icon { color: var(--info); }
-.tile__label { font-size: var(--fs-micro); line-height: var(--lh-micro); font-weight: var(--fw-heavy); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
-.tile--streak .tile__value { color: var(--streak); }
-.tile--longest .tile__value { color: var(--success); }
-.tile--freeze .tile__value { color: var(--info); }
-
-.stat-card { padding: var(--space-md) var(--space-lg) var(--space-lg); display: grid; gap: var(--space-sm); }
-.stat-card__head { display: flex; align-items: center; justify-content: space-between; gap: var(--space-sm); }
-.stat-card__pct { font-size: var(--fs-small); line-height: var(--lh-small); font-weight: var(--fw-heavy); color: var(--muted); }
-.stat-card__level { color: var(--reward); letter-spacing: 0.04em; text-transform: uppercase; }
-.stat-card__big { font-size: var(--fs-title); font-weight: var(--fw-heavy); line-height: var(--lh-title); }
-.stat-card__big--xp, .stat-card__big--days { display: flex; align-items: center; gap: var(--space-sm); }
-.stat-card__icon { display: grid; place-items: center; }
-.stat-card__big--xp .stat-card__icon { color: var(--reward); }
-.stat-card__big--days .stat-card__icon { color: var(--accent-ink); }
-.stat-card__hint { font-size: var(--fs-small); line-height: var(--lh-small); font-weight: var(--fw-bold); color: var(--muted); }
-
-.bar { height: 14px; border-radius: var(--radius-pill); background: var(--border); overflow: hidden; }
-.bar__fill { height: 100%; min-width: 0; border-radius: var(--radius-pill); transition: width var(--dur-reward); }
-
-.cal { padding: var(--space-md) var(--space-md) var(--space-md); display: grid; gap: var(--space-sm); }
-.cal__head { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; gap: var(--space-sm); }
-.cal__title { font-size: var(--fs-heading); line-height: var(--lh-heading); text-align: center; }
-.cal__nav {
-  width: 44px; height: 44px; border-radius: var(--radius-md); cursor: pointer;
-  background: var(--bg); border: var(--border-w) solid var(--border); box-shadow: var(--elev-card);
-  color: var(--accent); font-size: var(--icon-md); font-weight: var(--fw-heavy); line-height: 1; padding: 0;
-}
-.cal__nav:active { transform: translateY(var(--lip-sm)); box-shadow: var(--elev-card-down); }
-.cal__nav:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
-.cal__nav[disabled] { opacity: 0.35; cursor: default; transform: none; box-shadow: var(--elev-card); }
-
-.cal__weekdays, .cal__grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: var(--space-xs); }
-.cal__weekdays span { text-align: center; font-size: var(--fs-micro); line-height: var(--lh-micro); font-weight: var(--fw-heavy); letter-spacing: 0.06em; color: var(--muted); }
-.cal__pad { aspect-ratio: 1; }
-.cal__cell {
-  aspect-ratio: 1; border-radius: var(--radius-md); display: grid; place-items: center;
-  font-size: var(--fs-small); line-height: var(--lh-small); font-weight: var(--fw-heavy); color: var(--text); background: transparent;
-}
-.cal__cell--solved { background: var(--success); color: var(--on-accent); box-shadow: 0 var(--lip-xs) 0 var(--success-edge); }
-.cal__cell--frozen { background: var(--info-soft); }
-.cal__cell--missed { background: var(--danger-soft); }
-.cal__cell.is-future { color: var(--muted); opacity: 0.6; }
-.cal__cell.is-today { outline: 3px solid var(--streak); outline-offset: -3px; }
-
-.legend { list-style: none; margin: var(--space-xs) 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-xs) var(--space-md); }
-.legend__item { display: flex; align-items: center; gap: var(--space-xs); font-size: var(--fs-caption); line-height: var(--lh-caption); font-weight: var(--fw-bold); color: var(--muted); }
-.legend__swatch { width: 16px; height: 16px; border-radius: var(--radius-xs); background: transparent; }
-.legend__swatch--solved { background: var(--success); }
-.legend__swatch--frozen { background: var(--info-soft); }
-.legend__swatch--missed { background: var(--danger-soft); }
-.legend__swatch--today { border: 3px solid var(--streak); }
-
 /* ---------- settings ---------- */
 .settings { display: grid; gap: var(--space-md); padding-bottom: var(--space-sm); }
 .settings__title { font-size: var(--fs-display); line-height: var(--lh-display); }
@@ -987,4 +924,93 @@ html, body { overflow: hidden; overscroll-behavior: none; }
 }
 @keyframes ember-wave-arcs {
   0%, 30% { opacity: 0; } 34%, 44%, 56%, 68% { opacity: 1; } 40%, 52%, 64% { opacity: 0.35; } 78% { opacity: 1; } 86%, 100% { opacity: 0; }
+}
+
+/* ---------- stats v4 (Duolingo streak-screen style) ---------- */
+/* Replaces every earlier stats block (donut, topics, tiles, legend, ember dots, level row are gone). */
+.stats { position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0, 1fr); align-content: start; gap: var(--space-xl); padding-bottom: var(--space-lg); }
+.stats::before { content: ""; position: absolute; z-index: -1; pointer-events: none; inset: calc(-1 * var(--space-xl)) calc(-1 * var(--space-lg)) auto calc(-1 * var(--space-lg)); height: 400px;
+  background: radial-gradient(ellipse 70% 62% at 72% 8%, rgba(255, 122, 26, 0.22), rgba(255, 90, 40, 0.07) 55%, transparent 80%);
+  -webkit-mask-image: linear-gradient(#000 55%, transparent); mask-image: linear-gradient(#000 55%, transparent); }
+.stats__title { font-size: var(--fs-title); line-height: var(--lh-title); }
+.stats__h { margin: 0; font-size: var(--fs-title); line-height: var(--lh-title); font-weight: var(--fw-heavy); }
+.stats-block { display: grid; gap: var(--space-md); }
+
+/* every card on this screen: outline only, no fill, no lip */
+.stats .card { background: transparent; box-shadow: none; border: 2px solid var(--border); border-radius: 20px; }
+
+/* hero: giant number left, flame right, no box */
+.stats-hero { padding: 0; }
+.stats-hero .streak-hero { justify-content: space-between; gap: var(--space-md); }
+.stats-hero .streak-hero__text { justify-items: start; }
+.stats-hero .streak-hero__number { font-size: clamp(76px, 26vw, 112px); line-height: 0.95; }
+.stats-hero .streak-hero__label { margin-top: var(--space-sm); font-size: clamp(20px, 6vw, 26px); line-height: 1.1; }
+.stats-hero .streak-hero__flame { width: clamp(104px, 34vw, 148px); height: clamp(108px, 35.5vw, 154px); }
+
+/* calendar: compact, grey numbers, only solved days carry colour */
+.cal { padding: var(--space-sm) var(--space-md) var(--space-md); display: grid; gap: var(--space-xs); }
+.cal__head { display: grid; grid-template-columns: 32px 1fr 32px; align-items: center; gap: var(--space-sm); }
+.cal__title { margin: 0; font-size: var(--fs-body); line-height: var(--lh-body); font-weight: var(--fw-heavy); text-align: center; }
+.cal__nav { width: 32px; height: 32px; padding: 0; border: 0; border-radius: var(--radius-pill); cursor: pointer; background: transparent;
+  color: var(--muted); font-size: 24px; font-weight: var(--fw-heavy); line-height: 1; }
+.cal__nav:hover { background: var(--accent-soft); }
+.cal__nav:active { transform: scale(0.92); }
+.cal__nav:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+.cal__nav[disabled] { opacity: 0.25; cursor: default; background: transparent; transform: none; }
+.cal__weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: var(--space-xs); }
+.cal__weekdays span { text-align: center; font-size: var(--fs-caption); line-height: var(--lh-caption); font-weight: var(--fw-heavy); color: var(--muted); }
+.cal__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--space-sm); }
+.cal__week { position: relative; display: grid; grid-template-columns: repeat(7, 1fr); grid-auto-rows: 28px; column-gap: var(--space-xs); }
+.cal__week > .cal__pad, .cal__week > .cal__cell { grid-row: 1; position: relative; z-index: 1; }
+.cal__pad { height: 28px; }
+.cal__cell { height: 28px; width: 28px; justify-self: center; border-radius: 50%; display: grid; place-items: center;
+  font-size: var(--fs-small); line-height: 1; font-weight: var(--fw-heavy); color: var(--muted); background: transparent; }
+/* the pill colour follows the flame stage (same colours as the flame art, in a top-to-bottom gradient) */
+.cal { --pill: linear-gradient(to bottom, #FFC400 0%, #FFA800 30%, #FF9B00 60%, #F58200 85%, #EE7A00 100%); --pill-ink: #5b2a05; }
+.cal--stage-1 { --pill: linear-gradient(to bottom, #FFF18A 0%, #FFE34B 35%, #FFD21A 70%, #F6C900 100%); --pill-ink: #5b4300; }
+.cal--stage-3 { --pill: linear-gradient(to bottom, #FFBD06 0%, #FF8F0F 30%, #FF651B 60%, #FE4727 85%, #FB3E2B 100%); --pill-ink: #4a1a05; }
+.cal__run { grid-row: 1; grid-column: var(--from) / span var(--len); z-index: 0; height: 28px; margin-inline: 2px; border-radius: var(--radius-pill); background: var(--pill); }
+.cal__run--frozen { background: var(--info-soft); }
+.cal__cell--solved { color: var(--pill-ink); }
+.cal__cell--frozen { color: var(--info); }
+.cal__cell.is-future { opacity: 0.4; }
+.cal__cell.is-today { color: var(--text); box-shadow: inset 0 0 0 2px var(--streak); }
+.cal__cell--solved.is-today { color: var(--pill-ink); background: rgba(255, 255, 255, 0.32); box-shadow: none; }
+.cal__cell.is-today:not(.cal__cell--solved) { animation: today-pulse 2.2s var(--ease-in-out) infinite; }
+@keyframes today-pulse {
+  0%, 100% { box-shadow: inset 0 0 0 2px var(--streak), 0 0 0 0 rgba(255, 150, 0, 0.5); }
+  50% { box-shadow: inset 0 0 0 2px var(--streak), 0 0 0 6px rgba(255, 150, 0, 0); }
+}
+
+/* bar (Solved card) */
+.bar { height: 16px; border-radius: var(--radius-pill); background: var(--border); overflow: hidden; }
+.bar__fill { height: 100%; min-width: 0; border-radius: var(--radius-pill); transition: width var(--dur-reward); }
+
+/* progress: one number, one bar, one nudge, then the small stats row */
+.progress { padding: var(--space-lg); display: grid; gap: var(--space-sm); }
+.progress__top { display: flex; align-items: baseline; justify-content: space-between; gap: var(--space-sm); }
+.progress__big { font-size: 40px; line-height: 1; font-weight: var(--fw-display); font-variant-numeric: tabular-nums; }
+.progress__big b { font-weight: inherit; }
+.progress__big span { font-size: var(--fs-heading); font-weight: var(--fw-bold); color: var(--muted); }
+.progress__pct { font-size: var(--fs-small); line-height: var(--lh-small); font-weight: var(--fw-heavy); color: var(--muted); }
+.progress__hint { margin: 0; font-size: var(--fs-small); line-height: var(--lh-small); font-weight: var(--fw-bold); color: var(--muted); }
+.stats-strip { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: var(--space-sm); padding-top: var(--space-md); border-top: 2px solid var(--border); }
+.stat { display: grid; justify-items: center; gap: 2px; padding: 0 var(--space-xs); text-align: center; }
+.stat__icon { display: grid; place-items: center; }
+.stat--longest .stat__icon { color: var(--reward); }
+.stat--freeze .stat__icon { color: var(--info); }
+.stat--days .stat__icon { color: var(--hue-purple); }
+.stat__value { font-size: var(--fs-title); font-weight: var(--fw-heavy); line-height: 1.1; }
+.stat__label { font-size: var(--fs-micro); line-height: var(--lh-micro); font-weight: var(--fw-heavy); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+/* opening animation (first draw only): blocks rise in turn, bars fill from empty. Numbers count up in stats/index.js. */
+.stats.is-intro > * { animation: stats-rise 420ms var(--ease-out) both; }
+.stats.is-intro > :nth-child(2) { animation-delay: 60ms; } .stats.is-intro > :nth-child(3) { animation-delay: 120ms; }
+.stats.is-intro > :nth-child(4) { animation-delay: 180ms; } .stats.is-intro > :nth-child(5) { animation-delay: 240ms; }
+.stats.is-intro > :nth-child(6) { animation-delay: 300ms; }
+.stats.is-intro .bar__fill { animation: bar-reveal 700ms var(--ease-out) 350ms both; }
+@keyframes stats-rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes bar-reveal { from { clip-path: inset(0 100% 0 0 round 999px); } to { clip-path: inset(0 0 0 0 round 999px); } }
+@media (prefers-reduced-motion: reduce) {
+  .stats.is-intro > *, .stats.is-intro .bar__fill, .cal__cell.is-today:not(.cal__cell--solved) { animation: none; }
 }

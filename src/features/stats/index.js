@@ -1,13 +1,37 @@
-// Stats screen: streak tiles, solved progress, XP and level, days practiced, and a month calendar.
+// Stats screen (Duolingo streak-screen style): big streak hero, then
+// "heading outside, outline card inside" blocks: Streak Calendar and Progress.
 // Everything comes from selectStats; the calendar grid comes from core/calendar.js.
 import { h } from '../../ui/dom.js';
 import { icon } from '../../ui/icons.js';
 import { buildMonthGrid, shiftMonth, compareMonths, monthTitle, monthOfDay } from '../../core/calendar.js';
-import { statsToday, percent, monthLimits, clampMonth } from './model.js';
+import { createStreakFlame, flameStageFor } from '../../ui/flame.js';
+import { statsToday, percent, monthLimits, clampMonth, nextMilestone } from './model.js';
 
 const MAX_FREEZES = 2;
 const WEEKDAY_LETTERS = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 const STATUS_WORD = { solved: 'solved', frozen: 'frozen', missed: 'missed', pending: 'not done yet' };
+const COUNT_UP_MS = 650;
+
+function prefersReducedMotion() {
+  return typeof window !== 'undefined' && typeof window.matchMedia === 'function'
+    && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+}
+
+// Numbers count up from 0 once, when the screen opens. The final value is already in the text, so nothing breaks without animation.
+function countUp(el) {
+  const to = Number(el.dataset.count);
+  if (!Number.isFinite(to) || to <= 0 || prefersReducedMotion()) return;
+  const start = performance.now();
+  const step = (now) => {
+    if (!el.isConnected) return;
+    const t = Math.min(1, (now - start) / COUNT_UP_MS);
+    const eased = 1 - (1 - t) * (1 - t);
+    el.textContent = String(Math.round(to * eased));
+    if (t < 1) requestAnimationFrame(step);
+  };
+  el.textContent = '0';
+  requestAnimationFrame(step);
+}
 
 function mount(root, ctx) {
   const { store, selectors } = ctx;
@@ -17,16 +41,17 @@ function mount(root, ctx) {
 
   let frame = null;      // pending render request
   let viewed = null;     // the month shown in the calendar: { year, month }
+  let intro = true;      // the opening animation (count-up, bars filling, blocks rising) plays on the first draw only
+  let introTimer = null;
 
   // ---------- small pieces ----------
 
-  function tile(className, iconEl, value, label, title) {
-    return h('div', { class: `card tile ${className}`, title },
-      h('div', { class: 'tile__main' },
-        h('span', { class: 'tile__icon', 'aria-hidden': 'true' }, iconEl),
-        h('span', { class: 'tile__value' }, value)),
-      h('div', { class: 'tile__label' }, label));
-  }
+  // ICON SWAP: these three are placeholders. Put the new trophy / freeze / calendar SVGs here (one place).
+  const ART = {
+    trophy: () => icon('trophy', 22),
+    freeze: () => icon('snowflake', 22),
+    days: () => icon('calendar', 22),
+  };
 
   function bar(fraction, color, label) {
     const pct = percent(fraction);
@@ -36,42 +61,57 @@ function mount(root, ctx) {
     }, h('div', { class: 'bar__fill', style: { width: `${pct}%`, background: color } }));
   }
 
-  function tiles(stats) {
-    return h('div', { class: 'tiles' },
-      tile('tile--streak', icon('flame', 20), stats.streak, 'Current streak', `${stats.streak}-day current streak`),
-      tile('tile--longest', icon('trophy', 20), stats.longest, 'Longest streak', `${stats.longest}-day longest streak`),
-      tile('tile--freeze', icon('snowflake', 20), `${stats.freezes}/${MAX_FREEZES}`, 'Freezes', `${stats.freezes} of ${MAX_FREEZES} streak freezes`));
+  // A heading on the page (outside the card) with the card under it.
+  function block(title, card) {
+    return h('section', { class: 'stats-block' }, h('h2', { class: 'stats__h' }, title), card);
   }
 
-  function solvedCard(stats) {
+  // Top: giant number on the left, his flame (stage by streak, dim until today is solved) on the right.
+  function hero(stats, solvedToday) {
+    const stage = flameStageFor(stats.streak, solvedToday);
+    const sparks = stage === 'stage-2' || stage === 'stage-3'
+      ? h('div', { class: 'streak-hero__sparks', 'aria-hidden': 'true' },
+        h('span', { class: 'streak-hero__spark' }), h('span', { class: 'streak-hero__spark' }), h('span', { class: 'streak-hero__spark' }))
+      : null;
+    return h('section', { class: `stats-hero stats-hero--${stage}` },
+      h('div', {
+        class: `streak-hero streak-hero--${stage}${solvedToday ? '' : ' is-dim'}`, role: 'img',
+        'aria-label': `${stats.streak}-day streak`, title: `${stats.streak}-day streak`,
+      },
+        h('div', { class: 'streak-hero__text' },
+          h('span', { class: 'streak-hero__number', dataset: { count: stats.streak } }, stats.streak),
+          h('span', { class: 'streak-hero__label' }, 'day streak!')),
+        h('div', { class: 'streak-hero__flame' }, createStreakFlame(stage), sparks)));
+  }
+
+  // Longest / Freezes / Days: a plain row (no boxes) at the bottom of the Progress card.
+  function statsRow(stats) {
+    const item = (cls, iconEl, value, label, title) => h('div', { class: `stat ${cls}`, title },
+      h('span', { class: 'stat__icon', 'aria-hidden': 'true' }, iconEl),
+      h('span', { class: 'stat__value' }, value),
+      h('span', { class: 'stat__label' }, label));
+    return h('div', { class: 'stats-strip' },
+      item('stat--longest', ART.trophy(), stats.longest, 'Longest', `${stats.longest}-day longest streak`),
+      item('stat--freeze', ART.freeze(), `${stats.freezes}/${MAX_FREEZES}`, 'Freezes', `${stats.freezes} of ${MAX_FREEZES} streak freezes`),
+      item('stat--days', ART.days(), stats.daysPracticed, stats.daysPracticed === 1 ? 'Day' : 'Days', `${stats.daysPracticed} days practiced`));
+  }
+
+  // One number, one bar, one nudge towards the next round number, then the small stats row.
+  function progressCard(stats) {
     const fraction = stats.total > 0 ? stats.solvedCount / stats.total : 0;
-    return h('section', { class: 'card stat-card stat-card--solved' },
-      h('div', { class: 'stat-card__head' },
-        h('div', { class: 'label' }, 'Solved'),
-        h('span', { class: 'stat-card__pct' }, `${percent(fraction)}%`)),
-      h('div', { class: 'stat-card__big' }, `Solved ${stats.solvedCount} of ${stats.total}`),
-      bar(fraction, 'var(--green)', 'Problems solved'));
-  }
-
-  function xpCard(stats) {
-    const { total, level, xpIntoLevel, xpForNext, fraction } = stats.xp;
-    return h('section', { class: 'card stat-card stat-card--xp' },
-      h('div', { class: 'stat-card__head' },
-        h('div', { class: 'label' }, 'XP'),
-        h('span', { class: 'stat-card__pct stat-card__level' }, `Level ${level}`)),
-      h('div', { class: 'stat-card__big stat-card__big--xp' },
-        h('span', { class: 'stat-card__icon', 'aria-hidden': 'true' }, icon('xp', 24)),
-        `${total} XP`),
-      bar(fraction, '#ffc800', `Progress to level ${level + 1}`),
-      h('p', { class: 'stat-card__hint' }, `${xpForNext - xpIntoLevel} XP to Level ${level + 1}`));
-  }
-
-  function practicedCard(stats) {
-    return h('section', { class: 'card stat-card stat-card--days' },
-      h('div', { class: 'label' }, 'Days practiced'),
-      h('div', { class: 'stat-card__big stat-card__big--days' },
-        h('span', { class: 'stat-card__icon', 'aria-hidden': 'true' }, icon('calendar', 24)),
-        `${stats.daysPracticed} ${stats.daysPracticed === 1 ? 'day' : 'days'}`));
+    const next = nextMilestone(stats.solvedCount, stats.total);
+    let hint = 'Every problem solved. Legend.';
+    if (stats.total > 0 && stats.solvedCount === 0) hint = 'Your first solve starts the bar.';
+    else if (next) hint = next.isFinish ? `${next.remaining} more to finish the sheet` : `${next.remaining} more to reach ${next.target}`;
+    return h('section', { class: 'card progress' },
+      h('div', { class: 'progress__top' },
+        h('div', { class: 'progress__big', role: 'img', 'aria-label': `Solved ${stats.solvedCount} of ${stats.total}` },
+          h('b', { dataset: { count: stats.solvedCount } }, stats.solvedCount),
+          h('span', null, ` / ${stats.total}`)),
+        h('span', { class: 'progress__pct' }, `${percent(fraction)}%`)),
+      bar(fraction, 'var(--success)', 'Solved progress'),
+      h('p', { class: 'progress__hint' }, hint),
+      statsRow(stats));
   }
 
   // ---------- the calendar ----------
@@ -87,10 +127,33 @@ function mount(root, ctx) {
       h('span', null, cell.date));
   }
 
-  function legendItem(kind, text) {
-    return h('li', { class: 'legend__item' }, h('span', { class: `legend__swatch legend__swatch--${kind}`, 'aria-hidden': 'true' }), text);
+  // One row of the month: neighbouring solved days join into one orange pill, neighbouring frozen days into one ice-tinted pill.
+  function weekRow(week, today) {
+    const runs = [];
+    ['solved', 'frozen'].forEach((kind) => {
+      let from = -1;
+      week.forEach((cell, i) => {
+        const match = cell !== null && cell.status === kind;
+        if (match && from < 0) from = i;
+        if ((!match || i === week.length - 1) && from >= 0) {
+          const end = match ? i : i - 1;
+          runs.push(h('span', {
+            class: kind === 'frozen' ? 'cal__run cal__run--frozen' : 'cal__run',
+            style: { '--from': from + 1, '--len': end - from + 1 }, 'aria-hidden': 'true',
+          }));
+          from = -1;
+        }
+      });
+    });
+    const cells = week.map((cell, i) => {
+      const el = cellFor(cell, today);
+      el.style.gridColumn = String(i + 1);
+      return el;
+    });
+    return h('div', { class: 'cal__week' }, runs, cells);
   }
 
+  // No legend: solved = gradient pill (flame colour), frozen = ice-tinted pill, today = ring, everything else stays quiet and grey.
   function calendar(stats, today) {
     const limits = monthLimits(stats.firstDay, today);
     viewed = clampMonth(viewed || monthOfDay(today), limits);
@@ -98,13 +161,15 @@ function mount(root, ctx) {
     const canNext = compareMonths(viewed, limits.last) < 0;
     const weeks = buildMonthGrid(viewed.year, viewed.month, stats.statusByDay, today);
 
-    return h('section', { class: 'card cal' },
+    // The pills take the colour of the current flame stage (same stage as the hero flame, even while today is still open).
+    const stage = flameStageFor(stats.streak, true);
+    return h('section', { class: `card cal cal--${stage}` },
       h('div', { class: 'cal__head' },
         h('button', {
           type: 'button', class: 'cal__nav cal__nav--prev', 'aria-label': 'Previous month',
           disabled: !canPrev, onclick: () => go(-1),
         }, '‹'),
-        h('h2', { class: 'cal__title', 'aria-live': 'polite' }, monthTitle(viewed.year, viewed.month)),
+        h('h3', { class: 'cal__title', 'aria-live': 'polite' }, monthTitle(viewed.year, viewed.month)),
         h('button', {
           type: 'button', class: 'cal__nav cal__nav--next', 'aria-label': 'Next month',
           disabled: !canNext, onclick: () => go(1),
@@ -112,12 +177,7 @@ function mount(root, ctx) {
       h('div', { class: 'cal__weekdays', 'aria-hidden': 'true' },
         WEEKDAY_LETTERS.map((letter) => h('span', null, letter))),
       h('div', { class: 'cal__grid', role: 'grid', 'aria-label': monthTitle(viewed.year, viewed.month) },
-        weeks.map((week) => week.map((cell) => cellFor(cell, today)))),
-      h('ul', { class: 'legend', 'aria-label': 'Legend' },
-        legendItem('solved', 'Solved'),
-        legendItem('frozen', 'Frozen'),
-        legendItem('missed', 'Missed'),
-        legendItem('today', 'Today')));
+        weeks.map((week) => weekRow(week, today))));
   }
 
   function go(delta) {
@@ -138,13 +198,20 @@ function mount(root, ctx) {
     const state = store.get();
     const stats = selectors.selectStats(state);
     const today = statsToday(state.today, stats.statusByDay);
+    const solvedToday = stats.statusByDay[today] === 'solved';
+    const playIntro = intro;
+    intro = false;
+    container.classList.toggle('is-intro', playIntro);
     container.replaceChildren(
       h('h1', { class: 'stats__title' }, 'Stats'),
-      tiles(stats),
-      solvedCard(stats),
-      xpCard(stats),
-      practicedCard(stats),
-      calendar(stats, today));
+      hero(stats, solvedToday),
+      block('Streak Calendar', calendar(stats, today)),
+      block('Progress', progressCard(stats)));
+    if (playIntro) {
+      container.querySelectorAll('[data-count]').forEach(countUp);
+      clearTimeout(introTimer);
+      introTimer = setTimeout(() => container.classList.remove('is-intro'), 1500);
+    }
   }
 
   // Draw on the next frame: many changes at once give one redraw.
@@ -157,6 +224,7 @@ function mount(root, ctx) {
 
   return function unmount() {
     unsubscribe();
+    clearTimeout(introTimer);
   };
 }
 

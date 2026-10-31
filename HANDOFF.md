@@ -198,3 +198,11 @@ Notes
   and `html, body` do not scroll. The old `height: 100vh / 100dvh` was taller than the visible area on Android Chrome. This affects every screen.
 - Tests: `home-dom`, `path-dom`, `skip-continue` updated for the new card; new tests for first-solve-only animation, upcoming days, info sheets and
   section progress.
+
+## Stats redesign merged (from dsa-streak-demo3, Duolingo streak-screen style)
+- Copied from the demo: `src/features/stats/index.js`, `src/features/stats/model.js` (+ `nextMilestone`), `src/styles/main.css` (old stats rules gone, one "stats v4" block at the end). Not copied: `kit/`, `problems.data.js`. Every other `src/` file was already identical to the demo.
+- Screen = hero (giant streak number + flame by stage, dim until today is solved, 3 sparks from stage 2) > "Streak Calendar" (solved neighbours = one pill per week row, frozen neighbours = ice pill, today = ring, pills coloured by flame stage) > "Progress" (`N / total`, one bar, "N more to reach 25", then Longest / Freezes / Days row).
+- Removed from Stats: level / XP card (still on Home), donut, topics list, legend, 3 tiles, sentence card, Streak Goal.
+- First draw only: blocks rise, bars fill, streak and solved numbers count up (`data-count`); all off with reduced motion.
+- ICON SWAP: trophy / freeze / calendar icons come from the `ART` object at the top of `stats/index.js`.
+- Tests: `stats-dom` rewritten for the new structure (hero, pills, stages, hint, intro, reduced motion); `stats-model` has new `nextMilestone` tests; `tests/helpers/fake-dom.js` gained `classList.toggle` and `querySelectorAll` (one class or one `[data-x]`). 429 tests green, `npm run build` ok.
