@@ -206,3 +206,12 @@ Notes
 - First draw only: blocks rise, bars fill, streak and solved numbers count up (`data-count`); all off with reduced motion.
 - ICON SWAP: trophy / freeze / calendar icons come from the `ART` object at the top of `stats/index.js`.
 - Tests: `stats-dom` rewritten for the new structure (hero, pills, stages, hint, intro, reduced motion); `stats-model` has new `nextMilestone` tests; `tests/helpers/fake-dom.js` gained `classList.toggle` and `querySelectorAll` (one class or one `[data-x]`). 429 tests green, `npm run build` ok.
+
+## App logo + loading screen = happy Ember
+- New app icon (happy Ember, `Ember_Coding_Streak_Mascot.png`): `src/pwa/icon-192.png`, `icon-512.png` (rounded, transparent corners), `icon-maskable-512.png` (art at 84% so phone masks never clip it), `apple-touch-icon.png` (180, opaque, full-bleed), new `favicon-64.png`. Manifest unchanged (same file names).
+- `src/index.html`: favicon is now `./favicon-64.png`; `#app` holds the logo markup (`.boot--logo`) so the logo shows before the script loads. `src/main.js` `bootLogo()` keeps / redraws it while the data loads (the old "Loading…" text is gone). `main.css`: `.boot--logo`, `.boot__logo`.
+- `tests/manifest.test.js`: favicon check updated, two new tests.
+- `src/pwa/icon.svg` and `icon-maskable.svg` are the OLD flame, now unused (a test still checks they exist). Do NOT run `tools/make-icons.py` any more: it would overwrite the new PNGs with the old flame.
+- Phones keep the old home-screen icon until the app is removed and added again (iOS), or Chrome refreshes it on its own (Android, can take a day).
+- Sad Ember (`Sad_Ember_Streak_Lost_Icon.png`) is NOT in the project yet; icon switching postponed until the app is more polished.
+

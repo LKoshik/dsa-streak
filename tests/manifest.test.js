@@ -54,7 +54,7 @@ test('the SVG sources exist and are SVG', () => {
 test('index.html links the manifest and icons with relative URLs', () => {
   assert.match(indexHtml, /<link rel="manifest" href="\.\/manifest\.webmanifest">/);
   assert.match(indexHtml, /<link rel="apple-touch-icon" href="\.\/apple-touch-icon\.png">/);
-  assert.match(indexHtml, /<link rel="icon" href="\.\/icon\.svg"/);
+  assert.match(indexHtml, /<link rel="icon" href="\.\/favicon-64\.png"/);
   assert.match(indexHtml, /<meta name="theme-color"/);
 });
 
@@ -64,4 +64,13 @@ test('main.js registers the worker with a relative path and no absolute sw URL a
   assert.match(main, /registerWorker/);
   assert.match(client, /scriptUrl = '\.\/sw\.js'/);
   assert.ok(!/['"`]\/sw\.js['"`]/.test(main + client));
+});
+
+test('favicon is a 64x64 PNG', () => {
+  assert.deepEqual(pngSize('favicon-64.png'), [64, 64]);
+});
+
+test('loading screen: index.html draws the logo before the script runs, using an icon that exists', () => {
+  assert.match(indexHtml, /<div id="app"><div class="boot boot--logo"><img class="boot__logo" src="\.\/icon-512\.png"/);
+  assert.ok(fs.existsSync(new URL('icon-512.png', PWA)));
 });

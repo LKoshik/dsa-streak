@@ -191,6 +191,9 @@ html, body { overflow: hidden; overscroll-behavior: none; }
 .view--fill { overflow: hidden; padding-bottom: var(--space-sm); }
 .boot { padding: var(--space-2xl) var(--space-xl); text-align: center; font-weight: var(--fw-heavy); font-size: var(--fs-heading); line-height: var(--lh-heading); display: grid; gap: var(--space-lg); justify-items: center; }
 .boot__small { font-weight: var(--fw-regular); font-size: var(--fs-small); line-height: var(--lh-small); color: var(--muted); }
+/* Loading screen: the logo, centred on the whole screen. */
+.boot--logo { flex: 1; align-content: center; padding: 0; }
+.boot__logo { width: 132px; height: 132px; display: block; user-select: none; -webkit-user-drag: none; pointer-events: none; }
 .habit-tip { padding: var(--space-md) var(--space-lg); display: grid; gap: var(--space-xs); }
 
 .nav {

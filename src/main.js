@@ -25,6 +25,12 @@ function scheduleMidnight() {
   }, msUntilNextMidnight(new Date()) + 100);
 }
 
+// Loading screen: the happy Ember logo. index.html already draws the same markup before this script runs.
+function bootLogo() {
+  return h('div', { class: 'boot boot--logo' },
+    h('img', { class: 'boot__logo', src: './icon-512.png', alt: 'DSA Streak', width: 132, height: 132, draggable: 'false' }));
+}
+
 function showStartupError(error) {
   console.error(error);
   appRoot.replaceChildren(h('div', { class: 'boot' },
@@ -35,7 +41,7 @@ function showStartupError(error) {
 
 async function start() {
   applyTheme('system');
-  appRoot.replaceChildren(h('div', { class: 'boot' }, 'Loading…'));
+  if (!appRoot.querySelector('.boot--logo')) appRoot.replaceChildren(bootLogo());
   try {
     await init();
   } catch (error) {
