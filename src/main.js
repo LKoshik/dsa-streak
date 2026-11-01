@@ -10,6 +10,7 @@ import { features } from './features/index.js';
 import { startRouter } from './router.js';
 import { registerWorker } from './ui/sw-client.js';
 import { createUpdateBanner } from './ui/update-banner.js';
+import { waitForSplash } from './ui/splash.js';
 
 // Every screen gets the WHOLE actions file, so a new action can never be forgotten here.
 const { store, init, refreshToday } = actions;
@@ -61,6 +62,12 @@ async function start() {
   if (typeof matchMedia === 'function') {
     matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => applyTheme(appliedTheme));
   }
+
+  // The flame loading screen stays up for a moment (tap skips it; no waiting with "reduce motion"), then fades out.
+  await waitForSplash(appRoot.querySelector('.splash'), {
+    elapsed: typeof performance !== 'undefined' ? performance.now() : 0,
+    reducedMotion: typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches,
+  });
 
   const view = h('main', { class: 'view', id: 'view' });
   const nav = createNav(features);

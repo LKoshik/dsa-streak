@@ -215,3 +215,11 @@ Notes
 - Phones keep the old home-screen icon until the app is removed and added again (iOS), or Chrome refreshes it on its own (Android, can take a day).
 - Sad Ember (`Sad_Ember_Streak_Lost_Icon.png`) is NOT in the project yet; icon switching postponed until the app is more polished.
 
+
+## Flame loading screen (cold start)
+- Looks: dark screen, the happy Ember logo pops in and floats, a glow pulses behind it, a bed of 7 burning flames (the stage 3 flame art, same paths as `src/ui/flame.js`, some mirrored) ignites along the bottom edge and flickers, 8 embers drift up. Only transform / opacity are animated (no blur filters), no new dependencies.
+- Markup is in `src/index.html` inside `#app` (`.splash`), so it is on screen before any script loads. The flame is defined once (`<g id="splash-flame">`) and reused with `<use>`; per-flame position, size and timing are CSS variables on each `<svg class="splash__flame">` (`--l --w --b --delay --dur`). Styles + keyframes are the "Burning-flame loading screen" block in `main.css` (after `.boot__logo`). The plain styles are the finished look, so "reduce motion" shows it still.
+- `src/ui/splash.js`: `waitForSplash(el, ...)`. Stays at least `SPLASH_MIN_MS` (1200 ms, counted from the start of the page load via `performance.now()`), a tap skips it, then it fades out (`SPLASH_FADE_MS` 220 ms) and Home appears. With reduce motion there is no waiting. `main.js` calls it right after the data and theme are ready, before the shell is built. The startup error screen shows immediately (no waiting).
+- Only runs on a fresh open of the app (page load), not when you come back to it from another app.
+- To change: minimum time = `SPLASH_MIN_MS`; flame count / layout = the `<svg class="splash__flame">` lines in `index.html`; embers = the `<span class="splash__spark">` lines.
+- Tests: new `tests/splash.test.js` (timing, tap skip, reduce motion, keyframes exist), `tests/manifest.test.js` checks the markup and that every `#id` it points at exists. 438 tests green, `npm run build` ok.
