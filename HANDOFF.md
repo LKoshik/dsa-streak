@@ -223,3 +223,9 @@ Notes
 - Only runs on a fresh open of the app (page load), not when you come back to it from another app.
 - To change: minimum time = `SPLASH_MIN_MS`; flame count / layout = the `<svg class="splash__flame">` lines in `index.html`; embers = the `<span class="splash__spark">` lines.
 - Tests: new `tests/splash.test.js` (timing, tap skip, reduce motion, keyframes exist), `tests/manifest.test.js` checks the markup and that every `#id` it points at exists. 438 tests green, `npm run build` ok.
+
+## Home-screen icon made brighter and bigger (Android launcher showed it small and dark)
+- Problem seen on a phone: the tile was near-black on a dark wallpaper (other icons have white plates) and the mascot filled only about two thirds of it.
+- `src/pwa/icon-maskable-512.png` (the one Android launchers use) and `src/pwa/apple-touch-icon.png` (iOS) are now the happy Ember cut out of its dark background, about 15% bigger, on a violet-to-orange gradient tile. The ring and corner sparks are trimmed a little at the edges on purpose.
+- `icon-192.png`, `icon-512.png` (rounded, dark tile) and `favicon-64.png` are unchanged: they are used by the loading screen, the splash and the browser tab.
+- To see it on a phone: remove the installed app and add it again (Android Chrome may also refresh it by itself after about a day).
