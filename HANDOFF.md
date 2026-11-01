@@ -209,23 +209,18 @@ Notes
 
 ## App logo + loading screen = happy Ember
 - New app icon (happy Ember, `Ember_Coding_Streak_Mascot.png`): `src/pwa/icon-192.png`, `icon-512.png` (rounded, transparent corners), `icon-maskable-512.png` (art at 84% so phone masks never clip it), `apple-touch-icon.png` (180, opaque, full-bleed), new `favicon-64.png`. Manifest unchanged (same file names).
-- `src/index.html`: favicon is now `./favicon-64.png`; `#app` holds the logo markup (`.boot--logo`) so the logo shows before the script loads. `src/main.js` `bootLogo()` keeps / redraws it while the data loads (the old "Loading…" text is gone). `main.css`: `.boot--logo`, `.boot__logo`.
+- `src/index.html`: favicon is now `./favicon-64.png`; the logo is drawn by the loading screen (`#splash`, see the last section) so it shows before the script loads. The old "Loading…" text is gone.
 - `tests/manifest.test.js`: favicon check updated, two new tests.
 - `src/pwa/icon.svg` and `icon-maskable.svg` are the OLD flame, now unused (a test still checks they exist). Do NOT run `tools/make-icons.py` any more: it would overwrite the new PNGs with the old flame.
 - Phones keep the old home-screen icon until the app is removed and added again (iOS), or Chrome refreshes it on its own (Android, can take a day).
 - Sad Ember (`Sad_Ember_Streak_Lost_Icon.png`) is NOT in the project yet; icon switching postponed until the app is more polished.
 
 
-## Flame loading screen (cold start)
-- Looks: dark screen, the happy Ember logo pops in and floats, a glow pulses behind it, a bed of 7 burning flames (the stage 3 flame art, same paths as `src/ui/flame.js`, some mirrored) ignites along the bottom edge and flickers, 8 embers drift up. Only transform / opacity are animated (no blur filters), no new dependencies.
-- Markup is in `src/index.html` inside `#app` (`.splash`), so it is on screen before any script loads. The flame is defined once (`<g id="splash-flame">`) and reused with `<use>`; per-flame position, size and timing are CSS variables on each `<svg class="splash__flame">` (`--l --w --b --delay --dur`). Styles + keyframes are the "Burning-flame loading screen" block in `main.css` (after `.boot__logo`). The plain styles are the finished look, so "reduce motion" shows it still.
-- `src/ui/splash.js`: `waitForSplash(el, ...)`. Stays at least `SPLASH_MIN_MS` (1200 ms, counted from the start of the page load via `performance.now()`), a tap skips it, then it fades out (`SPLASH_FADE_MS` 220 ms) and Home appears. With reduce motion there is no waiting. `main.js` calls it right after the data and theme are ready, before the shell is built. The startup error screen shows immediately (no waiting).
+## Loading screen (cold start) — calm version, replaced the flame animation
+- Looks: dark screen (#131f24, same as the manifest `background_color`), the happy Ember icon (`icon-512.png`, 160 px) breathing slowly, the name "DSA Streak" fades in under it. No flames, glow or embers. Only transform / opacity animate; "reduce motion" shows it still.
+- Markup: `src/index.html`, `<div id="splash" class="splash">` placed AFTER `<div id="app">` (a fixed layer above it, z-index 1000). Styles: the "Loading screen (cold start)" block in `main.css`. Icon size = the `--splash-logo` variable on `.splash`.
+- Flow in `src/main.js`: data + theme ready -> `waitForSplash` (stays at least `SPLASH_MIN_MS` = 700 ms counted from the start of the page load; a tap skips the wait) -> the shell is built into `#app` underneath -> `hideSplash` fades the layer out (`SPLASH_FADE_MS` = 300 ms, must equal the CSS transition; a test checks it) and removes it. So the app is revealed by a fade, with no hard cut. Reduce motion: no waiting, no fade. The startup error screen shows immediately.
+- Why the splash is no longer inside `#app`: `appRoot.replaceChildren(...)` would delete it, and the app could not be built underneath.
 - Only runs on a fresh open of the app (page load), not when you come back to it from another app.
-- To change: minimum time = `SPLASH_MIN_MS`; flame count / layout = the `<svg class="splash__flame">` lines in `index.html`; embers = the `<span class="splash__spark">` lines.
-- Tests: new `tests/splash.test.js` (timing, tap skip, reduce motion, keyframes exist), `tests/manifest.test.js` checks the markup and that every `#id` it points at exists. 438 tests green, `npm run build` ok.
-
-## Home-screen icon made brighter and bigger (Android launcher showed it small and dark)
-- Problem seen on a phone: the tile was near-black on a dark wallpaper (other icons have white plates) and the mascot filled only about two thirds of it.
-- `src/pwa/icon-maskable-512.png` (the one Android launchers use) and `src/pwa/apple-touch-icon.png` (iOS) are now the happy Ember cut out of its dark background, about 15% bigger, on a violet-to-orange gradient tile. The ring and corner sparks are trimmed a little at the edges on purpose.
-- `icon-192.png`, `icon-512.png` (rounded, dark tile) and `favicon-64.png` are unchanged: they are used by the loading screen, the splash and the browser tab.
-- To see it on a phone: remove the installed app and add it again (Android Chrome may also refresh it by itself after about a day).
+- The phone's OWN launch screen (Android) comes before this one: it shows `icon-512.png` on the manifest `background_color`. If the icon's tile colour differs from that background, a tile edge shows there (that is outside this code).
+- Tests: `tests/splash.test.js` (timing, tap skip, reduce motion, fade then remove, CSS exists, fade time matches), `tests/manifest.test.js` (loading screen markup, layer sits after `#app`, no old flame markup).

@@ -10,11 +10,13 @@ import { features } from './features/index.js';
 import { startRouter } from './router.js';
 import { registerWorker } from './ui/sw-client.js';
 import { createUpdateBanner } from './ui/update-banner.js';
-import { waitForSplash } from './ui/splash.js';
+import { waitForSplash, hideSplash } from './ui/splash.js';
 
 // Every screen gets the WHOLE actions file, so a new action can never be forgotten here.
 const { store, init, refreshToday } = actions;
 const appRoot = document.getElementById('app');
+const splash = document.getElementById('splash');
+const reducedMotion = typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // Re-read the clock at the next local midnight (and re-arm the timer afterwards).
 let midnightTimer = null;
@@ -26,23 +28,17 @@ function scheduleMidnight() {
   }, msUntilNextMidnight(new Date()) + 100);
 }
 
-// Loading screen: the happy Ember logo. index.html already draws the same markup before this script runs.
-function bootLogo() {
-  return h('div', { class: 'boot boot--logo' },
-    h('img', { class: 'boot__logo', src: './icon-512.png', alt: 'DSA Streak', width: 132, height: 132, draggable: 'false' }));
-}
-
 function showStartupError(error) {
   console.error(error);
   appRoot.replaceChildren(h('div', { class: 'boot' },
     h('p', null, 'Could not open the app storage on this phone.'),
     h('p', { class: 'boot__small' }, 'Private browsing can block it. Try a normal browser tab.'),
     h('button', { class: 'btn btn--blue', type: 'button', onclick: () => location.reload() }, 'Try again')));
+  hideSplash(splash, { reducedMotion: true }); // show the error right away, no fade
 }
 
 async function start() {
   applyTheme('system');
-  if (!appRoot.querySelector('.boot--logo')) appRoot.replaceChildren(bootLogo());
   try {
     await init();
   } catch (error) {
@@ -63,16 +59,18 @@ async function start() {
     matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => applyTheme(appliedTheme));
   }
 
-  // The flame loading screen stays up for a moment (tap skips it; no waiting with "reduce motion"), then fades out.
-  await waitForSplash(appRoot.querySelector('.splash'), {
+  // The loading screen stays up for a moment (tap skips it; no waiting with "reduce motion").
+  await waitForSplash(splash, {
     elapsed: typeof performance !== 'undefined' ? performance.now() : 0,
-    reducedMotion: typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches,
+    reducedMotion,
   });
 
   const view = h('main', { class: 'view', id: 'view' });
   const nav = createNav(features);
   appRoot.replaceChildren(view, nav.el);
   startRouter({ root: view, features, ctx: { store, actions, selectors }, nav });
+  // The app is on screen underneath now: fade the loading screen away to reveal it (no hard cut).
+  hideSplash(splash, { reducedMotion });
 
   // Keep "today" correct.
   document.addEventListener('visibilitychange', () => {

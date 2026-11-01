@@ -15,30 +15,13 @@
   <link rel="stylesheet" href="./app.css">
 </head>
 <body>
-  <div id="app"><div class="boot boot--logo splash">
-    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
-      <linearGradient id="splash-core" x1=".18" y1=".05" x2=".82" y2=".92"><stop offset="0" stop-color="#ffd21a"/><stop offset=".48" stop-color="#ff9d00"/><stop offset=".78" stop-color="#ff5b16"/><stop offset="1" stop-color="#ff2639"/></linearGradient>
-      <linearGradient id="splash-lower" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff7b12" stop-opacity="0"/><stop offset=".55" stop-color="#ff4b20" stop-opacity=".8"/><stop offset="1" stop-color="#ff2639"/></linearGradient>
-      <g id="splash-flame">
-        <path d="M181 318C128 318 91 288 76 244C65 211 66 161 61 111C58 82 76 69 101 76L126 83L169 27C184 8 206 8 223 25L309 116C335 144 347 176 343 210C338 267 294 310 238 319C218 322 199 321 181 318Z" fill="#ff484e"/>
-        <path d="M181 294C139 294 111 270 99 237C89 210 91 164 87 121C85 106 93 99 108 104L139 112L177 67C186 56 197 56 208 67L286 147C308 170 318 195 313 222C305 263 271 291 230 297C211 300 195 298 181 294Z" fill="url(#splash-core)"/>
-        <path d="M103 263C132 239 164 237 192 249C224 264 252 266 286 242C271 278 239 296 203 298C156 301 122 288 103 263Z" fill="url(#splash-lower)"/>
-        <path d="M101 126C101 111 107 106 119 112L145 122L183 91C194 82 206 86 210 98C213 107 206 112 198 116L123 170C110 180 99 169 99 153Z" fill="#fff2a0" opacity=".52"/>
-        <path d="M181 160C169 174 151 191 143 208C127 242 150 276 183 278C218 280 241 253 231 222C225 204 203 181 181 160Z" fill="#fff6c9"/>
-      </g>
-    </defs></svg>
-    <div class="splash__heat"></div>
-    <div class="splash__glow"></div>
-    <svg class="splash__flame" style="--l:2%;--w:46%;--b:-46px;--delay:.10s;--dur:1.15s" viewBox="0 0 360 380" aria-hidden="true" focusable="false"><use href="#splash-flame" transform="translate(360 0) scale(-1 1)"/></svg>
-    <svg class="splash__flame" style="--l:29%;--w:44%;--b:-50px;--delay:.00s;--dur:1.30s" viewBox="0 0 360 380" aria-hidden="true" focusable="false"><use href="#splash-flame"/></svg>
-    <svg class="splash__flame" style="--l:54%;--w:46%;--b:-46px;--delay:.16s;--dur:1.05s" viewBox="0 0 360 380" aria-hidden="true" focusable="false"><use href="#splash-flame" transform="translate(360 0) scale(-1 1)"/></svg>
-    <svg class="splash__flame" style="--l:-8%;--w:34%;--b:-36px;--delay:.22s;--dur:0.95s" viewBox="0 0 360 380" aria-hidden="true" focusable="false"><use href="#splash-flame"/></svg>
-    <svg class="splash__flame" style="--l:16%;--w:32%;--b:-34px;--delay:.08s;--dur:1.20s" viewBox="0 0 360 380" aria-hidden="true" focusable="false"><use href="#splash-flame" transform="translate(360 0) scale(-1 1)"/></svg>
-    <svg class="splash__flame" style="--l:42%;--w:34%;--b:-36px;--delay:.28s;--dur:1.00s" viewBox="0 0 360 380" aria-hidden="true" focusable="false"><use href="#splash-flame"/></svg>
-    <svg class="splash__flame" style="--l:68%;--w:36%;--b:-36px;--delay:.14s;--dur:1.10s" viewBox="0 0 360 380" aria-hidden="true" focusable="false"><use href="#splash-flame" transform="translate(360 0) scale(-1 1)"/></svg>
-    <span class="splash__spark" style="--x:10%;--s:5px;--d:.5s;--t:2.6s;--dx:-18px"></span><span class="splash__spark" style="--x:24%;--s:4px;--d:1.1s;--t:3.1s;--dx:22px"></span><span class="splash__spark" style="--x:38%;--s:6px;--d:.8s;--t:2.4s;--dx:-24px"></span><span class="splash__spark" style="--x:52%;--s:4px;--d:1.4s;--t:3.4s;--dx:16px"></span><span class="splash__spark" style="--x:64%;--s:5px;--d:.4s;--t:2.8s;--dx:-14px"></span><span class="splash__spark" style="--x:77%;--s:6px;--d:1.0s;--t:2.5s;--dx:26px"></span><span class="splash__spark" style="--x:90%;--s:4px;--d:.7s;--t:3.0s;--dx:-20px"></span><span class="splash__spark" style="--x:46%;--s:5px;--d:1.7s;--t:2.7s;--dx:20px"></span>
-    <img class="boot__logo" src="./icon-512.png" alt="DSA Streak" width="132" height="132" draggable="false">
-  </div></div>
+  <div id="app"></div>
+  <!-- Loading screen: a layer ABOVE #app, so the app can be built underneath and the screen fades away to reveal it.
+       Styles: main.css (.splash). Timing, tap-to-skip and fade: src/ui/splash.js. -->
+  <div id="splash" class="splash" role="status" aria-label="Loading DSA Streak">
+    <img class="splash__logo" src="./icon-512.png" alt="" width="160" height="160" draggable="false">
+    <p class="splash__name">DSA Streak</p>
+  </div>
   <noscript>DSA Streak needs JavaScript.</noscript>
   <script type="module" src="./app.js"></script>
 </body>

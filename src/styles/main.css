@@ -192,53 +192,30 @@ html, body { overflow: hidden; overscroll-behavior: none; }
 .boot { padding: var(--space-2xl) var(--space-xl); text-align: center; font-weight: var(--fw-heavy); font-size: var(--fs-heading); line-height: var(--lh-heading); display: grid; gap: var(--space-lg); justify-items: center; }
 .boot__small { font-weight: var(--fw-regular); font-size: var(--fs-small); line-height: var(--lh-small); color: var(--muted); }
 /* Loading screen: the logo, centred on the whole screen. */
-.boot--logo { flex: 1; align-content: center; padding: 0; }
-.boot__logo { width: 132px; height: 132px; display: block; user-select: none; -webkit-user-drag: none; pointer-events: none; }
-
-/* Burning-flame loading screen. Markup: index.html (shows before any script). Timing and tap-to-skip: src/ui/splash.js.
-   The plain styles are the FINISHED look, the animations only build up to it, so "reduce motion" simply shows it still. */
-.splash { position: relative; overflow: hidden; background: #131f24; transition: opacity 220ms ease-out; }
-.splash--out { opacity: 0; }
-.splash .boot__logo {
-  position: relative; z-index: 3;
-  animation: splash-pop 600ms ease-out 150ms both, splash-float 2400ms var(--ease-in-out) 800ms infinite;
+/* Loading screen (cold start). Markup: index.html (#splash, a layer above #app). Timing, tap-to-skip and fade: src/ui/splash.js.
+   The plain styles are the FINISHED look, the animations only add a slow breath and a name that fades in, so "reduce motion" shows it still.
+   The colour is the manifest background_color, so the phone's own launch screen flows into this one. --splash-logo = icon size. */
+.splash {
+  --splash-logo: 160px;
+  position: fixed; inset: 0; z-index: 1000;
+  display: grid; place-items: center;
+  background: #131f24;
+  transition: opacity 300ms ease-out;
 }
-.splash__heat {
-  position: absolute; left: 0; right: 0; bottom: 0; height: 46%;
-  background: linear-gradient(to top, rgba(255, 92, 30, 0.42), rgba(255, 92, 30, 0));
-  animation: splash-heat 1400ms var(--ease-in-out) infinite;
+.splash--out { opacity: 0; pointer-events: none; }
+.splash__logo {
+  width: var(--splash-logo); height: var(--splash-logo); display: block;
+  user-select: none; -webkit-user-drag: none; pointer-events: none;
+  animation: splash-breathe 2200ms var(--ease-in-out) infinite;
 }
-.splash__glow {
-  position: absolute; left: 50%; top: 50%; width: 320px; height: 320px; margin: -160px 0 0 -160px; border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(255, 160, 50, 0.55), rgba(255, 100, 30, 0.2) 60%, rgba(255, 100, 30, 0));
-  animation: splash-glow 1800ms var(--ease-in-out) infinite;
+.splash__name {
+  position: absolute; left: 0; right: 0; top: calc(50% + var(--splash-logo) / 2 + 20px);
+  text-align: center; color: #ffffff;
+  font-weight: var(--fw-heavy); font-size: var(--fs-heading); line-height: var(--lh-heading);
+  animation: splash-name-in 500ms ease-out 200ms both;
 }
-.splash__flame {
-  position: absolute; left: var(--l); bottom: var(--b); width: var(--w); height: auto; aspect-ratio: 360 / 380; z-index: 1;
-  transform-origin: 50% 85%;
-  animation: splash-ignite 550ms var(--ease-pop) var(--delay) both, splash-flicker var(--dur) var(--ease-in-out) calc(var(--delay) + 550ms) infinite;
-}
-.splash__spark {
-  position: absolute; left: var(--x); bottom: 9%; width: var(--s); height: var(--s); border-radius: 50%; z-index: 2;
-  background: #ffd24a; box-shadow: 0 0 6px 1px rgba(255, 170, 40, 0.9); opacity: 0;
-  animation: splash-spark var(--t) ease-out var(--d) infinite;
-}
-@keyframes splash-pop { from { opacity: 0; transform: scale(0.55); } 60% { opacity: 1; transform: scale(1.1); } to { opacity: 1; transform: none; } }
-@keyframes splash-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
-@keyframes splash-ignite { from { opacity: 0; transform: translateY(40px) scale(0.5, 0.05); } to { opacity: 1; transform: none; } }
-@keyframes splash-flicker {
-  0%, 100% { transform: none; }
-  25% { transform: scale(0.96, 1.07) rotate(-1.6deg); }
-  50% { transform: scale(1.03, 0.95) rotate(1.2deg); }
-  75% { transform: scale(0.97, 1.1) rotate(1.8deg); }
-}
-@keyframes splash-glow { 0%, 100% { opacity: 0.75; transform: scale(1); } 50% { opacity: 1; transform: scale(1.14); } }
-@keyframes splash-heat { 0%, 100% { opacity: 0.75; } 50% { opacity: 1; } }
-@keyframes splash-spark {
-  0% { opacity: 0; transform: translate(0, 0) scale(1); }
-  12% { opacity: 1; }
-  100% { opacity: 0; transform: translate(var(--dx), -52vh) scale(0.3); }
-}
+@keyframes splash-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+@keyframes splash-name-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
 .habit-tip { padding: var(--space-md) var(--space-lg); display: grid; gap: var(--space-xs); }
 
 .nav {

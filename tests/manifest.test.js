@@ -70,17 +70,14 @@ test('favicon is a 64x64 PNG', () => {
   assert.deepEqual(pngSize('favicon-64.png'), [64, 64]);
 });
 
-test('loading screen: index.html draws the logo and the flames before the script runs, using an icon that exists', () => {
-  assert.match(indexHtml, /<div id="app"><div class="boot boot--logo splash">/);
-  assert.match(indexHtml, /<img class="boot__logo" src="\.\/icon-512\.png"/);
+test('loading screen: index.html draws the logo before the script runs, using an icon that exists', () => {
+  assert.match(indexHtml, /<div id="app"><\/div>/);
+  assert.match(indexHtml, /<div id="splash" class="splash"/);
+  assert.match(indexHtml, /<img class="splash__logo" src="\.\/icon-512\.png"/);
   assert.ok(fs.existsSync(new URL('icon-512.png', PWA)));
-  assert.ok((indexHtml.match(/class="splash__flame"/g) || []).length >= 5, 'at least 5 flames');
-  assert.ok((indexHtml.match(/class="splash__spark"/g) || []).length >= 5, 'at least 5 sparks');
 });
 
-test('loading screen: every #id that index.html points at exists in index.html', () => {
-  const ids = new Set([...indexHtml.matchAll(/ id="([^"]+)"/g)].map((m) => m[1]));
-  const refs = [...indexHtml.matchAll(/(?:href="|url\()#([\w-]+)/g)].map((m) => m[1]);
-  assert.ok(refs.length >= 8);
-  for (const ref of refs) assert.ok(ids.has(ref), `#${ref} is missing`);
+test('loading screen: it is a layer next to #app (not inside it), so the app can be built underneath and fade in', () => {
+  assert.ok(indexHtml.indexOf('<div id="splash"') > indexHtml.indexOf('<div id="app"></div>'));
+  assert.ok(!/splash__flame|splash__spark/.test(indexHtml), 'the old flame markup is gone');
 });
