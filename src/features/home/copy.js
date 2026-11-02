@@ -1,7 +1,12 @@
 // The words and mood for the Home screen (pure code, easy to test).
 
 // Picks the headline, the small line under it, Ember's mood and whether the flame pulses.
-//   state: 'start' | 'keep' | 'done' | 'welcomeBack' | 'allDone'
+//   state: 'start' | 'keep' | 'progress' | 'done' | 'welcomeBack' | 'allDone'
+
+// Short cheers for "you solved one, but the daily goal is not met yet". The word is picked by how many problems
+// are done today, so it stays the same when the screen redraws.
+const CHEERS = ['Good job!', 'Awesome!', 'Nice one!'];
+
 export function homeCopy(home) {
   const { streak, longest, todayStatus, daily, next, total } = home;
 
@@ -11,14 +16,13 @@ export function homeCopy(home) {
   if (todayStatus === 'solved') {
     const left = Math.max(0, daily.goal - daily.done);
     const milestone = streak > 0 && streak % 7 === 0;
-    return {
-      state: 'done',
-      headline: 'Done for today. See you tomorrow',
-      sub: left > 0 ? `${left} more to reach today's goal.` : 'Your streak is safe.',
-      mood: milestone ? 'cheering' : 'happy',
-      pulse: false,
-      lit: true,
-    };
+    const mood = milestone ? 'cheering' : 'happy';
+    if (left > 0) {
+      // Streak is safe, but the daily goal is not reached yet: cheer, and say how many are left. No goodbye yet.
+      const cheer = CHEERS[Math.max(0, daily.done - 1) % CHEERS.length];
+      return { state: 'progress', headline: cheer, sub: `${left} more to reach today's goal.`, mood, pulse: false, lit: true };
+    }
+    return { state: 'done', headline: 'Done for today. See you tomorrow', sub: 'Your streak is safe.', mood, pulse: false, lit: true };
   }
   if (streak > 0) {
     // Today is still open and there is a streak to lose: Ember is sleepy and the flame pulses.

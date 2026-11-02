@@ -35,9 +35,29 @@ test('(c) today done: done message, happy lit Ember', () => {
   assert.equal(c.pulse, false);
 });
 
-test('(c) goal not reached yet says how many more', () => {
+test('(c) goal not reached yet: a short cheer, then how many more, and no goodbye', () => {
   const c = homeCopy(home({ streak: 1, longest: 1, todayStatus: 'solved', daily: { done: 1, goal: 3, met: false } }));
+  assert.equal(c.state, 'progress');
+  assert.equal(c.headline, 'Good job!');
   assert.equal(c.sub, "2 more to reach today's goal.");
+  assert.doesNotMatch(c.headline, /Done for today/);
+  assert.equal(c.mood, 'happy');
+  assert.equal(c.lit, true);
+});
+
+test('(c) the cheer changes with each problem but stays the same for the same count', () => {
+  const at = (done) => homeCopy(home({ streak: 1, longest: 1, todayStatus: 'solved', daily: { done, goal: 5, met: false } })).headline;
+  assert.equal(at(1), 'Good job!');
+  assert.equal(at(2), 'Awesome!');
+  assert.equal(at(3), 'Nice one!');
+  assert.equal(at(1), at(1));
+});
+
+test('(c) goal reached: now the goodbye line shows', () => {
+  const c = homeCopy(home({ streak: 1, longest: 1, todayStatus: 'solved', daily: { done: 3, goal: 3, met: true } }));
+  assert.equal(c.state, 'done');
+  assert.equal(c.headline, 'Done for today. See you tomorrow');
+  assert.equal(c.sub, 'Your streak is safe.');
 });
 
 test('(c) milestone streak: cheering', () => {
